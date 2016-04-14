@@ -2,7 +2,11 @@
     <string name="test">Halo Pickle Developer! Kamu berhasil</string>
     <string name="app_name">Pickle</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="KEY_SHARED_PREF">PICKLEBANK</string>
+
+    <!-- Strings related to Menu in Top Right-->
     <string name="action_settings">Settings</string>
+    <string name="action_logout">Logout</string>
 
     <!-- Splash Screen Strings-->
     <string name="splash_screen_title">Pickle</string>

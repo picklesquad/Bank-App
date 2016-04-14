@@ -10,8 +10,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
-
 public class ProfileActivity extends AppCompatActivity {
+
+    UserSessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,8 @@ public class ProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.mipmap.ic_pickle);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+
+        session = new UserSessionManager(getApplicationContext());
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Home"));
@@ -69,6 +72,10 @@ public class ProfileActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            return true;
+        }
+        if(id == R.id.action_logout){
+            session.logoutUser();
             return true;
         }
 

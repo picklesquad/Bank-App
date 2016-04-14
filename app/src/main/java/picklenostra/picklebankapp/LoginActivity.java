@@ -1,6 +1,7 @@
 package picklenostra.picklebankapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Patterns;
@@ -10,12 +11,25 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class LoginActivity extends ActionBarActivity {
 
     private ImageView imgBrandingLogo;
     private EditText etEmail, etPassword;
     private ProgressBar pbProgressBar;
     private Button btnLogin;
+    private final String url = "http://private-ba5008-picklesquad.apiary-mock.com/login";
 
     private String email,password;
     UserSessionManager session;
@@ -38,9 +52,7 @@ public class LoginActivity extends ActionBarActivity {
                 email = etEmail.getText().toString();
                 password = etPassword.getText().toString();
                 if(validate(email,password)){
-                    session.createUserLogin(email,password);
-                    Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
-                    startActivity(intent);
+                    volleyRequest(email,password);
                 }
             }
         });
@@ -62,6 +74,66 @@ public class LoginActivity extends ActionBarActivity {
             etPassword.setError(null);
         }
         return isValid;
+    }
+
+    private void volleyRequest(final String email, final String password){
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, "", new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONObject nasabah = response.getJSONObject("nasabah");
+                    String id = nasabah.getString("id");
+                    String nama = nasabah.getString("nama");
+                    int rating = nasabah.getInt("rating");
+                    int totalNasabah = nasabah.getInt("totalNasabah");
+                    int sampahPlastik = nasabah.getInt("sampahPlastik");
+                    int sampahKertas = nasabah.getInt("sampahKertas");
+                    int sampahBotol = nasabah.getInt("sampahBotol");
+                    int sampahBesi = nasabah.getInt("sampahBesi");
+
+                    //Create Session
+                    session.createUserLogin(email,password);
+
+                    //Simpan data nasabah di Shared Pref
+                    SharedPreferences shared = getSharedPreferences(getResources().getString(R.string.KEY_SHARED_PREF), MODE_PRIVATE);
+                    SharedPreferences.Editor editor = shared.edit();
+                    editor.putString("id",id);
+                    editor.putString("nama",nama);
+                    editor.putInt("rating", rating);
+                    editor.putInt("totalNasabah", totalNasabah);
+                    editor.putInt("sampahPlastik", sampahPlastik);
+                    editor.putInt("sampahKertas", sampahKertas);
+                    editor.putInt("sampahBotol", sampahBotol);
+                    editor.putInt("sampahBesi",sampahBesi);
+                    editor.commit();
+
+                    //Buat intent untuk masuk ke Profile
+                    Intent intent = new Intent(LoginActivity.this,ProfileActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                etEmail.setError(error.getMessage());//Masih belum selesai
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("email",email);
+                params.put("password",password);
+                return params;
+            }
+        };
+        VolleyController.getInstance().addToRequestQueue(request);
     }
 
 }
