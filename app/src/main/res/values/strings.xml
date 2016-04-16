@@ -25,4 +25,7 @@
         completions."
     </string>
     <string name="title_activity_profile">ProfileActivity</string>
+
+    <!--Strings related to Profile and its Fragments-->
+    <string name="nasabah_default_name">Your Name</string>
 </resources>

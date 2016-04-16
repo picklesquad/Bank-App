@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/thumbnail_nasabah"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dp">
+        
+        <ImageView
+            android:id="@+id/nasabah_photo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/ic_user"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/nasabah_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/thumbnail_nasabah"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="8dp"
+        android:text="@string/nasabah_default_name"
+        android:typeface="sans"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        />
+</LinearLayout>
