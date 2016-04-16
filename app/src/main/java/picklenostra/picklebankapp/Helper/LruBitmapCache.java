@@ -1,4 +1,4 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.Helper;
 
 /**
  * Created by Edwin on 4/13/2016.

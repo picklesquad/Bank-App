@@ -1,9 +1,7 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +13,10 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
+
+import picklenostra.picklebankapp.Model.NasabahModel;
+import picklenostra.picklebankapp.R;
 
 /**
  * Created by Edwin on 4/14/2016.

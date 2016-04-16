@@ -2,7 +2,18 @@
     <string name="test">Halo Pickle Developer! Kamu berhasil</string>
     <string name="app_name">Pickle</string>
     <string name="title_activity_login">Sign in</string>
+
+    <!-- DEFINE ALL CONSTANTS HERE -->
     <string name="KEY_SHARED_PREF">PICKLEBANK</string>
+    <string name="KEY_ID_BANK">idBank</string>
+    <string name="KEY_NAMA_BANK">namaBank</string>
+    <string name="KEY_RATING_BANK">ratingBank</string>
+    <string name="KEY_TOTAL_NASABAH_BANK">totalNasabahBank</string>
+    <string name="KEY_SAMPAH_PLASTIK_BANK">sampahPlastikBank</string>
+    <string name="KEY_SAMPAH_KERTAS_BANK">sampahKertasBank</string>
+    <string name="KEY_SAMPAH_BOTOL_BANK">sampahBotolBank</string>
+    <string name="KEY_SAMPAH_BESI_BANK">sampahBesiBank</string>
+
 
     <!-- Strings related to Menu in Top Right-->
     <string name="action_settings">Settings</string>
@@ -28,4 +39,5 @@
 
     <!--Strings related to Profile and its Fragments-->
     <string name="nasabah_default_name">Your Name</string>
+
 </resources>

@@ -23,6 +23,9 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import picklenostra.picklebankapp.Helper.UserSessionManager;
+import picklenostra.picklebankapp.Helper.VolleyController;
+
 public class LoginActivity extends ActionBarActivity {
 
     private ImageView imgBrandingLogo;
@@ -30,6 +33,15 @@ public class LoginActivity extends ActionBarActivity {
     private ProgressBar pbProgressBar;
     private Button btnLogin;
     private final String url = "http://private-ba5008-picklesquad.apiary-mock.com/login";
+
+    private final String KEY_ID_BANK = getResources().getString(R.string.KEY_ID_BANK);
+    private final String KEY_NAMA_BANK = getResources().getString(R.string.KEY_NAMA_BANK);
+    private final String KEY_RATING_BANK = getResources().getString(R.string.KEY_RATING_BANK);
+    private final String KEY_TOTAL_NASABAH_BANK = getResources().getString(R.string.KEY_TOTAL_NASABAH_BANK);
+    private final String KEY_SAMPAH_PLASTIK_BANK = getResources().getString(R.string.KEY_SAMPAH_PLASTIK_BANK);
+    private final String KEY_SAMPAH_KERTAS_BANK = getResources().getString(R.string.KEY_SAMPAH_KERTAS_BANK);
+    private final String KEY_SAMPAH_BOTOL_BANK = getResources().getString(R.string.KEY_SAMPAH_BOTOL_BANK);
+    private final String KEY_SAMPAH_BESI_BANK = getResources().getString(R.string.KEY_SAMPAH_BESI_BANK);
 
     private String email,password;
     UserSessionManager session;
@@ -97,14 +109,14 @@ public class LoginActivity extends ActionBarActivity {
                     //Simpan data nasabah di Shared Pref
                     SharedPreferences shared = getSharedPreferences(getResources().getString(R.string.KEY_SHARED_PREF), MODE_PRIVATE);
                     SharedPreferences.Editor editor = shared.edit();
-                    editor.putString("id",id);
-                    editor.putString("nama",nama);
-                    editor.putInt("rating", rating);
-                    editor.putInt("totalNasabah", totalNasabah);
-                    editor.putInt("sampahPlastik", sampahPlastik);
-                    editor.putInt("sampahKertas", sampahKertas);
-                    editor.putInt("sampahBotol", sampahBotol);
-                    editor.putInt("sampahBesi",sampahBesi);
+                    editor.putString(KEY_ID_BANK,id);
+                    editor.putString(KEY_NAMA_BANK,nama);
+                    editor.putInt(KEY_RATING_BANK, rating);
+                    editor.putInt(KEY_TOTAL_NASABAH_BANK, totalNasabah);
+                    editor.putInt(KEY_SAMPAH_PLASTIK_BANK, sampahPlastik);
+                    editor.putInt(KEY_SAMPAH_KERTAS_BANK, sampahKertas);
+                    editor.putInt(KEY_SAMPAH_BOTOL_BANK, sampahBotol);
+                    editor.putInt(KEY_SAMPAH_BESI_BANK,sampahBesi);
                     editor.commit();
 
                     //Buat intent untuk masuk ke Profile

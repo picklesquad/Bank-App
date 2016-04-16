@@ -1,10 +1,12 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.Helper;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
 import java.util.HashMap;
+
+import picklenostra.picklebankapp.LoginActivity;
 
 /**
  * Created by Edwin on 3/10/2016.

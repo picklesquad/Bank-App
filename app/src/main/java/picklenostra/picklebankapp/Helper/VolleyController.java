@@ -1,4 +1,4 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.Helper;
 
 import android.app.Application;
 import android.text.TextUtils;

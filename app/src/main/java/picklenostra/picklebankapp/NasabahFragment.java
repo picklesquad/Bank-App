@@ -1,5 +1,7 @@
 package picklenostra.picklebankapp;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -8,14 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Filter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONArray;
@@ -23,6 +22,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import picklenostra.picklebankapp.Adapter.NasabahAdapter;
+import picklenostra.picklebankapp.Helper.VolleyController;
+import picklenostra.picklebankapp.Model.NasabahModel;
 
 /**
  * Created by Daniya on 3/20/16.
@@ -33,6 +36,7 @@ public class NasabahFragment extends Fragment{
     private EditText searchInput;
     private String url = "http://private-ba5008-picklesquad.apiary-mock.com/bank/%1$s/nasabah/";
     private ArrayList<NasabahModel> listNasabah;
+    SharedPreferences shared;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,8 +46,9 @@ public class NasabahFragment extends Fragment{
         listView = (ListView)view.findViewById(R.id.lv_nasabah);
         searchInput = (EditText)view.findViewById(R.id.search_nasabah);
         listNasabah = new ArrayList<>();
+        shared = getActivity().getSharedPreferences(getResources().getResourceName(R.string.KEY_SHARED_PREF), Context.MODE_PRIVATE);
 
-        volleyRequest("1");//Ini harus diambil dari id bank
+        volleyRequest(shared.getString(getResources().getResourceName(R.string.KEY_ID_BANK),""));
         final NasabahAdapter adapter = new NasabahAdapter(getActivity(), listNasabah);
         listView.setAdapter(adapter);
 
@@ -56,12 +61,9 @@ public class NasabahFragment extends Fragment{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-
             }
-
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
 

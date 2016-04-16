@@ -1,4 +1,4 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.Model;
 
 import java.io.Serializable;
 

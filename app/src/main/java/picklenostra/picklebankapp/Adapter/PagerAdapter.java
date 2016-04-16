@@ -1,8 +1,12 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.Adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+
+import picklenostra.picklebankapp.HomeFragment;
+import picklenostra.picklebankapp.NasabahFragment;
+import picklenostra.picklebankapp.NotifikasiFragment;
 
 /**
  * Created by Daniya on 3/20/16.
