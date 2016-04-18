@@ -34,14 +34,14 @@ public class LoginActivity extends ActionBarActivity {
     private Button btnLogin;
     private final String url = "http://private-ba5008-picklesquad.apiary-mock.com/login";
 
-    private final String KEY_ID_BANK = getResources().getString(R.string.KEY_ID_BANK);
-    private final String KEY_NAMA_BANK = getResources().getString(R.string.KEY_NAMA_BANK);
-    private final String KEY_RATING_BANK = getResources().getString(R.string.KEY_RATING_BANK);
-    private final String KEY_TOTAL_NASABAH_BANK = getResources().getString(R.string.KEY_TOTAL_NASABAH_BANK);
-    private final String KEY_SAMPAH_PLASTIK_BANK = getResources().getString(R.string.KEY_SAMPAH_PLASTIK_BANK);
-    private final String KEY_SAMPAH_KERTAS_BANK = getResources().getString(R.string.KEY_SAMPAH_KERTAS_BANK);
-    private final String KEY_SAMPAH_BOTOL_BANK = getResources().getString(R.string.KEY_SAMPAH_BOTOL_BANK);
-    private final String KEY_SAMPAH_BESI_BANK = getResources().getString(R.string.KEY_SAMPAH_BESI_BANK);
+    private final String KEY_ID_BANK = "idBank";
+    private final String KEY_NAMA_BANK = "namaBank";
+    private final String KEY_RATING_BANK = "ratingBank";
+    private final String KEY_TOTAL_NASABAH_BANK = "totalNasabahBank";
+    private final String KEY_SAMPAH_PLASTIK_BANK = "sampahPlastikBank";
+    private final String KEY_SAMPAH_KERTAS_BANK = "sampahKertasBank";
+    private final String KEY_SAMPAH_BOTOL_BANK = "sampahBotolBank";
+    private final String KEY_SAMPAH_BESI_BANK = "sampahBesiBank";
 
     private String email,password;
     UserSessionManager session;
@@ -109,7 +109,7 @@ public class LoginActivity extends ActionBarActivity {
                     //Simpan data nasabah di Shared Pref
                     SharedPreferences shared = getSharedPreferences(getResources().getString(R.string.KEY_SHARED_PREF), MODE_PRIVATE);
                     SharedPreferences.Editor editor = shared.edit();
-                    editor.putString(KEY_ID_BANK,id);
+                    editor.putString("idBank",id);
                     editor.putString(KEY_NAMA_BANK,nama);
                     editor.putInt(KEY_RATING_BANK, rating);
                     editor.putInt(KEY_TOTAL_NASABAH_BANK, totalNasabah);

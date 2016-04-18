@@ -59,6 +59,7 @@ public class NasabahAdapter extends BaseAdapter implements Filterable {
             LayoutInflater inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.nasabah_listviewitem,null);
             holder.nasabahName = (TextView)view.findViewById(R.id.nasabah_name);
+            holder.nasabahJoinDate = (TextView)view.findViewById(R.id.nasabah_join_date);
             holder.nasabahPhoto = (ImageView)view.findViewById(R.id.nasabah_photo);
             view.setTag(holder);
         }
@@ -68,6 +69,7 @@ public class NasabahAdapter extends BaseAdapter implements Filterable {
 
         NasabahModel nasabah = (NasabahModel)getItem(position);
         holder.nasabahName.setText(nasabah.getNama());
+        holder.nasabahJoinDate.setText("Bergabung Sejak: " + nasabah.getJoinDate());
         if(nasabah.getPhotoUrl() == null || nasabah.getPhotoUrl().equals(""))
             holder.nasabahPhoto.setImageResource(R.mipmap.ic_user);
         else
@@ -122,6 +124,6 @@ public class NasabahAdapter extends BaseAdapter implements Filterable {
 
     static class ViewHolder{
         ImageView nasabahPhoto;
-        TextView nasabahName;
+        TextView nasabahName, nasabahJoinDate;
     }
 }

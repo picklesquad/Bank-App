@@ -2,12 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_margin="16dp"
+    android:orientation="vertical"
+    android:background="@android:color/white">
 
     <EditText
         android:id="@+id/search_nasabah"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:hint="Search"
         android:inputType="textVisiblePassword"/>
 
@@ -15,6 +19,10 @@
         android:id="@+id/lv_nasabah"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:cacheColorHint="@android:color/transparent">
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        android:dividerHeight="0dp">
     </ListView>
 </LinearLayout>
