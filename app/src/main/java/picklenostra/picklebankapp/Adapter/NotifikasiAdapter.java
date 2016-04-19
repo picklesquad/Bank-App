@@ -50,6 +50,7 @@ public class NotifikasiAdapter extends BaseAdapter{
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.notifikasi_listviewitem,null);
+            viewHolder.idNotifikasi = (TextView)view.findViewById(R.id.id_notif);
             viewHolder.nameNotifikasi = (TextView)view.findViewById(R.id.tv_user_notifikasi);
             viewHolder.dateNotifikasi = (TextView)view.findViewById(R.id.tv_date_notifikasi);
             viewHolder.priceNotifikasi = (TextView)view.findViewById(R.id.tv_price_notifikasi);
@@ -60,6 +61,7 @@ public class NotifikasiAdapter extends BaseAdapter{
         }
 
         NotifikasiModel notifikasiModel = (NotifikasiModel)getItem(position);
+        viewHolder.idNotifikasi.setText(notifikasiModel.getNotificationId());
         viewHolder.nameNotifikasi.setText(notifikasiModel.getUserName());
         viewHolder.dateNotifikasi.setText(notifikasiModel.getDate());
         viewHolder.priceNotifikasi.setText(notifikasiModel.getTotalPrice()+"");
@@ -69,6 +71,6 @@ public class NotifikasiAdapter extends BaseAdapter{
 
 
     static class ViewHolder{
-        TextView nameNotifikasi, dateNotifikasi, priceNotifikasi;
+        TextView idNotifikasi, nameNotifikasi, dateNotifikasi, priceNotifikasi;
     }
 }

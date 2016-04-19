@@ -3,11 +3,12 @@ package picklenostra.picklebankapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 
 import picklenostra.picklebankapp.Helper.UserSessionManager;
 
-public class Splash extends AppCompatActivity {
+public class Splash extends ActionBarActivity {
 
     private final int DELAY_SPLASHSCREEN = 3000;
     UserSessionManager session;

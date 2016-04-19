@@ -44,13 +44,6 @@ public class NotifikasiFragment extends Fragment {
         listNotifikasi = new ArrayList<>();
         shared = getActivity().getSharedPreferences("PICKLEBANK", Context.MODE_PRIVATE);
 
-//        for(int i = 0; i < 8; i++) {
-//            NotifikasiModel notifikasiModel = new NotifikasiModel();
-//            notifikasiModel.setUserName("Edwin Aditya Rahman");
-//            notifikasiModel.setDate("05 Apr 2016, 12:33");
-//            notifikasiModel.setTotalPrice(200000);
-//            listNotifikasi.add(notifikasiModel);
-//        }
         volleyRequest("1");
         Log.e("LEN",listNotifikasi.size()+"");
         final NotifikasiAdapter notifikasiAdapter = new NotifikasiAdapter(getActivity(),listNotifikasi);

@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:cacheColorHint="@android:color/transparent"
-        android:divider="@null"
-        android:dividerHeight="0dp"></ListView>
+        android:divider="@color/textHint"
+        android:dividerHeight="1dp"></ListView>
 
 </RelativeLayout>
