@@ -8,4 +8,6 @@
     <dimen name="button_press_elevation">12dp</dimen>
     <dimen name="card_elevation">2dp</dimen>
     <dimen name="card_corner_radius">0dp</dimen>
+    <dimen name="list_height">72dp</dimen>
+
 </resources>
