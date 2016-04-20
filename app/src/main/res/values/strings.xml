@@ -40,5 +40,7 @@
     <!--Strings related to Profile and its Fragments-->
     <string name="nasabah_default_name">Your Name</string>
     <string name="nasabah_default_join_date">Join Date</string>
+    <string name="empty_string"> </string>
+    <string name="transaction_header">Tambah Transaksi</string>
 
 </resources>

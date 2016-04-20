@@ -1,13 +1,16 @@
 package picklenostra.picklebankapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 
 /**
  * Created by Daniya on 3/20/16.
@@ -34,6 +37,17 @@ public class HomeFragment extends Fragment {
 
         tvCustomer.setText(100 + " Nasabah");
         tvGarbage.setText(56 + " kgs");
+
+        //Floating Action Button
+        FloatingActionButton transacFAB = (FloatingActionButton)  view.findViewById(R.id.add_transac_fab);
+        transacFAB.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),TransactionFormActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
 
         return view;
     }

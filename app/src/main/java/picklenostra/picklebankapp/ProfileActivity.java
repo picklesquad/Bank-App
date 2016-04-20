@@ -80,6 +80,9 @@ public class ProfileActivity extends AppCompatActivity {
             session.logoutUser();
             return true;
         }
+        if (id == R.id.action_edit_profile) {
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
