@@ -25,7 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.mipmap.ic_pickle);
+        getSupportActionBar().setLogo(R.drawable.brand_logo_white_copy);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         session = new UserSessionManager(getApplicationContext());

@@ -25,7 +25,10 @@
             android:label="@string/title_activity_login" />
         <activity
             android:name=".ProfileActivity"
-            android:label="@string/title_activity_profile"></activity>
+            android:label=""/>
+        <activity
+            android:name=".TransactionFormActivity"
+            android:label=" "/>
     </application>
 
 </manifest>

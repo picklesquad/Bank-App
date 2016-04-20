@@ -1,5 +1,6 @@
 package picklenostra.picklebankapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import picklenostra.picklebankapp.Adapter.PagerAdapter;
 import picklenostra.picklebankapp.Helper.UserSessionManager;
@@ -24,18 +26,41 @@ public class TransactionFormActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_form);
 
-        toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
+        toolbar = (Toolbar) findViewById(R.id.transac_form_toolbar); // Attaching the layout to the toolbar object
+        toolbar.setTitle("Tambah Transaksi");
+
         setSupportActionBar(toolbar);                   // Setting toolbar as the ActionBar with setSupportActionBar() call
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //do something you want
+            }
+        });
+        //toolbar.setNavigationIcon(R.mipmap.ic_back_arrow);
+        /**toolbar.setNavigationOnClickListener( new View.OnClickListener() {
+                    public void OnClick(View view){
+                        public void onBackPressed()
+                        {
+                            FragmentManager fm = getActivity().getSupportFragmentManager();
+                            fm.popBackStack();
+                        }
+                    }
+                }
+        ); **/
+
 
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    //@Override
+    //public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+    //    getMenuInflater().inflate(R.menu.menu_main, menu);
+    //    return true;
+    //}
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
