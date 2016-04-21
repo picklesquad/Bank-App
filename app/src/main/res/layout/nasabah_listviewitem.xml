@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/list_height"
+    android:background="@android:color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/nasabah_photo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/profpic"
+        app:civ_border_width="1dp"
+        app:civ_border_color="@color/white"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
+
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_toRightOf="@id/nasabah_photo"
+        >
+        <TextView
+            android:id="@+id/nasabah_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/nasabah_default_name"
+            android:textColor="@color/text"
+            android:textSize="@dimen/abc_text_size_subtitle_material_toolbar"
+            />
+
+        <TextView
+            android:id="@+id/nasabah_join_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_below="@id/nasabah_name"
+            android:text="@string/nasabah_default_join_date"
+            android:textColor="@color/textHint"
+            android:textSize="@dimen/abc_text_size_small_material"/>
+    </RelativeLayout>
+</RelativeLayout>
