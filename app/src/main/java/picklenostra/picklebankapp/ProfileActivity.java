@@ -57,6 +57,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
 
+
             }
         });
 

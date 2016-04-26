@@ -36,7 +36,7 @@ public class TransactionFormActivity extends AppCompatActivity{
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //do something you want
+                TransactionFormActivity.this.onBackPressed();
             }
         });
         //toolbar.setNavigationIcon(R.mipmap.ic_back_arrow);

@@ -1,26 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context="picklenostra.picklebankapp.Splash"
+    android:background="@color/primary"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="picklenostra.picklebankapp.Splash"
-    android:background="@color/primary">
+    android:gravity="center"
+    >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerInParent="true">
+    <ImageView
+        android:id="@+id/splash_title"
+        android:layout_width="320dp"
+        android:layout_height="137dp"
+        android:src="@drawable/brand"/>
 
-
-        <ImageView
-            android:id="@+id/splash_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="32dp"
-            android:src="@drawable/brand"/>
-
-
-    </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>

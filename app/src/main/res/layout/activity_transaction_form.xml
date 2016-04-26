@@ -28,10 +28,10 @@
         android:layout_marginLeft="24dp"
         android:layout_below="@id/transac_form_toolbar">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginBottom="8dp"
+            android:layout_margin="8dp"
             android:id="@+id/phone_numb">
             <TextView
                 android:id="@+id/phone_numb_caption"
@@ -40,24 +40,23 @@
                 android:textSize="@dimen/abc_text_size_body_1_material"
                 android:textColor="@color/text"
                 android:text="No. Telepon Nasabah"
-                android:textStyle="bold"
-                android:layout_marginRight="4dp"/>
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/phone_numb_input"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_marginRight="8dp"
-                android:layout_weight=".7"
+                android:layout_width="match_parent"
+                android:layout_below="@id/phone_numb_caption"
                 android:textSize="@dimen/abc_text_size_body_1_material"
-                />
-        </LinearLayout>
 
-        <LinearLayout
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:id="@+id/plastik_input"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginBottom="8dp"
+            android:layout_margin="8dp"
             android:layout_below="@id/phone_numb">
             <TextView
                 android:id="@+id/plastik_caption"
@@ -66,14 +65,13 @@
                 android:textSize="@dimen/abc_text_size_body_1_material"
                 android:textColor="@color/text"
                 android:text="Plastik"
-                android:textStyle="bold"
-                android:layout_weight=".48"/>
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/jumlah_plastik_input"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_weight=".7"
+                android:layout_width="match_parent"
+                android:layout_below="@id/plastik_caption"
                 android:textSize="@dimen/abc_text_size_body_1_material"
                 />
 
@@ -85,14 +83,15 @@
                 android:textColor="@color/text"
                 android:text="kg"
                 android:textStyle="bold"
-                android:layout_weight=".1"/>
-        </LinearLayout>
+                android:layout_below="@id/plastik_caption"
+                android:layout_toRightOf="@id/jumlah_plastik_input"/>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/kertas_input"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginBottom="8dp"
+            android:layout_margin="8dp"
             android:layout_below="@id/plastik_input">
             <TextView
                 android:id="@+id/kertas_caption"
@@ -101,15 +100,14 @@
                 android:textSize="@dimen/abc_text_size_body_1_material"
                 android:textColor="@color/text"
                 android:text="Kertas"
-                android:textStyle="bold"
-                android:layout_weight=".49"/>
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/jumlah_kertas_input"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_weight=".7"
+                android:layout_width="match_parent"
                 android:textSize="@dimen/abc_text_size_body_1_material"
+                android:layout_below="@id/kertas_caption"
                 />
 
             <TextView
@@ -119,14 +117,15 @@
                 android:textColor="@color/text"
                 android:text="kg"
                 android:textStyle="bold"
-                android:layout_weight=".1"/>
-        </LinearLayout>
+                android:layout_below="@id/kertas_caption"
+                android:layout_toRightOf="@id/jumlah_kertas_input"/>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/logam_input"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginBottom="8dp"
+            android:layout_margin="8dp"
             android:layout_below="@id/kertas_input">
             <TextView
                 android:id="@+id/logam_caption"
@@ -135,15 +134,14 @@
                 android:textSize="@dimen/abc_text_size_body_1_material"
                 android:textColor="@color/text"
                 android:text="Logam"
-                android:textStyle="bold"
-                android:layout_weight=".48"/>
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/jumlah_logam_input"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_weight=".7"
+                android:layout_width="match_parent"
                 android:textSize="@dimen/abc_text_size_body_1_material"
+                android:layout_below="@id/logam_caption"
                 />
 
             <TextView
@@ -153,14 +151,14 @@
                 android:textColor="@color/text"
                 android:text="kg"
                 android:textStyle="bold"
-                android:layout_weight=".1"/>
-        </LinearLayout>
+                android:layout_toRightOf="@id/jumlah_logam_input"/>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/botol_input"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginBottom="8dp"
+            android:layout_margin="8dp"
             android:layout_below="@id/logam_input">
             <TextView
                 android:id="@+id/botol_caption"
@@ -169,14 +167,13 @@
                 android:textSize="@dimen/abc_text_size_body_1_material"
                 android:textColor="@color/text"
                 android:text="Botol"
-                android:textStyle="bold"
-                android:layout_weight=".52"/>
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/jumlah_botol_input"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_weight=".7"
+                android:layout_width="match_parent"
+                android:layout_below="@id/botol_caption"
                 android:textSize="@dimen/abc_text_size_body_1_material"
                 />
 
@@ -185,17 +182,18 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/abc_text_size_body_1_material"
                 android:textColor="@color/text"
-                android:text="kg"
+                android:text="buah"
                 android:textStyle="bold"
-                android:layout_weight=".1"/>
-        </LinearLayout>
+                android:layout_toRightOf="@id/jumlah_botol_input"
+                />
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/transaction_total"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_marginBottom="8dp"
-            android:layout_below="@id/botol_input">
+            android:layout_below="@id/botol_input"
+            android:layout_margin="8dp">
             <TextView
                 android:id="@+id/total_caption"
                 android:layout_width="wrap_content"
@@ -203,14 +201,13 @@
                 android:textSize="@dimen/abc_text_size_body_1_material"
                 android:textColor="@color/text"
                 android:text="Total Harga"
-                android:textStyle="bold"
-                android:layout_weight=".38"/>
+                android:textStyle="bold"/>
 
             <EditText
                 android:id="@+id/transaction_total_input"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:layout_weight=".7"
+                android:layout_width="match_parent"
+                android:layout_below="@id/total_caption"
                 android:textSize="@dimen/abc_text_size_body_1_material"
                 />
 
@@ -221,13 +218,14 @@
                 android:textColor="@color/text"
                 android:text="rupiah"
                 android:textStyle="bold"
-                android:layout_weight=".1"/>
-        </LinearLayout>
+                android:layout_toRightOf="@id/transaction_total_input"/>
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_below="@id/transaction_total"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp">
 
             <Button
                 android:layout_width="wrap_content"
@@ -236,7 +234,7 @@
                 android:layout_height="wrap_content"
                 android:text="Lanjutkan"
                 android:layout_centerInParent="true"
-                style="@style/blue_button"
+                style="@style/yellow_button"
                 android:textSize="@dimen/abc_text_size_body_1_material"
 
                 />
