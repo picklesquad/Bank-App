@@ -44,11 +44,12 @@
 
             <EditText
                 android:id="@+id/phone_numb_input"
+                android:inputType="number"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_below="@id/phone_numb_caption"
                 android:textSize="@dimen/abc_text_size_body_1_material"
-
+                android:hint="ex: 08123456789"
                 />
         </RelativeLayout>
 
@@ -69,10 +70,12 @@
 
             <EditText
                 android:id="@+id/jumlah_plastik_input"
+                android:inputType="number"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_below="@id/plastik_caption"
                 android:textSize="@dimen/abc_text_size_body_1_material"
+                android:hint="ex: 50kg"
                 />
 
             <TextView
@@ -104,10 +107,12 @@
 
             <EditText
                 android:id="@+id/jumlah_kertas_input"
+                android:inputType="number"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:textSize="@dimen/abc_text_size_body_1_material"
                 android:layout_below="@id/kertas_caption"
+                android:hint="ex: 50kg"
                 />
 
             <TextView
@@ -138,10 +143,12 @@
 
             <EditText
                 android:id="@+id/jumlah_logam_input"
+                android:inputType="number"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:textSize="@dimen/abc_text_size_body_1_material"
                 android:layout_below="@id/logam_caption"
+                android:hint="ex: 50kg"
                 />
 
             <TextView
@@ -171,10 +178,12 @@
 
             <EditText
                 android:id="@+id/jumlah_botol_input"
+                android:inputType="number"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_below="@id/botol_caption"
                 android:textSize="@dimen/abc_text_size_body_1_material"
+                android:hint="ex: 50kg"
                 />
 
             <TextView
@@ -205,10 +214,12 @@
 
             <EditText
                 android:id="@+id/transaction_total_input"
+                android:inputType="number"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_below="@id/total_caption"
                 android:textSize="@dimen/abc_text_size_body_1_material"
+                android:hint="ex: 10000 rupiah"
                 />
 
             <TextView
@@ -233,7 +244,7 @@
                 android:paddingRight="16dp"
                 android:layout_height="wrap_content"
                 android:text="Lanjutkan"
-                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
                 style="@style/yellow_button"
                 android:textSize="@dimen/abc_text_size_body_1_material"
 

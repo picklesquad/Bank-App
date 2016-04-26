@@ -44,7 +44,7 @@ public class NotifikasiFragment extends Fragment {
         listNotifikasi = new ArrayList<>();
         shared = getActivity().getSharedPreferences("PICKLEBANK", Context.MODE_PRIVATE);
 
-        volleyRequest("1");
+        volleyRequest("000001");
         Log.e("LEN",listNotifikasi.size()+"");
         final NotifikasiAdapter notifikasiAdapter = new NotifikasiAdapter(getActivity(),listNotifikasi);
         listView.setAdapter(notifikasiAdapter);

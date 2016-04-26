@@ -93,15 +93,15 @@ public class LoginActivity extends ActionBarActivity {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    JSONObject nasabah = response.getJSONObject("nasabah");
-                    String id = nasabah.getString("id");
-                    String nama = nasabah.getString("nama");
-                    int rating = nasabah.getInt("rating");
-                    int totalNasabah = nasabah.getInt("totalNasabah");
-                    int sampahPlastik = nasabah.getInt("sampahPlastik");
-                    int sampahKertas = nasabah.getInt("sampahKertas");
-                    int sampahBotol = nasabah.getInt("sampahBotol");
-                    int sampahBesi = nasabah.getInt("sampahBesi");
+                    JSONObject bank = response.getJSONObject("bank");
+                    String id = bank.getString("id");
+                    String nama = bank.getString("nama");
+                    int rating = bank.getInt("rating");
+                    int totalNasabah = bank.getInt("totalNasabah");
+                    int sampahPlastik = bank.getInt("sampahPlastik");
+                    int sampahKertas = bank.getInt("sampahKertas");
+                    int sampahBotol = bank.getInt("sampahBotol");
+                    int sampahBesi = bank.getInt("sampahBesi");
 
                     //Create Session
                     session.createUserLogin(email,password);

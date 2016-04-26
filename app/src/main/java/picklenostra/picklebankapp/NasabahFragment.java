@@ -50,7 +50,8 @@ public class NasabahFragment extends Fragment{
         shared = getActivity().getSharedPreferences("PICKLEBANK", Context.MODE_PRIVATE);
 
 //        volleyRequest(shared.getString(getResources().getResourceName(R.string.KEY_ID_BANK),null));
-        volleyRequest("1");
+        volleyRequest("000001");
+        Log.d("Fetching failed", listNasabah.toString());
         final NasabahAdapter adapter = new NasabahAdapter(getActivity(), listNasabah);
         listView.setAdapter(adapter);
 
