@@ -13,7 +13,6 @@ public class Splash extends AppCompatActivity {
     private final int DELAY_SPLASHSCREEN = 3000;
     UserSessionManager session;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

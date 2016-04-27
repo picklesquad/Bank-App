@@ -8,36 +8,21 @@
         android:id="@+id/cv_notifikasi"
         android:layout_width="match_parent"
         android:layout_height="96dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
-
+        android:layout_margin="8dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:background="@color/light_grey">
-
+            android:background="@color/light_grey_2">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_margin="8dp">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp">
-
-                    <!--ImageView
-                        android:id="@+id/icon_user_notifikasi"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@mipmap/ic_user"
-                        android:layout_marginLeft="8dp"/-->
-
-
                     <TextView
                         android:id="@+id/id_notif"
                         android:layout_width="wrap_content"
@@ -46,9 +31,7 @@
                         android:textColor="@color/text"
                         android:layout_marginLeft="8dp"
                         android:textSize="@dimen/abc_text_size_body_1_material"
-                        android:layout_weight="1"
-                        />
-
+                        android:layout_weight="1"/>
                     <TextView
                         android:id="@+id/tv_date_notifikasi"
                         android:layout_gravity="right"
@@ -61,25 +44,12 @@
                         android:textSize="@dimen/abc_text_size_body_1_material"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"/>
-                    >
-
-
-                    <!--android:layout_toRightOf="@id/icon_user_notifikasi"-->
-
-                   </LinearLayout>
+                </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp">
-
-                    <!--ImageView
-                        android:id="@+id/icon_date_notifikasi"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@mipmap/ic_calendar"
-                        android:layout_marginLeft="8dp"/-->
-
                     <TextView
                         android:id="@+id/tv_user_notifikasi"
                         android:layout_width="wrap_content"
@@ -87,23 +57,12 @@
                         android:text="Edwin Aditya Rahman"
                         android:textColor="@color/text"
                         android:layout_marginLeft="8dp"
-                        android:textSize="@dimen/abc_text_size_body_1_material"
-                        />
-
+                        android:textSize="@dimen/abc_text_size_body_1_material"/>
                 </RelativeLayout>
-
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp">
-
-                    <!--ImageView
-                        android:id="@+id/icon_price_notifikasi"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@mipmap/ic_coin_stack"
-                        android:layout_marginLeft="8dp"/-->
-
                     <TextView
                         android:id="@+id/tv_price_notifikasi"
                         android:layout_width="wrap_content"
@@ -112,22 +71,8 @@
                         android:textColor="@color/text"
                         android:textSize="@dimen/abc_text_size_body_1_material"
                         android:layout_marginLeft="8dp"/>
-
                 </RelativeLayout>
-
             </LinearLayout>
-
         </LinearLayout>
-
-        <!--TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:textSize="@dimen/abc_text_size_body_1_material"
-            android:text="HAHA"
-            android:textColor="@color/text"
-            /-->
-
-
     </android.support.v7.widget.CardView>
-
 </LinearLayout>

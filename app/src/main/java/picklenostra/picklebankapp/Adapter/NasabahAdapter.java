@@ -56,7 +56,8 @@ public class NasabahAdapter extends BaseAdapter implements Filterable {
 
         if (view == null){
             holder = new ViewHolder();
-            LayoutInflater inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater)activity.getSystemService
+                    (Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.nasabah_listviewitem,null);
             holder.nasabahName = (TextView)view.findViewById(R.id.nasabah_name);
             holder.nasabahJoinDate = (TextView)view.findViewById(R.id.nasabah_join_date);
@@ -70,11 +71,12 @@ public class NasabahAdapter extends BaseAdapter implements Filterable {
         NasabahModel nasabah = (NasabahModel)getItem(position);
         holder.nasabahName.setText(nasabah.getNama());
         holder.nasabahJoinDate.setText("Bergabung Sejak: " + nasabah.getJoinDate());
-        if(nasabah.getPhotoUrl() == null || nasabah.getPhotoUrl().equals(""))
+        if(nasabah.getPhotoUrl() == null || nasabah.getPhotoUrl().equals("")) {
             holder.nasabahPhoto.setImageResource(R.mipmap.ic_user);
-        else
+        }
+        else {
             Picasso.with(activity).load(nasabah.getPhotoUrl()).into(holder.nasabahPhoto);
-
+        }
         return view;
     }
 
@@ -88,7 +90,6 @@ public class NasabahAdapter extends BaseAdapter implements Filterable {
 
     //Search Functionality
     private class NasabahFilter extends Filter{
-
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults filterResults = new FilterResults();
@@ -100,8 +101,10 @@ public class NasabahAdapter extends BaseAdapter implements Filterable {
             else{
                 ArrayList<NasabahModel> listNasabahFiltered = new ArrayList<>();
                 for (NasabahModel n : listNasabah){
-                    if (n.getNama().toLowerCase().contains(constraint.toString().toLowerCase()))
+                    if (n.getNama().toLowerCase().contains(constraint.toString()
+                            .toLowerCase())) {
                         listNasabahFiltered.add(n);
+                    }
                 }
                 filterResults.values = listNasabahFiltered;
                 filterResults.count = listNasabahFiltered.size();
@@ -119,9 +122,7 @@ public class NasabahAdapter extends BaseAdapter implements Filterable {
                 NasabahAdapter.this.notifyDataSetChanged();
             }
         }
-
     }
-
     static class ViewHolder{
         ImageView nasabahPhoto;
         TextView nasabahName, nasabahJoinDate;

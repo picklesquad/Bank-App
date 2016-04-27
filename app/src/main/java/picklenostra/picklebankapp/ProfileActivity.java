@@ -23,7 +23,6 @@ public class ProfileActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.brand_logo_white_copy);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
@@ -51,18 +50,14 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
+                /** Soon to be defined**/
             }
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
-
+                /** Soon to be defined**/
             }
         });
-
-
-
     }
 
     @Override
@@ -84,7 +79,6 @@ public class ProfileActivity extends AppCompatActivity {
         if (id == R.id.action_edit_profile) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

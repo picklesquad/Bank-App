@@ -48,7 +48,8 @@ public class NotifikasiAdapter extends BaseAdapter{
 
         if (view == null){
             viewHolder = new ViewHolder();
-            LayoutInflater inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater)activity.getSystemService
+                    (Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.notifikasi_listviewitem,null);
             viewHolder.idNotifikasi = (TextView)view.findViewById(R.id.id_notif);
             viewHolder.nameNotifikasi = (TextView)view.findViewById(R.id.tv_user_notifikasi);

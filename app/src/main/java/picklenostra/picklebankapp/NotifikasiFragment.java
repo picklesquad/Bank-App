@@ -69,7 +69,8 @@ public class NotifikasiFragment extends Fragment {
                         String namaUser = objectNotifikasi.getString("namaUser");
                         int jumlahTagihan = objectNotifikasi.getInt("jumlah");
                         String status = objectNotifikasi.getString("status");
-                        String date = objectNotifikasi.getString("tanggal") + ", " + objectNotifikasi.getString("waktu");
+                        String date = objectNotifikasi.getString("tanggal") + ", "
+                                + objectNotifikasi.getString("waktu");
 
                         Log.e("Response2",objectNotifikasi.toString());
 
@@ -79,7 +80,6 @@ public class NotifikasiFragment extends Fragment {
                         notifikasiModel.setStatus(status);
                         notifikasiModel.setDate(date);
                         listNotifikasi.add(notifikasiModel);
-//                        Log.e("LEN",listNotifikasi.size()+" " + notifikasiModel.getNotificationId());
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

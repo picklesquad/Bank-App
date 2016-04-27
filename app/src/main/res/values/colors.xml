@@ -8,6 +8,8 @@
     <color name="textHint">#9e9e9e</color>
     <color name="text">#616161</color>
     <color name="blue">#42a5f5</color>
-    <color name="light_grey">#e0e0e0</color>
+    <color name="light_grey_1">#bdbdbd</color>
+    <color name="light_grey_2">#e0e0e0</color>
+    <color name="light_grey_3">#eceff1</color>
 
 </resources>

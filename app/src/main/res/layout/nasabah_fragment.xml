@@ -22,8 +22,6 @@
         android:id="@+id/lv_nasabah"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
         android:cacheColorHint="@android:color/transparent"
         android:divider="@color/textHint"
         android:dividerHeight="1dp">

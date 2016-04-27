@@ -68,7 +68,6 @@ public class LoginActivity extends ActionBarActivity {
                 }
             }
         });
-
     }
 
     private boolean validate(String email, String password){
@@ -89,7 +88,8 @@ public class LoginActivity extends ActionBarActivity {
     }
 
     private void volleyRequest(final String email, final String password){
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, "", new Response.Listener<JSONObject>() {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, "",
+                new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -125,16 +125,15 @@ public class LoginActivity extends ActionBarActivity {
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                etEmail.setError(error.getMessage());//Masih belum selesai
+                etEmail.setError(error.getMessage());
+                /** Needs to be define further more**/
             }
         }){
             @Override

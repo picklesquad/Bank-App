@@ -13,9 +13,7 @@ import picklenostra.picklebankapp.LoginActivity;
  */
     public class UserSessionManager {
         SharedPreferences pref;
-
         SharedPreferences.Editor editor;
-
         Context mContext;
 
         private static final String KEY_SHARED_PREF = "PICKLEBANK";
@@ -35,7 +33,6 @@ import picklenostra.picklebankapp.LoginActivity;
             editor.commit();
         }
 
-
         public boolean checkLogin(){
             if(this.isUserLogin()){
                 return true;
@@ -48,7 +45,6 @@ import picklenostra.picklebankapp.LoginActivity;
                 return false;
             }
         }
-
 
         public void logoutUser(){
             editor.clear();

@@ -23,6 +23,7 @@ public class LruBitmapCache extends LruCache<String, Bitmap> implements
     }
 
     public LruBitmapCache(int sizeInKiloBytes) {
+
         super(sizeInKiloBytes);
     }
 

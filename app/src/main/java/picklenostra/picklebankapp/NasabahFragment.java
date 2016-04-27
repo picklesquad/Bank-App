@@ -49,9 +49,7 @@ public class NasabahFragment extends Fragment{
         listNasabah = new ArrayList<>();
         shared = getActivity().getSharedPreferences("PICKLEBANK", Context.MODE_PRIVATE);
 
-//        volleyRequest(shared.getString(getResources().getResourceName(R.string.KEY_ID_BANK),null));
         volleyRequest("000001");
-        Log.d("Fetching failed", listNasabah.toString());
         final NasabahAdapter adapter = new NasabahAdapter(getActivity(), listNasabah);
         listView.setAdapter(adapter);
 
@@ -65,6 +63,7 @@ public class NasabahFragment extends Fragment{
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
+
             @Override
             public void afterTextChanged(Editable s) {
             }
@@ -81,20 +80,22 @@ public class NasabahFragment extends Fragment{
                 try {
                     JSONObject responseAPI = new JSONObject(response);
                     JSONArray arrayNasabah = responseAPI.getJSONArray("nasabah");
+
                     for(int i = 0; i < arrayNasabah.length(); i++){
                         NasabahModel nasabahModel = new NasabahModel();
                         JSONObject objectNasabah = arrayNasabah.getJSONObject(i);
                         String id = objectNasabah.getString("id");
                         String nama = objectNasabah.getString("name");
-                        String location = objectNasabah.getString("location");
+                        String photoUrl = objectNasabah.getString("photo");
                         String joinDate = objectNasabah.getString("join_date");
 
                         nasabahModel.setId(id);
                         nasabahModel.setNama(nama);
-                        nasabahModel.setLokasi(location);
+                        nasabahModel.setPhotoUrl(photoUrl);
                         nasabahModel.setJoinDate(joinDate);
                         listNasabah.add(nasabahModel);
                     }
+                    Log.d("Array empty", listNasabah.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

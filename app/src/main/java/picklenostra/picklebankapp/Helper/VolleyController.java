@@ -14,8 +14,7 @@ import com.android.volley.toolbox.Volley;
 
 public class VolleyController extends Application {
 
-    public static final String TAG = VolleyController.class
-            .getSimpleName();
+    public static final String TAG = VolleyController.class.getSimpleName();
 
     private RequestQueue mRequestQueue;
     private ImageLoader mImageLoader;
@@ -36,15 +35,13 @@ public class VolleyController extends Application {
         if (mRequestQueue == null) {
             mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         }
-
         return mRequestQueue;
     }
 
     public ImageLoader getImageLoader() {
         getRequestQueue();
         if (mImageLoader == null) {
-            mImageLoader = new ImageLoader(this.mRequestQueue,
-                    new LruBitmapCache());
+            mImageLoader = new ImageLoader(this.mRequestQueue, new LruBitmapCache());
         }
         return this.mImageLoader;
     }
