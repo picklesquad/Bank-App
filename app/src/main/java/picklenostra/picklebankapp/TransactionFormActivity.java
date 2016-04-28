@@ -8,9 +8,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -41,8 +43,11 @@ public class TransactionFormActivity extends AppCompatActivity{
 
     private Toolbar toolbar;
     private EditText etPlastikInput, etPhoneNumbInput, etKertasInput, etLogamInput, etBotolInput, etHargaInput;
-    private final String URL = "http://private-ba5008-picklesquad.apiary-mock.com/bank/%1$s/transaction";
+    private final String URL = "http://private-ba5008-picklesquad.apiary-mock.com/bank/transaction/create";
     SharedPreferences shared;
+
+    public String phoneNumber, harga, plastik, kertas, botol, logam;
+    private Button submitButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +67,7 @@ public class TransactionFormActivity extends AppCompatActivity{
         etLogamInput = (EditText) findViewById(R.id.jumlah_logam_input);
         etBotolInput = (EditText) findViewById(R.id.jumlah_botol_input);
         etHargaInput = (EditText) findViewById(R.id.transaction_total_input);
+        submitButton = (Button) findViewById(R.id.button_transactions);
 
 
 
@@ -72,18 +78,36 @@ public class TransactionFormActivity extends AppCompatActivity{
             }
         });
 
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                phoneNumber = etPhoneNumbInput.getText().toString();
+                harga = etHargaInput.getText().toString();
+                plastik = etPlastikInput.getText().toString();
+                kertas = etKertasInput.getText().toString();
+                logam = etLogamInput.getText().toString();
+                botol = etBotolInput.getText().toString();
+                volleyRequest(phoneNumber,harga,plastik,kertas,logam,botol);
+            }
+        });
+
 
     }
 
     private void volleyRequest(final String phoneNumber, final String harga, final String plastik, final String kertas, final String logam, final String botol){
+        Log.e("test","masuk");
+
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, "", new Response.Listener<JSONObject>() {
+
             @Override
             public void onResponse(JSONObject response) {
                 try {
 
+                    Log.e("json","masuk");
                     int status = response.getInt("status");
 
                     if(status == 201){
+                        Log.e("201","masuk");
                         //Buat intent untuk masuk ke Profile
                         Toast.makeText(getApplicationContext(), "Transaksi berhasil", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(TransactionFormActivity.this,ProfileActivity.class);
