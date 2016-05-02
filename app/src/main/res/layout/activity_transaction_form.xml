@@ -215,7 +215,7 @@
                 android:layout_marginLeft="8dp">
                 <Button
                     android:layout_width="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_margin="@dimen/activity_vertical_margin"
                     android:layout_height="wrap_content"
                     android:text="Lanjutkan"
                     android:layout_centerInParent="true"

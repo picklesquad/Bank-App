@@ -54,10 +54,12 @@ public class TransactionFormActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_transaction_form);
 
-        toolbar = (Toolbar) findViewById(R.id.transac_form_toolbar); // Attaching the layout to the toolbar object
+        // Attaching the layout to the toolbar object
+        toolbar = (Toolbar) findViewById(R.id.transac_form_toolbar);
         toolbar.setTitle("Tambah Transaksi");
 
-        setSupportActionBar(toolbar);                   // Setting toolbar as the ActionBar with setSupportActionBar() call
+        // Setting toolbar as the ActionBar with setSupportActionBar() call
+        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -95,7 +97,6 @@ public class TransactionFormActivity extends AppCompatActivity{
     }
 
     private void volleyRequest(final String phoneNumber, final String harga, final String plastik, final String kertas, final String logam, final String botol){
-        Log.e("test","masuk");
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, "", new Response.Listener<JSONObject>() {
 
