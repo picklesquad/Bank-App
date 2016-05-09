@@ -1,6 +1,7 @@
 package picklenostra.picklebankapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.AdapterView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -52,6 +54,14 @@ public class NasabahFragment extends Fragment{
         volleyRequest("000001");
         final NasabahAdapter adapter = new NasabahAdapter(getActivity(), listNasabah);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(NasabahFragment.this.getActivity(),NasabahDetailActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //Search Functionality
         searchInput.addTextChangedListener(new TextWatcher() {
