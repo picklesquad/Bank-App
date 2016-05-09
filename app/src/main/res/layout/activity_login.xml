@@ -27,13 +27,13 @@
             android:gravity="center_horizontal"
             android:orientation="vertical">
             <EditText
-                android:id="@+id/etEmail"
+                android:id="@+id/etPhoneNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:ems="12"
-                android:hint="Email"
-                android:inputType="textEmailAddress"/>
+                android:hint="No HP"
+                android:inputType="number"/>
             <EditText
                 android:id="@+id/etPassword"
                 android:layout_width="wrap_content"

@@ -29,10 +29,10 @@ import picklenostra.picklebankapp.Helper.VolleyController;
 public class LoginActivity extends ActionBarActivity {
 
     private ImageView imgBrandingLogo;
-    private EditText etEmail, etPassword;
+    private EditText etPhoneNumber, etPassword;
     private ProgressBar pbProgressBar;
     private Button btnLogin;
-    private final String url = "http://private-ba5008-picklesquad.apiary-mock.com/login";
+    private final String url = "http://104.155.206.184:8080/pickle-0.1/bank/login";
 
     private final String KEY_ID_BANK = "idBank";
     private final String KEY_NAMA_BANK = "namaBank";
@@ -43,7 +43,7 @@ public class LoginActivity extends ActionBarActivity {
     private final String KEY_SAMPAH_BOTOL_BANK = "sampahBotolBank";
     private final String KEY_SAMPAH_BESI_BANK = "sampahBesiBank";
 
-    private String email,password;
+    private String phoneNumber,password;
     UserSessionManager session;
 
     @Override
@@ -54,17 +54,17 @@ public class LoginActivity extends ActionBarActivity {
         session = new UserSessionManager(getApplicationContext());
 
         imgBrandingLogo = (ImageView) findViewById(R.id.imgBrandingLogo);
-        etEmail = (EditText) findViewById(R.id.etEmail);
+        etPhoneNumber = (EditText) findViewById(R.id.etPhoneNumber);
         etPassword = (EditText) findViewById(R.id.etPassword);
         btnLogin = (Button) findViewById(R.id.btnLogin);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                email = etEmail.getText().toString();
+                phoneNumber = etPhoneNumber.getText().toString();
                 password = etPassword.getText().toString();
-                if(validate(email,password)){
-                    volleyRequest(email,password);
+                if(validate(phoneNumber,password)){
+                    volleyRequest(phoneNumber,password);
                 }
             }
         });
@@ -72,76 +72,83 @@ public class LoginActivity extends ActionBarActivity {
 
     private boolean validate(String email, String password){
         boolean isValid = true;
-        if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            etEmail.setError("Enter a valid email address");
-            isValid = false;
-        }
-        else if(password.isEmpty() || password.length() < 8){
+//        if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+//            etEmail.setError("Enter a valid email address");
+//            isValid = false;
+//        }
+        if(password.isEmpty() || password.length() < 8){
             etPassword.setError("Password must be 8 characters or more");
             isValid = false;
         }
         else{
-            etEmail.setError(null);
+            etPhoneNumber.setError(null);
             etPassword.setError(null);
         }
         return isValid;
     }
 
-    private void volleyRequest(final String email, final String password){
+    private void volleyRequest(final String phoneNumber, final String password){
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, "",
                 new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
-                    JSONObject bank = response.getJSONObject("bank");
-                    String id = bank.getString("id");
-                    String nama = bank.getString("nama");
-                    int rating = bank.getInt("rating");
-                    int totalNasabah = bank.getInt("totalNasabah");
-                    int sampahPlastik = bank.getInt("sampahPlastik");
-                    int sampahKertas = bank.getInt("sampahKertas");
-                    int sampahBotol = bank.getInt("sampahBotol");
-                    int sampahBesi = bank.getInt("sampahBesi");
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject bank = response.getJSONObject("data");
+                            String id = bank.getString("id");
+                            String nama = bank.getString("nama");
+                            int rating = bank.getInt("rating");
+                            int totalNasabah = bank.getInt("totalNasabah");
+                            int sampahPlastik = bank.getInt("sampahPlastik");
+                            int sampahKertas = bank.getInt("sampahKertas");
+                            int sampahBotol = bank.getInt("sampahBotol");
+                            int sampahBesi = bank.getInt("sampahBesi");
 
-                    //Create Session
-                    session.createUserLogin(email,password);
+                            //Create Session
+                            session.createUserLogin(phoneNumber,password);
 
-                    //Simpan data nasabah di Shared Pref
-                    SharedPreferences shared = getSharedPreferences(getResources().getString(R.string.KEY_SHARED_PREF), MODE_PRIVATE);
-                    SharedPreferences.Editor editor = shared.edit();
-                    editor.putString("idBank",id);
-                    editor.putString(KEY_NAMA_BANK,nama);
-                    editor.putInt(KEY_RATING_BANK, rating);
-                    editor.putInt(KEY_TOTAL_NASABAH_BANK, totalNasabah);
-                    editor.putInt(KEY_SAMPAH_PLASTIK_BANK, sampahPlastik);
-                    editor.putInt(KEY_SAMPAH_KERTAS_BANK, sampahKertas);
-                    editor.putInt(KEY_SAMPAH_BOTOL_BANK, sampahBotol);
-                    editor.putInt(KEY_SAMPAH_BESI_BANK,sampahBesi);
-                    editor.commit();
+                            //Simpan data nasabah di Shared Pref
+                            SharedPreferences shared = getSharedPreferences(getResources().getString(R.string.KEY_SHARED_PREF), MODE_PRIVATE);
+                            SharedPreferences.Editor editor = shared.edit();
+                            editor.putString(KEY_ID_BANK,id);
+                            editor.putString(KEY_NAMA_BANK,nama);
+                            editor.putInt(KEY_RATING_BANK, rating);
+                            editor.putInt(KEY_TOTAL_NASABAH_BANK, totalNasabah);
+                            editor.putInt(KEY_SAMPAH_PLASTIK_BANK, sampahPlastik);
+                            editor.putInt(KEY_SAMPAH_KERTAS_BANK, sampahKertas);
+                            editor.putInt(KEY_SAMPAH_BOTOL_BANK, sampahBotol);
+                            editor.putInt(KEY_SAMPAH_BESI_BANK,sampahBesi);
+                            editor.commit();
 
-                    //Buat intent untuk masuk ke Profile
-                    Intent intent = new Intent(LoginActivity.this,ProfileActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                    finish();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
+                            //Buat intent untuk masuk ke Profile
+                            Intent intent = new Intent(LoginActivity.this,ProfileActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            finish();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                etEmail.setError(error.getMessage());
+                etPhoneNumber.setError(error.getMessage());
                 /** Needs to be define further more**/
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("email",email);
+                params.put("phoneNumber",phoneNumber);
                 params.put("password",password);
                 return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError{
+                Map<String,String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json;charset=UTF-8");
+                return headers;
             }
         };
         VolleyController.getInstance().addToRequestQueue(request);
