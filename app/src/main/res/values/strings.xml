@@ -41,6 +41,8 @@
     <string name="nasabah_default_name">Your Name</string>
     <string name="nasabah_default_join_date">Join Date</string>
     <string name="empty_string"> </string>
+    <!--Toolbar String -->
     <string name="transaction_header">Tambah Transaksi</string>
+    <string name="notifikasi_detail_header">Status Withdrawal</string>
 
 </resources>

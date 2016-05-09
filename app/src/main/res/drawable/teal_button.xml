@@ -11,7 +11,7 @@
     </item>
     <item android:state_pressed="false">
         <shape>
-            <solid android:color="@color/primaryDark" />
+            <solid android:color="@color/primary" />
         </shape>
     </item>
 </selector>

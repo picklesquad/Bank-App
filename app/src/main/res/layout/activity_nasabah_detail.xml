@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <android.support.v7.widget.Toolbar
+    android:layout_height="match_parent"
+    tools:context=".NasabahDetailActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <android.support.v7.widget.Toolbar
         android:id="@+id/nasabah_detail_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,7 +22,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:titleTextAppearance="@string/transaction_header"/>
-    <RelativeLayout
+        <RelativeLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:layout_below="@id/nasabah_detail_toolbar"
@@ -41,21 +46,27 @@
                 android:layout_toRightOf="@id/nasabah_name_icon"
                 android:layout_centerInParent="true"
                 android:text="Edwin Aditya"
-                android:textSize="@dimen/abc_text_size_display_1_material"
+                android:textSize="@dimen/abc_text_size_body_1_material"
                 android:textColor="@color/text"/>
         </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/nasabah_name_field"
+            android:background="@color/textHint" />
         <RelativeLayout
             android:id="@+id/nasabah_id_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_vertical_margin"
             android:layout_below="@id/nasabah_name_field"
-            android:layout_centerInParent="true">
+            android:layout_centerInParent="true"
+            >
             <ImageView
                 android:id="@+id/user_id_icon"
                 android:layout_width="@dimen/icon_size"
                 android:layout_height="@dimen/icon_size"
-                android:src="@mipmap/ic_user"/>
+                android:src="@mipmap/ic_business_card"/>
             <TextView
                 android:id="@+id/nasabah_id"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
@@ -64,9 +75,14 @@
                 android:layout_toRightOf="@id/user_id_icon"
                 android:layout_centerInParent="true"
                 android:text="1206237681"
-                android:textSize="@dimen/abc_text_size_display_1_material"
+                android:textSize="@dimen/abc_text_size_body_1_material"
                 android:textColor="@color/text"/>
         </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/nasabah_id_field"
+            android:background="@color/textHint" />
         <RelativeLayout
             android:id="@+id/nasabah_email_field"
             android:layout_width="wrap_content"
@@ -87,9 +103,14 @@
                 android:layout_toRightOf="@id/email_icon"
                 android:layout_centerInParent="true"
                 android:text="edwin@kece.com"
-                android:textSize="@dimen/abc_text_size_display_1_material"
+                android:textSize="@dimen/abc_text_size_body_1_material"
                 android:textColor="@color/text" />
         </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/nasabah_email_field"
+            android:background="@color/textHint" />
         <RelativeLayout
             android:id="@+id/nasabah_phone_numb_field"
             android:layout_width="wrap_content"
@@ -110,9 +131,14 @@
                 android:layout_toRightOf="@id/phone_numb_icon"
                 android:layout_centerInParent="true"
                 android:text="08123456789"
-                android:textSize="@dimen/abc_text_size_display_1_material"
+                android:textSize="@dimen/abc_text_size_body_1_material"
                 android:textColor="@color/text" />
         </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/nasabah_phone_numb_field"
+            android:background="@color/textHint" />
         <RelativeLayout
             android:id="@+id/nasabah_address_field"
             android:layout_width="wrap_content"
@@ -133,39 +159,20 @@
                 android:layout_toRightOf="@id/address_icon"
                 android:layout_centerInParent="true"
                 android:text="Jalan Akses UI"
-                android:textSize="@dimen/abc_text_size_display_1_material"
+                android:textSize="@dimen/abc_text_size_body_1_material"
                 android:textColor="@color/text"/>
         </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/nasabah_trash_total_field"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/activity_vertical_margin"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
             android:layout_below="@id/nasabah_address_field"
-            android:layout_centerInParent="true">
-            <ImageView
-                android:layout_height="@dimen/icon_size"
-                android:layout_width="@dimen/icon_size"
-                android:src="@mipmap/ic_weight_grey"
-                android:id="@+id/trash_icon"/>
-            <TextView
-                android:id="@+id/nasabah_trash_total"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/trash_icon"
-                android:layout_centerInParent="true"
-                android:text="10 kg"
-                android:textSize="@dimen/abc_text_size_display_1_material"
-                android:textColor="@color/text"/>
-        </RelativeLayout>
-
+            android:background="@color/textHint" />
         <RelativeLayout
             android:id="@+id/nasabah_balance_field"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/activity_vertical_margin"
-            android:layout_below="@id/nasabah_trash_total_field"
+            android:layout_below="@id/nasabah_address_field"
             android:layout_centerInParent="true">
             <ImageView
                 android:layout_height="@dimen/icon_size"
@@ -180,8 +187,159 @@
                 android:layout_toRightOf="@id/balance_icon"
                 android:layout_centerInParent="true"
                 android:text="10000 Rupiah"
-                android:textSize="@dimen/abc_text_size_display_1_material"
+                android:textSize="@dimen/abc_text_size_body_1_material"
                 android:textColor="@color/text"/>
         </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/nasabah_balance_field"
+            android:background="@color/textHint" />
+        <RelativeLayout
+            android:id="@+id/nasabah_trash_total_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:layout_below="@id/nasabah_balance_field"
+            android:layout_centerInParent="true">
+            <ImageView
+                android:layout_height="@dimen/icon_size"
+                android:layout_width="@dimen/icon_size"
+                android:src="@mipmap/ic_weight_grey"
+                android:id="@+id/trash_icon"/>
+            <RelativeLayout
+                android:id="@+id/nasabah_trash"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_toRightOf="@id/trash_icon"
+                android:layout_centerInParent="true">
+                <RelativeLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:id="@+id/trash_total">
+                    <TextView
+                        android:id="@+id/nasabah_trash_total"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="10 kg"
+                        android:textSize="@dimen/abc_text_size_body_1_material"
+                        android:textColor="@color/text"/>
+                    <TextView
+                        android:id="@+id/nasabah_trash_total_caption"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/nasabah_trash_total"
+                        android:text="Total"
+                        android:textSize="@dimen/abc_text_size_body_1_material"
+                        android:textColor="@color/text"
+                        android:textStyle=""/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:id="@+id/trash_plastik"
+                    android:layout_below="@id/trash_total"
+                    android:layout_marginTop="@dimen/activity_vertical_margin">
+                    <TextView
+                        android:id="@+id/nasabah_trash_plastik"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="2.5 kg"
+                        android:textSize="@dimen/abc_text_size_body_1_material"
+                        android:textColor="@color/text"/>
+                    <TextView
+                        android:id="@+id/nasabah_trash_plastik_caption"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/nasabah_trash_plastik"
+                        android:text="Plastik"
+                        android:textSize="@dimen/abc_text_size_body_1_material"
+                        android:textColor="@color/text"
+                        android:textStyle=""/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:id="@+id/trash_kertas"
+                    android:layout_below="@id/trash_plastik"
+                    android:layout_marginTop="@dimen/activity_vertical_margin">
+                    <TextView
+                        android:id="@+id/nasabah_trash_kertas"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1 kg"
+                        android:textSize="@dimen/abc_text_size_body_1_material"
+                        android:textColor="@color/text"/>
+                    <TextView
+                        android:id="@+id/nasabah_trash_kertas_caption"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/nasabah_trash_kertas"
+                        android:text="Kertas"
+                        android:textSize="@dimen/abc_text_size_body_1_material"
+                        android:textColor="@color/text"
+                        android:textStyle=""/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:id="@+id/trash_besi"
+                    android:layout_below="@id/trash_kertas"
+                    android:layout_marginTop="@dimen/activity_vertical_margin">
+                    <TextView
+                        android:id="@+id/nasabah_trash_besi"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="3 kg"
+                        android:textSize="@dimen/abc_text_size_body_1_material"
+                        android:textColor="@color/text"/>
+                    <TextView
+                        android:id="@+id/nasabah_trash_besi_caption"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/nasabah_trash_besi"
+                        android:text="Besi"
+                        android:textSize="@dimen/abc_text_size_body_1_material"
+                        android:textColor="@color/text"
+                        android:textStyle=""/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:id="@+id/trash_botol"
+                    android:layout_below="@id/trash_besi"
+                    android:layout_marginTop="@dimen/activity_vertical_margin">
+                    <TextView
+                        android:id="@+id/nasabah_trash_botol"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="204 botol"
+                        android:textSize="@dimen/abc_text_size_body_1_material"
+                        android:textColor="@color/text"/>
+                    <TextView
+                        android:id="@+id/nasabah_trash_botol_caption"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/nasabah_trash_botol"
+                        android:text="Botol"
+                        android:textSize="@dimen/abc_text_size_body_1_material"
+                        android:textColor="@color/text"
+                        android:textStyle=""/>
+                </RelativeLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+
+
     </RelativeLayout>
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>
