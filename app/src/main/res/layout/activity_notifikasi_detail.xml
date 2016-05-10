@@ -37,20 +37,27 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:textSize="@dimen/abc_text_size_body_1_material"
-                android:text="3930231239123"
+                android:text=""
                 android:textColor="@color/text"
                 android:layout_margin="@dimen/activity_vertical_margin_small"
                 />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/detail_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:textSize="@dimen/abc_text_size_body_1_material"
-                android:text="Menunggu Konfirmasi"
+                android:text=""
                 android:textColor="@color/text"
                 android:layout_margin="@dimen/activity_vertical_margin_small"
                 />
         </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -75,7 +82,7 @@
                 android:layout_toRightOf="@id/user_id_icon_notif"
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/abc_text_size_body_1_material"
-                android:text="Daniya Rachmadiani"
+                android:text=""
                 android:textColor="@color/text"
                 android:layout_margin="@dimen/activity_vertical_margin_small"
                 />
@@ -99,7 +106,7 @@
                 android:layout_toRightOf="@id/total_withdrawal_icon"
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/abc_text_size_body_1_material"
-                android:text="100.000 Rupiah"
+                android:text=""
                 android:textColor="@color/text"
                 android:layout_margin="@dimen/activity_vertical_margin_small"
                 />
@@ -123,7 +130,7 @@
                 android:layout_toRightOf="@id/date_icon"
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/abc_text_size_body_1_material"
-                android:text="Rabu, 33 Februari 2020"
+                android:text=""
                 android:textColor="@color/text"
                 android:layout_margin="@dimen/activity_vertical_margin_small"
                 />
@@ -147,7 +154,7 @@
                 android:layout_toRightOf="@id/time_icon"
                 android:layout_centerVertical="true"
                 android:textSize="@dimen/abc_text_size_body_1_material"
-                android:text="21:20"
+                android:text=""
                 android:textColor="@color/text"
                 android:layout_margin="@dimen/activity_vertical_margin_small"
                 />
