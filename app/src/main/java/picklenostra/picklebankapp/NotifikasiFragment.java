@@ -1,6 +1,7 @@
 package picklenostra.picklebankapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.android.volley.Request;
@@ -48,6 +50,16 @@ public class NotifikasiFragment extends Fragment {
         Log.e("LEN",listNotifikasi.size()+"");
         final NotifikasiAdapter notifikasiAdapter = new NotifikasiAdapter(getActivity(),listNotifikasi);
         listView.setAdapter(notifikasiAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String idNotification = (String) listNotifikasi.get(position).getNotificationId();
+                Intent intent = new Intent(NotifikasiFragment.this.getActivity(),NasabahDetailActivity.class);
+                intent.putExtra("id","000001");
+                startActivity(intent);
+            }
+        });
         
         return view;
     }
