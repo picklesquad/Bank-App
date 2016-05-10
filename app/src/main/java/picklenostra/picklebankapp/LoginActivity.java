@@ -93,7 +93,7 @@ public class LoginActivity extends ActionBarActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            JSONObject bank = response.getJSONObject("");
+                            JSONObject bank = response.getJSONObject("data");
                             String id = bank.getString("id");
                             String nama = bank.getString("nama");
                             int rating = bank.getInt("rating");
