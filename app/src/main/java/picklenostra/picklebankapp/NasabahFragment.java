@@ -58,7 +58,9 @@ public class NasabahFragment extends Fragment{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String iduser = (String) listNasabah.get(position).getId();
                 Intent intent = new Intent(NasabahFragment.this.getActivity(),NasabahDetailActivity.class);
+                intent.putExtra("iduser","1");
                 startActivity(intent);
             }
         });

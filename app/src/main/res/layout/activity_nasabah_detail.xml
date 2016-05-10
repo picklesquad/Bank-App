@@ -45,7 +45,7 @@
                     android:layout_width="match_parent"
                     android:layout_toRightOf="@id/nasabah_name_icon"
                     android:layout_centerInParent="true"
-                    android:text="Edwin Aditya"
+                    android:text=""
                     android:textSize="@dimen/abc_text_size_body_1_material"
                     android:textColor="@color/text"/>
             </RelativeLayout>
@@ -74,7 +74,7 @@
                     android:layout_width="match_parent"
                     android:layout_toRightOf="@id/user_id_icon"
                     android:layout_centerInParent="true"
-                    android:text="1206237681"
+                    android:text=""
                     android:textSize="@dimen/abc_text_size_body_1_material"
                     android:textColor="@color/text"/>
             </RelativeLayout>
@@ -102,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/email_icon"
                     android:layout_centerInParent="true"
-                    android:text="edwin@kece.com"
+                    android:text=""
                     android:textSize="@dimen/abc_text_size_body_1_material"
                     android:textColor="@color/text" />
             </RelativeLayout>
@@ -130,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/phone_numb_icon"
                     android:layout_centerInParent="true"
-                    android:text="08123456789"
+                    android:text=""
                     android:textSize="@dimen/abc_text_size_body_1_material"
                     android:textColor="@color/text" />
             </RelativeLayout>
@@ -158,7 +158,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/address_icon"
                     android:layout_centerInParent="true"
-                    android:text="Jalan Akses UI"
+                    android:text=""
                     android:textSize="@dimen/abc_text_size_body_1_material"
                     android:textColor="@color/text"/>
             </RelativeLayout>
@@ -186,7 +186,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@id/balance_icon"
                     android:layout_centerInParent="true"
-                    android:text="10000 Rupiah"
+                    android:text=""
                     android:textSize="@dimen/abc_text_size_body_1_material"
                     android:textColor="@color/text"/>
             </RelativeLayout>
@@ -213,41 +213,17 @@
                     android:layout_width="match_parent"
                     android:layout_toRightOf="@id/trash_icon"
                     android:layout_centerInParent="true">
+
                     <RelativeLayout
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
-                        android:id="@+id/trash_total">
-                        <TextView
-                            android:id="@+id/nasabah_trash_total"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="10 kg"
-                            android:textSize="@dimen/abc_text_size_body_1_material"
-                            android:textColor="@color/text"/>
-                        <TextView
-                            android:id="@+id/nasabah_trash_total_caption"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/nasabah_trash_total"
-                            android:text="Total"
-                            android:textSize="@dimen/abc_text_size_body_1_material"
-                            android:textColor="@color/text"
-                            android:textStyle=""/>
-                    </RelativeLayout>
-                    <RelativeLayout
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        android:id="@+id/trash_plastik"
-                        android:layout_below="@id/trash_total"
-                        android:layout_marginTop="@dimen/activity_vertical_margin">
+                        android:id="@+id/trash_plastik">
                         <TextView
                             android:id="@+id/nasabah_trash_plastik"
                             android:layout_marginLeft="@dimen/activity_horizontal_margin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="2.5 kg"
+                            android:text=""
                             android:textSize="@dimen/abc_text_size_body_1_material"
                             android:textColor="@color/text"/>
                         <TextView
@@ -272,7 +248,7 @@
                             android:layout_marginLeft="@dimen/activity_horizontal_margin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="1 kg"
+                            android:text=""
                             android:textSize="@dimen/abc_text_size_body_1_material"
                             android:textColor="@color/text"/>
                         <TextView
@@ -297,7 +273,7 @@
                             android:layout_marginLeft="@dimen/activity_horizontal_margin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="3 kg"
+                            android:text=""
                             android:textSize="@dimen/abc_text_size_body_1_material"
                             android:textColor="@color/text"/>
                         <TextView
@@ -322,7 +298,7 @@
                             android:layout_marginLeft="@dimen/activity_horizontal_margin"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="204 botol"
+                            android:text=""
                             android:textSize="@dimen/abc_text_size_body_1_material"
                             android:textColor="@color/text"/>
                         <TextView

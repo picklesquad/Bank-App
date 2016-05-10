@@ -29,6 +29,9 @@
         <activity
             android:name=".TransactionFormActivity"
             android:label=" "/>
+        <activity
+            android:name=".NasabahDetailActivity"
+            android:label=""/>
     </application>
 
 </manifest>

@@ -32,7 +32,7 @@ public class LoginActivity extends ActionBarActivity {
     private EditText etPhoneNumber, etPassword;
     private ProgressBar pbProgressBar;
     private Button btnLogin;
-    private final String url = "http://104.155.206.184:8080/pickle-0.1/bank/login";
+    private final String url = "http://private-ba5008-picklesquad.apiary-mock.com/login";
 
     private final String KEY_ID_BANK = "idBank";
     private final String KEY_NAMA_BANK = "namaBank";
@@ -70,7 +70,7 @@ public class LoginActivity extends ActionBarActivity {
         });
     }
 
-    private boolean validate(String email, String password){
+    private boolean validate(String phoneNumber, String password){
         boolean isValid = true;
 //        if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
 //            etEmail.setError("Enter a valid email address");
@@ -93,7 +93,7 @@ public class LoginActivity extends ActionBarActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            JSONObject bank = response.getJSONObject("data");
+                            JSONObject bank = response.getJSONObject("");
                             String id = bank.getString("id");
                             String nama = bank.getString("nama");
                             int rating = bank.getInt("rating");
@@ -144,12 +144,12 @@ public class LoginActivity extends ActionBarActivity {
                 return params;
             }
 
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError{
-                Map<String,String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json;charset=UTF-8");
-                return headers;
-            }
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError{
+//                Map<String,String> headers = new HashMap<String, String>();
+//                headers.put("Content-Type", "application/json;charset=UTF-8");
+//                return headers;
+//            }
         };
         VolleyController.getInstance().addToRequestQueue(request);
     }

@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -41,7 +42,9 @@ import picklenostra.picklebankapp.Model.NotifikasiModel;
  */
 public class NasabahDetailActivity extends AppCompatActivity{
     private Toolbar toolbar;
-    //private final String URL = "http://private-ba5008-picklesquad.apiary-mock.com/bank/transaction/create";
+    private TextView tvName, tvNasabahId, tvEmail, tvPhoneNumber, tvAddress, tvBalance, tvPlastik, tvKertas, tvBesi, tvBotol;
+    private String iduser;
+    private final String URL = "http://private-ba5008-picklesquad.apiary-mock.com/nasabah/%1$s";
     //SharedPreferences shared;
 
     @Override
@@ -49,11 +52,26 @@ public class NasabahDetailActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nasabah_detail);
 
-        toolbar = (Toolbar) findViewById(R.id.transac_form_toolbar); // Attaching the layout to the toolbar object
+        toolbar = (Toolbar) findViewById(R.id.nasabah_detail_toolbar); // Attaching the layout to the toolbar object
         toolbar.setTitle("Detil Nasabah");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        tvName = (TextView) findViewById(R.id.name);
+        tvNasabahId = (TextView) findViewById(R.id.nasabah_id);
+        tvEmail = (TextView) findViewById(R.id.nasabah_email);
+        tvPhoneNumber = (TextView) findViewById(R.id.nasabah_phone_numb);
+        tvAddress = (TextView) findViewById(R.id.nasabah_address);
+        tvBalance = (TextView) findViewById(R.id.nasabah_balance);
+        tvPlastik = (TextView) findViewById(R.id.nasabah_trash_plastik);
+        tvKertas = (TextView) findViewById(R.id.nasabah_trash_kertas);
+        tvBesi = (TextView) findViewById(R.id.nasabah_trash_besi);
+        tvBotol = (TextView) findViewById(R.id.nasabah_trash_botol);
+
+        iduser = getIntent().getStringExtra("iduser");
+
+        volleyRequest(iduser);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +79,51 @@ public class NasabahDetailActivity extends AppCompatActivity{
                 NasabahDetailActivity.this.onBackPressed();
             }
         });
+    }
+
+    private void volleyRequest(final String iduser){
+        String params = String.format(URL,iduser+"");
+        StringRequest request =  new StringRequest(Request.Method.GET, params, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject responseObject = new JSONObject(response);
+                    JSONObject bank = responseObject.getJSONObject("nasabah");
+
+                    String name = bank.getString("name");
+                    String email = bank.getString("email");
+                    String phone = bank.getString("phone");
+                    String location = bank.getString("location");
+                    int saldo = bank.getInt("saldo");
+                    int plastik = bank.getInt("sampahPlastik");
+                    int kertas = bank.getInt("sampahKertas");
+                    int besi = bank.getInt("sampahBesi");
+                    int botol = bank.getInt("sampahBotol");
+
+                    tvName.setText(name);
+                    tvNasabahId.setText(iduser);
+                    tvEmail.setText(email);
+                    tvPhoneNumber.setText(phone);
+                    tvAddress.setText(location);
+                    tvBalance.setText("Rp " + saldo);
+                    tvKertas.setText(kertas + " Kg");
+                    tvPlastik.setText(plastik + " Kg");
+                    tvBesi.setText(besi + " Kg");
+                    tvBotol.setText(botol + " Buah");
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        VolleyController.getInstance().addToRequestQueue(request);
     }
 
 
