@@ -55,7 +55,7 @@ public class NotifikasiFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String idNotification = (String) listNotifikasi.get(position).getNotificationId();
-                Intent intent = new Intent(NotifikasiFragment.this.getActivity(),NasabahDetailActivity.class);
+                Intent intent = new Intent(NotifikasiFragment.this.getActivity(),NotifikasiDetailActivity.class);
                 intent.putExtra("id","000001");
                 startActivity(intent);
             }

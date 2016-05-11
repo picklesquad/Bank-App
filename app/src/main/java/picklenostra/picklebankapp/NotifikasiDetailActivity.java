@@ -34,7 +34,7 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
         setContentView(R.layout.activity_notifikasi_detail);
 
         toolbar = (Toolbar) findViewById(R.id.notifikasi_detail_toolbar); // Attaching the layout to the toolbar object
-        toolbar.setTitle("Detil Nasabah");
+        toolbar.setTitle("Detil Withdraw");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -72,14 +72,15 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
                     long date = data.getLong("date");
 
                     tvNama.setText(nama);
-                    tvBalance.setText(jumlah);
+                    tvId.setText(id);
+                    tvBalance.setText("Rp " + jumlah);
                     if(status == 0){
                         tvStatus.setText("Menunggu Konfirmasi");
                     } else{
                         tvStatus.setText("Menunggu Pembayaran");
                     }
-                    tvDate.setText(DateFormat.format("dd/MM/yyyy",date));
-                    tvTime.setText(DateFormat.format("HH:mm",date));
+                    tvDate.setText(DateFormat.format("dd/MM/yyyy",date) + "");
+                    tvTime.setText(DateFormat.format("HH:mm",date)+ "");
 
 
                 } catch (JSONException e) {

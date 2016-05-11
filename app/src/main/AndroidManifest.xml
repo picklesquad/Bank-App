@@ -32,6 +32,9 @@
         <activity
             android:name=".NasabahDetailActivity"
             android:label=""/>
+        <activity
+            android:name=".NotifikasiDetailActivity"
+            android:label=""/>
     </application>
 
 </manifest>
