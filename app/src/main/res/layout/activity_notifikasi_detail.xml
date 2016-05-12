@@ -20,6 +20,21 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:titleTextAppearance="@string/notifikasi_detail_header"/>
 
+    <LinearLayout
+        android:id="@+id/loader_notifikasi"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_width="48dp"
+        android:layout_height="match_parent">
+        <ProgressBar
+            android:id="@+id/notifikasi_loader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:indeterminate="true"
+            style="@android:style/Widget.ProgressBar.Large" />
+    </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/detail"
         android:layout_height="wrap_content"
@@ -27,6 +42,7 @@
         android:layout_margin="@dimen/activity_vertical_margin_small"
         android:layout_below="@id/notifikasi_detail_toolbar"
         android:background="@color/light_grey_2"
+        android:visibility="gone"
         android:padding="@dimen/activity_vertical_margin_small">
         <RelativeLayout
             android:id="@+id/detail_header"
@@ -171,6 +187,7 @@
                 style="@style/teal_button"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
+                android:visibility="gone"
                 android:text="Setuju"
                 android:padding="@dimen/abc_button_padding_horizontal_material"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
@@ -181,6 +198,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_toRightOf="@id/approval_btn"
+                android:visibility="gone"
                 android:text="Tidak Setuju"
                 android:padding="@dimen/abc_button_padding_horizontal_material"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
@@ -191,6 +209,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:layout_centerInParent="true"
+                android:visibility="gone"
                 android:text="Konfirmasi"
                 android:padding="@dimen/abc_button_padding_horizontal_material"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"

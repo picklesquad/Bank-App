@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +47,8 @@ public class NasabahDetailActivity extends AppCompatActivity{
     private Toolbar toolbar;
     private TextView tvName, tvNasabahId, tvEmail, tvPhoneNumber, tvAddress, tvBalance, tvPlastik, tvKertas, tvBesi, tvBotol;
     private String iduser;
+    private ProgressBar loading;
+    private ScrollView sv_nasabah;
     private final String URL = "http://private-ba5008-picklesquad.apiary-mock.com/nasabah/%1$s";
     //SharedPreferences shared;
 
@@ -69,6 +73,8 @@ public class NasabahDetailActivity extends AppCompatActivity{
         tvKertas = (TextView) findViewById(R.id.nasabah_trash_kertas);
         tvBesi = (TextView) findViewById(R.id.nasabah_trash_besi);
         tvBotol = (TextView) findViewById(R.id.nasabah_trash_botol);
+        loading = (ProgressBar) findViewById(R.id.nasabah_loader);
+        sv_nasabah = (ScrollView) findViewById(R.id.scrollView_nasabah);
 
         iduser = getIntent().getStringExtra("iduser");
 
@@ -88,6 +94,8 @@ public class NasabahDetailActivity extends AppCompatActivity{
             @Override
             public void onResponse(String response) {
                 try {
+                    loading.setVisibility(View.GONE);
+                    sv_nasabah.setVisibility(View.VISIBLE);
                     JSONObject responseObject = new JSONObject(response);
                     JSONObject bank = responseObject.getJSONObject("nasabah");
 

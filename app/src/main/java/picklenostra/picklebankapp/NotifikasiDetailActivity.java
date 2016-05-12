@@ -6,6 +6,8 @@ import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -29,6 +31,9 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
     private Toolbar toolbar;
     private TextView tvId, tvNama, tvStatus, tvBalance, tvDate, tvTime;
     private Button accept, reject, confirm;
+    private RelativeLayout notifikasi;
+    private ProgressBar loading = null;
+    private int loadingStatus = 0;
     private String id;
     private final String URL = "http://private-ba5008-picklesquad.apiary-mock.com/notification/%1$s";
 
@@ -52,9 +57,12 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
         accept = (Button) findViewById (R.id.approval_btn);
         reject =  (Button) findViewById (R.id.disapproval_btn);
         confirm = (Button) findViewById (R.id.konfirmasi_btn);
+        loading = (ProgressBar) findViewById (R.id.notifikasi_loader);
+        notifikasi = (RelativeLayout) findViewById(R.id.detail);
 
 
         id = getIntent().getStringExtra("id");
+
         volleyRequest(id);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -71,6 +79,8 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
             @Override
             public void onResponse(String response) {
                 try {
+                    loading.setVisibility(View.GONE);
+                    notifikasi.setVisibility(View.VISIBLE);
                     JSONObject responseObject = new JSONObject(response);
                     JSONObject data = responseObject.getJSONObject("data");
 
@@ -91,10 +101,10 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
                     tvTime.setText(DateFormat.format("HH:mm",date)+ "");
 
                     if(status==0){
-                        confirm.setVisibility(View.INVISIBLE);
+                        accept.setVisibility(View.VISIBLE);
+                        reject.setVisibility(View.VISIBLE);
                     }else{
-                        accept.setVisibility(View.INVISIBLE);
-                        reject.setVisibility(View.INVISIBLE);
+                        confirm.setVisibility(View.VISIBLE);
                     }
 
 
@@ -111,4 +121,5 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
         });
         VolleyController.getInstance().addToRequestQueue(request);
     }
+
 }
