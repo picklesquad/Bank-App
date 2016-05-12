@@ -185,6 +185,16 @@
                 android:padding="@dimen/abc_button_padding_horizontal_material"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 />
+            <Button
+                android:id="@+id/konfirmasi_btn"
+                style="@style/teal_button"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Konfirmasi"
+                android:padding="@dimen/abc_button_padding_horizontal_material"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                />
         </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>
