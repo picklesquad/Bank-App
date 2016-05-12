@@ -44,7 +44,7 @@
                 android:inputType="textPassword" />
             <ProgressBar
                 android:visibility="gone"
-                android:id="@+id/pbProgressBar"
+                android:id="@+id/login_loading"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:indeterminate="true" />

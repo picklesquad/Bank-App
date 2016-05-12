@@ -57,6 +57,7 @@ public class LoginActivity extends ActionBarActivity {
         etPhoneNumber = (EditText) findViewById(R.id.etPhoneNumber);
         etPassword = (EditText) findViewById(R.id.etPassword);
         btnLogin = (Button) findViewById(R.id.btnLogin);
+        pbProgressBar = (ProgressBar) findViewById(R.id.login_loading);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,6 +65,8 @@ public class LoginActivity extends ActionBarActivity {
                 phoneNumber = etPhoneNumber.getText().toString();
                 password = etPassword.getText().toString();
                 if(validate(phoneNumber,password)){
+                    btnLogin.setVisibility(View.GONE);
+                    pbProgressBar.setVisibility(View.VISIBLE);
                     volleyRequest(phoneNumber,password);
                 }
             }
