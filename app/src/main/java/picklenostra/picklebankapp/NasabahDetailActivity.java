@@ -36,6 +36,7 @@ import picklenostra.picklebankapp.Adapter.PagerAdapter;
 import picklenostra.picklebankapp.Helper.UserSessionManager;
 import picklenostra.picklebankapp.Helper.VolleyController;
 import picklenostra.picklebankapp.Model.NotifikasiModel;
+import picklenostra.picklebankapp.Util.RupiahFormatter;
 
 /**
  * Created by Daniya on 4/28/16.
@@ -94,7 +95,7 @@ public class NasabahDetailActivity extends AppCompatActivity{
                     String email = bank.getString("email");
                     String phone = bank.getString("phone");
                     String location = bank.getString("location");
-                    int saldo = bank.getInt("saldo");
+                    String saldo = RupiahFormatter.format(bank.getInt("saldo"));
                     int plastik = bank.getInt("sampahPlastik");
                     int kertas = bank.getInt("sampahKertas");
                     int besi = bank.getInt("sampahBesi");
@@ -105,7 +106,7 @@ public class NasabahDetailActivity extends AppCompatActivity{
                     tvEmail.setText(email);
                     tvPhoneNumber.setText(phone);
                     tvAddress.setText(location);
-                    tvBalance.setText("Rp " + saldo);
+                    tvBalance.setText(saldo);
                     tvKertas.setText(kertas + " Kg");
                     tvPlastik.setText(plastik + " Kg");
                     tvBesi.setText(besi + " Kg");
