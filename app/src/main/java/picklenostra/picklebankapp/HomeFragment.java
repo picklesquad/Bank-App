@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,13 +31,13 @@ public class HomeFragment extends Fragment {
         tvCustomer = (TextView) view.findViewById(R.id.customer_stats_number);
         tvGarbage = (TextView) view.findViewById(R.id.level_name);
 
-        shared = this.getActivity().getSharedPreferences(getResources().getString(R.string.KEY_SHARED_PREF), Context.MODE_PRIVATE);
-        totalCustomer = shared.getInt("totalNasabah", 0);
-        totalGarbage = shared.getInt("sampahPlastik",0) + shared.getInt("sampahBesi",0) +
-                shared.getInt("sampahBotol",0) + shared.getInt("sampahBesi",0);
+        shared = this.getActivity().getSharedPreferences(getString(R.string.KEY_SHARED_PREF), Context.MODE_PRIVATE);
+        totalCustomer = shared.getInt(getString(R.string.KEY_TOTAL_NASABAH_BANK), 0);
+        totalGarbage = shared.getInt(getString(R.string.KEY_SAMPAH_PLASTIK_BANK),0) + shared.getInt(getString(R.string.KEY_SAMPAH_KERTAS_BANK),0) +
+                shared.getInt(getString(R.string.KEY_SAMPAH_BESI_BANK),0);
 
-        tvCustomer.setText(100 + " Nasabah");
-        tvGarbage.setText(56 + " kgs");
+        tvCustomer.setText(totalCustomer + " Nasabah");
+        tvGarbage.setText(totalGarbage + " kg dan " + shared.getInt(getString(R.string.KEY_SAMPAH_BOTOL_BANK),0) + " Buah");
 
         //Floating Action Button
         FloatingActionButton transacFAB = (FloatingActionButton)  view.findViewById(R.id.add_transac_fab);

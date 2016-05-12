@@ -49,7 +49,7 @@ public class NasabahDetailActivity extends AppCompatActivity{
     private String iduser;
     private ProgressBar loading;
     private ScrollView sv_nasabah;
-    private final String URL = "http://private-ba5008-picklesquad.apiary-mock.com/nasabah/%1$s";
+    private final String URL = "http://104.155.206.184:8080/pickle-0.1/bank/nasabah/%1$s";
     //SharedPreferences shared;
 
     @Override
@@ -97,17 +97,16 @@ public class NasabahDetailActivity extends AppCompatActivity{
                     loading.setVisibility(View.GONE);
                     sv_nasabah.setVisibility(View.VISIBLE);
                     JSONObject responseObject = new JSONObject(response);
-                    JSONObject bank = responseObject.getJSONObject("nasabah");
-
-                    String name = bank.getString("name");
-                    String email = bank.getString("email");
-                    String phone = bank.getString("phone");
-                    String location = bank.getString("location");
+                    JSONObject bank = responseObject.getJSONObject("data");
+                    String name = bank.getString("nama");
+                    String email = "andrikurniawan.id@gmail.com";
+                    String phone = bank.getString("phoneNumber");
+                    String location = bank.getString("alamat");
                     String saldo = RupiahFormatter.format(bank.getInt("saldo"));
-                    int plastik = bank.getInt("sampahPlastik");
-                    int kertas = bank.getInt("sampahKertas");
-                    int besi = bank.getInt("sampahBesi");
-                    int botol = bank.getInt("sampahBotol");
+                    double plastik = bank.getDouble("sampahPlastik");
+                    double kertas = bank.getDouble("sampahKertas");
+                    double besi = bank.getDouble("sampahBesi");
+                    double botol = bank.getDouble("sampahBotol");
 
                     tvName.setText(name);
                     tvNasabahId.setText(iduser);
