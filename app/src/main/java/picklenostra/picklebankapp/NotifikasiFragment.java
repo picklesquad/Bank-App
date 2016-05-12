@@ -36,6 +36,7 @@ public class NotifikasiFragment extends Fragment {
     private ListView listView;
     private ArrayList<NotifikasiModel> listNotifikasi;
     private final String URL = "http://private-ba5008-picklesquad.apiary-mock.com/bank/%1$s/notification";
+    private NotifikasiAdapter notifikasiAdapter;
     SharedPreferences shared;
 
     @Override
@@ -48,7 +49,7 @@ public class NotifikasiFragment extends Fragment {
 
         volleyRequest("000001");
         Log.e("LEN",listNotifikasi.size()+"");
-        final NotifikasiAdapter notifikasiAdapter = new NotifikasiAdapter(getActivity(),listNotifikasi);
+        notifikasiAdapter = new NotifikasiAdapter(getActivity(),listNotifikasi);
         listView.setAdapter(notifikasiAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -92,6 +93,7 @@ public class NotifikasiFragment extends Fragment {
                         notifikasiModel.setStatus(status);
                         notifikasiModel.setDate(date);
                         listNotifikasi.add(notifikasiModel);
+                        notifikasiAdapter.notifyDataSetChanged();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -39,6 +39,7 @@ public class NasabahFragment extends Fragment{
     private EditText searchInput;
     private String URL = "http://private-ba5008-picklesquad.apiary-mock.com/bank/%1$s/nasabah/";
     private ArrayList<NasabahModel> listNasabah;
+    private NasabahAdapter adapter;
     SharedPreferences shared;
 
     @Override
@@ -52,7 +53,7 @@ public class NasabahFragment extends Fragment{
         shared = getActivity().getSharedPreferences("PICKLEBANK", Context.MODE_PRIVATE);
 
         volleyRequest("000001");
-        final NasabahAdapter adapter = new NasabahAdapter(getActivity(), listNasabah);
+        adapter = new NasabahAdapter(getActivity(), listNasabah);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -106,6 +107,7 @@ public class NasabahFragment extends Fragment{
                         nasabahModel.setPhotoUrl(photoUrl);
                         nasabahModel.setJoinDate(joinDate);
                         listNasabah.add(nasabahModel);
+                        adapter.notifyDataSetChanged();
                     }
                     Log.d("Array empty", listNasabah.toString());
                 } catch (JSONException e) {
