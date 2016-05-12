@@ -4,8 +4,8 @@ package picklenostra.picklebankapp.Model;
  * Created by Edwin on 4/17/2016.
  */
 public class NotifikasiModel {
-    private String notificationId, userName, status, date, time;
-    private int totalPrice;
+    private String notificationId, nama, date, harga;
+    private int status;
     public String getNotificationId() {
         return notificationId;
     }
@@ -14,27 +14,27 @@ public class NotifikasiModel {
         this.notificationId = notificationId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getNama() {
+        return nama;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
-    public int getTotalPrice() {
-        return totalPrice;
+    public String getHarga() {
+        return harga;
     }
 
-    public void setTotalPrice(int totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setHarga(String harga) {
+        this.harga = harga;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -44,13 +44,5 @@ public class NotifikasiModel {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 }

@@ -63,9 +63,9 @@ public class NotifikasiAdapter extends BaseAdapter{
 
         NotifikasiModel notifikasiModel = (NotifikasiModel)getItem(position);
         viewHolder.idNotifikasi.setText(notifikasiModel.getNotificationId());
-        viewHolder.nameNotifikasi.setText(notifikasiModel.getUserName());
+        viewHolder.nameNotifikasi.setText(notifikasiModel.getNama());
         viewHolder.dateNotifikasi.setText(notifikasiModel.getDate());
-        viewHolder.priceNotifikasi.setText(notifikasiModel.getTotalPrice()+"");
+        viewHolder.priceNotifikasi.setText(notifikasiModel.getHarga()+"");
 
         return view;
     }

@@ -35,7 +35,7 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
     private ProgressBar loading = null;
     private int loadingStatus = 0;
     private String id;
-    private final String URL = "http://private-ba5008-picklesquad.apiary-mock.com/notification/%1$s";
+    private final String URL = "http://104.155.206.184:8080/pickle-0.1/bank/withdraw/%1$s";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -85,9 +85,9 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
                     JSONObject data = responseObject.getJSONObject("data");
 
                     String nama = data.getString("nama");
-                    String jumlah = RupiahFormatter.format(data.getInt("jumlah"));
+                    String jumlah = RupiahFormatter.format(data.getInt("saldo"));
                     int status = data.getInt("status");
-                    long date = data.getLong("date");
+                    long date = data.getLong("waktu");
 
                     tvNama.setText(nama);
                     tvId.setText(id);

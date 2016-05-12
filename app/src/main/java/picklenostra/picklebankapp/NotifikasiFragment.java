@@ -21,12 +21,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.text.format.DateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import picklenostra.picklebankapp.Adapter.NotifikasiAdapter;
 import picklenostra.picklebankapp.Helper.VolleyController;
 import picklenostra.picklebankapp.Model.NasabahModel;
 import picklenostra.picklebankapp.Model.NotifikasiModel;
+import picklenostra.picklebankapp.Util.RupiahFormatter;
 
 /**
  * Created by Daniya on 3/20/16.
@@ -35,8 +39,9 @@ public class NotifikasiFragment extends Fragment {
 
     private ListView listView;
     private ArrayList<NotifikasiModel> listNotifikasi;
-    private final String URL = "http://private-ba5008-picklesquad.apiary-mock.com/bank/%1$s/notification";
+    private final String URL = "http://104.155.206.184:8080/pickle-0.1/bank/notification";
     private NotifikasiAdapter notifikasiAdapter;
+    private String idBank;
     SharedPreferences shared;
 
     @Override
@@ -45,9 +50,9 @@ public class NotifikasiFragment extends Fragment {
 
         listView = (ListView)view.findViewById(R.id.lv_notifikasi);
         listNotifikasi = new ArrayList<>();
-        shared = getActivity().getSharedPreferences("PICKLEBANK", Context.MODE_PRIVATE);
-
-        volleyRequest("000001");
+        shared = getActivity().getSharedPreferences(getString(R.string.KEY_SHARED_PREF), Context.MODE_PRIVATE);
+        idBank = shared.getString(getString(R.string.KEY_ID_BANK),"1");
+        volleyRequest(idBank);
         Log.e("LEN",listNotifikasi.size()+"");
         notifikasiAdapter = new NotifikasiAdapter(getActivity(),listNotifikasi);
         listView.setAdapter(notifikasiAdapter);
@@ -55,9 +60,9 @@ public class NotifikasiFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String idNotification = (String) listNotifikasi.get(position).getNotificationId();
+                String idNotification = "" + listNotifikasi.get(position).getNotificationId();
                 Intent intent = new Intent(NotifikasiFragment.this.getActivity(),NotifikasiDetailActivity.class);
-                intent.putExtra("id","000001");
+                intent.putExtra("id",idNotification);
                 startActivity(intent);
             }
         });
@@ -65,33 +70,30 @@ public class NotifikasiFragment extends Fragment {
         return view;
     }
 
-    private void volleyRequest(String idBank){
-        String params = String.format(URL,idBank);
-        Log.e("params",params);
-        StringRequest request = new StringRequest(Request.Method.GET, params, new Response.Listener<String>() {
+    private void volleyRequest(final String idBank){
+        StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject responseAPI = new JSONObject(response);
-                    JSONArray arrayNotifikasi = responseAPI.getJSONArray("notification");
+                    JSONArray arrayNotifikasi = responseAPI.getJSONArray("data");
                     Log.e("Response",arrayNotifikasi.toString());
                     for (int i = 0; i < arrayNotifikasi.length(); i++){
                         NotifikasiModel notifikasiModel = new NotifikasiModel();
                         JSONObject objectNotifikasi = arrayNotifikasi.getJSONObject(i);
-                        String notificationId = objectNotifikasi.getString("notificationId");
-                        String namaUser = objectNotifikasi.getString("namaUser");
-                        int jumlahTagihan = objectNotifikasi.getInt("jumlah");
-                        String status = objectNotifikasi.getString("status");
-                        String date = objectNotifikasi.getString("tanggal") + ", "
-                                + objectNotifikasi.getString("waktu");
+                        String notificationId = ""+ objectNotifikasi.getInt("id");
+                        String nama = objectNotifikasi.getString("nama");
+                        String harga = RupiahFormatter.format(objectNotifikasi.getInt("harga"));
+                        int status = objectNotifikasi.getInt("status");
+                        long dateTemp = objectNotifikasi.getLong("waktu");
 
                         Log.e("Response2",objectNotifikasi.toString());
 
                         notifikasiModel.setNotificationId(notificationId);
-                        notifikasiModel.setUserName(namaUser);
-                        notifikasiModel.setTotalPrice(jumlahTagihan);
+                        notifikasiModel.setNama(nama);
+                        notifikasiModel.setHarga(harga);
                         notifikasiModel.setStatus(status);
-                        notifikasiModel.setDate(date);
+                        notifikasiModel.setDate(""+ DateFormat.format("dd/MM/yyyy",dateTemp));
                         listNotifikasi.add(notifikasiModel);
                         notifikasiAdapter.notifyDataSetChanged();
                     }
@@ -105,7 +107,14 @@ public class NotifikasiFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
 
             }
-        });
+        }){
+            @Override
+            public Map<String,String> getHeaders() {
+                Map<String, String> headers = new HashMap<String,String>();
+                headers.put("idBank",idBank);
+                return headers;
+            }
+        };
         VolleyController.getInstance().addToRequestQueue(request);
     }
 
