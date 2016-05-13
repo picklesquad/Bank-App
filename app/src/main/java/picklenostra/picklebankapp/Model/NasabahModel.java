@@ -12,14 +12,14 @@ public class NasabahModel implements Serializable {
     private String telepon;
     private String lokasi;
     private String photoUrl;
-    private String joinDate;
+    private String memberSince;
 
-    public String getJoinDate() {
-        return joinDate;
+    public String getMemberSince() {
+        return memberSince;
     }
 
-    public void setJoinDate(String joinDate) {
-        this.joinDate = joinDate;
+    public void setMemberSince(String memberSince) {
+        this.memberSince = memberSince;
     }
 
     private int jumlahSampah, jumlahSaldo;

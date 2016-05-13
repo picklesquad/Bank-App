@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +26,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import picklenostra.picklebankapp.Adapter.NasabahAdapter;
 import picklenostra.picklebankapp.Helper.VolleyController;
@@ -37,7 +40,8 @@ public class NasabahFragment extends Fragment{
 
     private ListView listView;
     private EditText searchInput;
-    private String URL = "http://private-ba5008-picklesquad.apiary-mock.com/bank/%1$s/nasabah/";
+    private String idBank;
+    private String URL = "http://104.155.206.184:8080/pickle-0.1/bank/nasabah/getAll";
     private ArrayList<NasabahModel> listNasabah;
     private NasabahAdapter adapter;
     SharedPreferences shared;
@@ -50,18 +54,18 @@ public class NasabahFragment extends Fragment{
         listView = (ListView)view.findViewById(R.id.lv_nasabah);
         searchInput = (EditText)view.findViewById(R.id.search_nasabah);
         listNasabah = new ArrayList<>();
-        shared = getActivity().getSharedPreferences("PICKLEBANK", Context.MODE_PRIVATE);
-
-        volleyRequest("000001");
+        shared = getActivity().getSharedPreferences(getString(R.string.KEY_SHARED_PREF), Context.MODE_PRIVATE);
+        idBank = shared.getString(getString(R.string.KEY_ID_BANK),"1");
+        volleyRequest(idBank);
         adapter = new NasabahAdapter(getActivity(), listNasabah);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String iduser = (String) listNasabah.get(position).getId();
+                String iduser = "" + listNasabah.get(position).getId();
                 Intent intent = new Intent(NasabahFragment.this.getActivity(),NasabahDetailActivity.class);
-                intent.putExtra("iduser","1");
+                intent.putExtra("iduser",iduser);
                 startActivity(intent);
             }
         });
@@ -85,27 +89,26 @@ public class NasabahFragment extends Fragment{
         return view;
     }
 
-    private void volleyRequest(String idBank){
-        String params = String.format(URL,idBank);
-        final StringRequest request = new StringRequest(Request.Method.GET, params, new Response.Listener<String>() {
+    private void volleyRequest(final String idBank){
+        final StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject responseAPI = new JSONObject(response);
-                    JSONArray arrayNasabah = responseAPI.getJSONArray("nasabah");
+                    JSONArray arrayNasabah = responseAPI.getJSONArray("data");
 
                     for(int i = 0; i < arrayNasabah.length(); i++){
                         NasabahModel nasabahModel = new NasabahModel();
                         JSONObject objectNasabah = arrayNasabah.getJSONObject(i);
                         String id = objectNasabah.getString("id");
-                        String nama = objectNasabah.getString("name");
+                        String nama = objectNasabah.getString("nama");
                         String photoUrl = objectNasabah.getString("photo");
-                        String joinDate = objectNasabah.getString("join_date");
+                        long memberSince = objectNasabah.getLong("memberSince");
 
                         nasabahModel.setId(id);
                         nasabahModel.setNama(nama);
                         nasabahModel.setPhotoUrl(photoUrl);
-                        nasabahModel.setJoinDate(joinDate);
+                        nasabahModel.setMemberSince(""+DateFormat.format("dd/MM/yyyy",memberSince));
                         listNasabah.add(nasabahModel);
                         adapter.notifyDataSetChanged();
                     }
@@ -118,7 +121,15 @@ public class NasabahFragment extends Fragment{
             @Override
             public void onErrorResponse(VolleyError error) {
             }
-        });
+        }){
+            @Override
+            public Map<String,String> getHeaders(){
+                Map<String,String> headers = new HashMap<String, String>();
+                headers.put("idBank", idBank);
+                return headers;
+            }
+
+        };
         VolleyController.getInstance().addToRequestQueue(request);
     }
 

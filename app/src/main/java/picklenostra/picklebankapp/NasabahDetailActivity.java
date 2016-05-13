@@ -99,7 +99,7 @@ public class NasabahDetailActivity extends AppCompatActivity{
                     JSONObject responseObject = new JSONObject(response);
                     JSONObject bank = responseObject.getJSONObject("data");
                     String name = bank.getString("nama");
-                    String email = "andrikurniawan.id@gmail.com";
+                    String email = bank.getString("email");
                     String phone = bank.getString("phoneNumber");
                     String location = bank.getString("alamat");
                     String saldo = RupiahFormatter.format(bank.getInt("saldo"));
