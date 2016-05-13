@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -100,40 +101,44 @@ public class LoginActivity extends ActionBarActivity {
                 Log.e("jsonLogin", response);
                 try {
                     JSONObject responseObject = new JSONObject(response);
-                    JSONObject bank = responseObject.getJSONObject("data");
-                    String id = bank.getString("id");
-                    String nama = bank.getString("nama");
-                    int rating = bank.getInt("rating");
-                    int totalNasabah = bank.getInt("totalNasabah");
-                    int sampahPlastik = bank.getInt("sampahPlastik");
-                    int sampahKertas = bank.getInt("sampahKertas");
-                    int sampahBotol = bank.getInt("sampahBotol");
-                    int sampahBesi = bank.getInt("sampahBesi");
+                    if(responseObject.getString("message").equals("Gagal")){
+                        Toast.makeText(getApplicationContext(), "No HP atau Password salah!", Toast.LENGTH_LONG).show();
+                        finish();
+                    }else{
+                        JSONObject bank = responseObject.getJSONObject("data");
+                        String id = bank.getString("id");
+                        String nama = bank.getString("nama");
+                        int rating = bank.getInt("rating");
+                        int totalNasabah = bank.getInt("totalNasabah");
+                        int sampahPlastik = bank.getInt("sampahPlastik");
+                        int sampahKertas = bank.getInt("sampahKertas");
+                        int sampahBotol = bank.getInt("sampahBotol");
+                        int sampahBesi = bank.getInt("sampahBesi");
 
-                    //Create Session
-                    session.createUserLogin(phoneNumber, password);
+                        //Create Session
+                        session.createUserLogin(phoneNumber, password);
 
-                    //Simpan data nasabah di Shared Pref
-                    SharedPreferences shared = getSharedPreferences(getResources().getString(R.string.KEY_SHARED_PREF), MODE_PRIVATE);
-                    SharedPreferences.Editor editor = shared.edit();
-                    editor.putString(KEY_ID_BANK, id);
-                    editor.putString(KEY_NAMA_BANK, nama);
-                    editor.putInt(KEY_RATING_BANK, rating);
-                    editor.putInt(KEY_TOTAL_NASABAH_BANK, totalNasabah);
-                    editor.putInt(KEY_SAMPAH_PLASTIK_BANK, sampahPlastik);
-                    editor.putInt(KEY_SAMPAH_KERTAS_BANK, sampahKertas);
-                    editor.putInt(KEY_SAMPAH_BOTOL_BANK, sampahBotol);
-                    editor.putInt(KEY_SAMPAH_BESI_BANK, sampahBesi);
-                    editor.commit();
+                        //Simpan data nasabah di Shared Pref
+                        SharedPreferences shared = getSharedPreferences(getResources().getString(R.string.KEY_SHARED_PREF), MODE_PRIVATE);
+                        SharedPreferences.Editor editor = shared.edit();
+                        editor.putString(KEY_ID_BANK, id);
+                        editor.putString(KEY_NAMA_BANK, nama);
+                        editor.putInt(KEY_RATING_BANK, rating);
+                        editor.putInt(KEY_TOTAL_NASABAH_BANK, totalNasabah);
+                        editor.putInt(KEY_SAMPAH_PLASTIK_BANK, sampahPlastik);
+                        editor.putInt(KEY_SAMPAH_KERTAS_BANK, sampahKertas);
+                        editor.putInt(KEY_SAMPAH_BOTOL_BANK, sampahBotol);
+                        editor.putInt(KEY_SAMPAH_BESI_BANK, sampahBesi);
+                        editor.commit();
 
-                    //Buat intent untuk masuk ke Profile
-                    Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    Log.e("nama",nama);
-                    startActivity(intent);
-                    finish();
-
+                        //Buat intent untuk masuk ke Profile
+                        Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        Log.e("nama",nama);
+                        startActivity(intent);
+                        finish();
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

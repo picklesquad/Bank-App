@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -50,6 +51,7 @@ public class TransactionFormActivity extends AppCompatActivity {
     private EditText etPlastikInput, etPhoneNumbInput, etKertasInput, etLogamInput, etBotolInput, etHargaInput;
     private final String URL = "http://104.155.206.184:8080/pickle-0.1/bank/transaction/addNew";
     private String idBank;
+    private ProgressBar loading;
     SharedPreferences shared;
 
     private String phoneNumber, harga, plastik, kertas, botol, logam;
@@ -84,6 +86,7 @@ public class TransactionFormActivity extends AppCompatActivity {
         etBotolInput = (EditText) findViewById(R.id.jumlah_botol_input);
         etHargaInput = (EditText) findViewById(R.id.transaction_total_input);
         submitButton = (Button) findViewById(R.id.button_transactions);
+        loading = (ProgressBar) findViewById(R.id.transac_loading);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +127,9 @@ public class TransactionFormActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             Log.e("json", "masuk");
+                            submitButton.setVisibility(View.GONE);
+                            loading.setVisibility(View.VISIBLE);
+
                             JSONObject responseObject = new JSONObject(response);
                             int status = responseObject.getInt("status");
 
