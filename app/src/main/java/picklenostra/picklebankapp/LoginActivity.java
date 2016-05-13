@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.crashlytics.android.Crashlytics;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -140,6 +141,7 @@ public class LoginActivity extends ActionBarActivity {
                         finish();
                     }
                 } catch (JSONException e) {
+                    Crashlytics.logException(e);
                     e.printStackTrace();
                 }
             }
@@ -147,6 +149,7 @@ public class LoginActivity extends ActionBarActivity {
         @Override
             public void onErrorResponse(VolleyError error) {
                 etPhoneNumber.setError(error.getMessage());
+                Crashlytics.logException(error);
                 /** Needs to be define further more**/
             }
         }){

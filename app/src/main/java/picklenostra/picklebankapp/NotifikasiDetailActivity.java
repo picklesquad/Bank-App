@@ -17,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.crashlytics.android.Crashlytics;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -143,6 +144,7 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
 
 
                 } catch (JSONException e) {
+                    Crashlytics.logException(e);
                     e.printStackTrace();
                 }
 
@@ -150,7 +152,7 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Crashlytics.logException(error);
             }
         });
         VolleyController.getInstance().addToRequestQueue(request);

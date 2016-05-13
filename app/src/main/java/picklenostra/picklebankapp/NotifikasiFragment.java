@@ -16,6 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.crashlytics.android.Crashlytics;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,10 +51,14 @@ public class NotifikasiFragment extends Fragment {
 
         listView = (ListView)view.findViewById(R.id.lv_notifikasi);
         listNotifikasi = new ArrayList<>();
+
         shared = getActivity().getSharedPreferences(getString(R.string.KEY_SHARED_PREF), Context.MODE_PRIVATE);
         idBank = shared.getString(getString(R.string.KEY_ID_BANK),"1");
+
         volleyRequest(idBank);
+
         Log.e("LEN",listNotifikasi.size()+"");
+
         notifikasiAdapter = new NotifikasiAdapter(getActivity(),listNotifikasi);
         listView.setAdapter(notifikasiAdapter);
 
@@ -99,13 +104,14 @@ public class NotifikasiFragment extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Crashlytics.logException(e);
                 }
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Crashlytics.logException(error);
             }
         }){
             @Override
