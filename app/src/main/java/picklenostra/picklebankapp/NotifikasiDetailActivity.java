@@ -1,14 +1,17 @@
 package picklenostra.picklebankapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -18,6 +21,9 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import picklenostra.picklebankapp.Helper.VolleyController;
 import picklenostra.picklebankapp.Util.RupiahFormatter;
@@ -35,7 +41,7 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
     private ProgressBar loading = null;
     private int loadingStatus = 0;
     private String id;
-    private final String URL = "http://104.155.206.184:8080/pickle-0.1/bank/withdraw/%1$s";
+    private final String URL = "http://104.155.206.184:8080/pickle-0.1/bank/withdraw/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -71,10 +77,36 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
                 NotifikasiDetailActivity.this.onBackPressed();
             }
         });
+
+        accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String url = "accpet";
+                volleyRequestButton(id,url);
+            }
+        });
+
+        reject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String url = "reject";
+                volleyRequestButton(id,url);
+            }
+        });
+
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final String url = "complete";
+                volleyRequestButton(id,url);
+            }
+        });
+
+
     }
 
     private void volleyRequest(final String id){
-        String params = String.format(URL,id+"");
+        String params = String.format(URL+"%1$s",id+"");
         StringRequest request =  new StringRequest(Request.Method.GET, params, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -119,6 +151,60 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
 
             }
         });
+        VolleyController.getInstance().addToRequestQueue(request);
+    }
+
+    private void volleyRequestButton(final String id, final String url){
+        String params = String.format(URL+url);
+        Log.e("params",params);
+        StringRequest request =  new StringRequest(Request.Method.PUT, params, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject responseObject = new JSONObject(response);
+                    String message = responseObject.getString("message");
+
+                    if(message.equals("Success") && url.equals("accept")){
+                        Toast.makeText(getApplicationContext(), "Withdraw telah disetujui", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(NotifikasiDetailActivity.this,NasabahFragment.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }else if (message.equals("Success") && url.equals("reject")){
+                        Toast.makeText(getApplicationContext(), "Withdraw telah ditolak", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(NotifikasiDetailActivity.this,NasabahFragment.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Withdraw telah selesai", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(NotifikasiDetailActivity.this,NasabahFragment.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders(){
+                Map<String,String> headers = new HashMap<String ,String>();
+                headers.put("id", id);
+                return headers;
+            }
+        };
         VolleyController.getInstance().addToRequestQueue(request);
     }
 
