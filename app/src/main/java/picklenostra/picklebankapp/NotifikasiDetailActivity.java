@@ -81,7 +81,7 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String url = "accpet";
+                final String url = "updateStatus/accept";
                 volleyRequestButton(id,url);
             }
         });
@@ -89,7 +89,7 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
         reject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String url = "reject";
+                final String url = "updateStatus/reject";
                 volleyRequestButton(id,url);
             }
         });
@@ -97,7 +97,7 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String url = "complete";
+                final String url = "updateStatus/complete";
                 volleyRequestButton(id,url);
             }
         });
@@ -126,8 +126,10 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
                     tvBalance.setText(jumlah);
                     if(status == 0){
                         tvStatus.setText("Menunggu Konfirmasi");
-                    } else{
+                    }else if(status == 1){
                         tvStatus.setText("Menunggu Pembayaran");
+                    }else{
+                        tvStatus.setText("Withdraw Selesai");
                     }
                     tvDate.setText(DateFormat.format("dd/MM/yyyy",date) + "");
                     tvTime.setText(DateFormat.format("HH:mm",date)+ "");
@@ -135,7 +137,7 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
                     if(status==0){
                         accept.setVisibility(View.VISIBLE);
                         reject.setVisibility(View.VISIBLE);
-                    }else{
+                    }else if(status==1){
                         confirm.setVisibility(View.VISIBLE);
                     }
 
@@ -155,9 +157,9 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
     }
 
     private void volleyRequestButton(final String id, final String url){
-        String params = String.format(URL+url);
-        Log.e("params",params);
-        StringRequest request =  new StringRequest(Request.Method.PUT, params, new Response.Listener<String>() {
+        String buildUrl = String.format(URL+url);
+        Log.e("params",buildUrl);
+        StringRequest request =  new StringRequest(Request.Method.PUT, buildUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -166,25 +168,16 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
 
                     if(message.equals("Success") && url.equals("accept")){
                         Toast.makeText(getApplicationContext(), "Withdraw telah disetujui", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(NotifikasiDetailActivity.this,NasabahFragment.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
                         finish();
+                        startActivity(getIntent());
                     }else if (message.equals("Success") && url.equals("reject")){
                         Toast.makeText(getApplicationContext(), "Withdraw telah ditolak", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(NotifikasiDetailActivity.this,NasabahFragment.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
                         finish();
+                        startActivity(getIntent());
                     }else{
                         Toast.makeText(getApplicationContext(), "Withdraw telah selesai", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(NotifikasiDetailActivity.this,NasabahFragment.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
                         finish();
+                        startActivity(getIntent());
                     }
 
                 } catch (JSONException e) {
