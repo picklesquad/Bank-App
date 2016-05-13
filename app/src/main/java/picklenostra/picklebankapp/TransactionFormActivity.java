@@ -1,7 +1,9 @@
 package picklenostra.picklebankapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -22,6 +24,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,15 +44,21 @@ import picklenostra.picklebankapp.Model.NotifikasiModel;
 /**
  * Created by Daniya on 4/20/16.
  */
-public class TransactionFormActivity extends AppCompatActivity{
+public class TransactionFormActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private EditText etPlastikInput, etPhoneNumbInput, etKertasInput, etLogamInput, etBotolInput, etHargaInput;
-    private final String URL = "http://private-ba5008-picklesquad.apiary-mock.com/bank/transaction/create";
+    private final String URL = "http://104.155.206.184:8080/pickle-0.1/bank/transaction/addNew";
+    private String idBank;
     SharedPreferences shared;
 
-    public String phoneNumber, harga, plastik, kertas, botol, logam;
+    private String phoneNumber, harga, plastik, kertas, botol, logam;
     private Button submitButton;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +68,9 @@ public class TransactionFormActivity extends AppCompatActivity{
         // Attaching the layout to the toolbar object
         toolbar = (Toolbar) findViewById(R.id.transac_form_toolbar);
         toolbar.setTitle("Tambah Transaksi");
+
+        shared = this.getSharedPreferences(getString(R.string.KEY_SHARED_PREF), Context.MODE_PRIVATE);
+        idBank = shared.getString(getString(R.string.KEY_ID_BANK),"1");
 
         // Setting toolbar as the ActionBar with setSupportActionBar() call
         setSupportActionBar(toolbar);
@@ -70,8 +84,6 @@ public class TransactionFormActivity extends AppCompatActivity{
         etBotolInput = (EditText) findViewById(R.id.jumlah_botol_input);
         etHargaInput = (EditText) findViewById(R.id.transaction_total_input);
         submitButton = (Button) findViewById(R.id.button_transactions);
-
-
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,48 +101,56 @@ public class TransactionFormActivity extends AppCompatActivity{
                 kertas = etKertasInput.getText().toString();
                 logam = etLogamInput.getText().toString();
                 botol = etBotolInput.getText().toString();
-                volleyRequest(phoneNumber,harga,plastik,kertas,logam,botol);
+                volleyRequest(phoneNumber, harga, plastik, kertas, logam, botol,idBank);
             }
         });
 
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    private void volleyRequest(final String phoneNumber, final String harga, final String plastik, final String kertas, final String logam, final String botol){
+    private void volleyRequest(final String phoneNumber,
+                               final String harga,
+                               final String plastik,
+                               final String kertas,
+                               final String logam,
+                               final String botol,
+                               final String idBank) {
+        StringRequest transaksi = new StringRequest(Request.Method.POST, URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            Log.e("json", "masuk");
+                            JSONObject responseObject = new JSONObject(response);
+                            int status = responseObject.getInt("status");
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL, "", new Response.Listener<JSONObject>() {
+                            if (status == 201) {
+                                Log.e("201", "masuk");
+                                //Buat intent untuk masuk ke Profile
+                                Toast.makeText(getApplicationContext(), "Transaksi berhasil", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(TransactionFormActivity.this, ProfileActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(getApplicationContext(), responseObject.getString("message"), Toast.LENGTH_SHORT).show();
+                            }
 
-            @Override
-            public void onResponse(JSONObject response) {
-                try {
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
-                    Log.e("json","masuk");
-                    int status = response.getInt("status");
-
-                    if(status == 201){
-                        Log.e("201","masuk");
-                        //Buat intent untuk masuk ke Profile
-                        Toast.makeText(getApplicationContext(), "Transaksi berhasil", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(TransactionFormActivity.this,ProfileActivity.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
-                        finish();
-                    } else{
-                        Toast.makeText(getApplicationContext(), response.getString("message"), Toast.LENGTH_SHORT).show();
                     }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 etPhoneNumbInput.setError(error.getMessage());//Masih belum selesai
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
@@ -142,17 +162,15 @@ public class TransactionFormActivity extends AppCompatActivity{
                 params.put("totalHarga", harga);
                 return params;
             }
-
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                Map<String, String> headers = new HashMap<String, String>();
-//                headers.put("idBank", shared.getString("idBank",""));
-//                return headers;
-//            }
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("idBank", idBank);
+                return headers;
+            }
         };
-        VolleyController.getInstance().addToRequestQueue(request);
+        VolleyController.getInstance().addToRequestQueue(transaksi);
     }
-
 
 
     @Override
@@ -177,4 +195,43 @@ public class TransactionFormActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "TransactionForm Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://picklenostra.picklebankapp/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client, viewAction);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "TransactionForm Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://picklenostra.picklebankapp/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client, viewAction);
+        client.disconnect();
+    }
 }
