@@ -124,6 +124,8 @@ public class NasabahDetailActivity extends AppCompatActivity{
                 } catch (JSONException e) {
                     Crashlytics.logException(e);
                     e.printStackTrace();
+                } catch (Exception e){
+                    Crashlytics.logException(e);
                 }
 
             }

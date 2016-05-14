@@ -17,7 +17,6 @@ import android.widget.TextView;
  * Created by Daniya on 3/20/16.
  */
 
-
 public class HomeFragment extends Fragment {
     private SharedPreferences shared;
     private TextView tvCustomer, tvGarbage;
@@ -37,7 +36,7 @@ public class HomeFragment extends Fragment {
                 shared.getInt(getString(R.string.KEY_SAMPAH_BESI_BANK),0);
 
         tvCustomer.setText(totalCustomer + " Nasabah");
-        tvGarbage.setText(totalGarbage + " kg dan " + shared.getInt(getString(R.string.KEY_SAMPAH_BOTOL_BANK),0) + " Buah");
+        tvGarbage.setText(totalGarbage + " Kg dan " + shared.getInt(getString(R.string.KEY_SAMPAH_BOTOL_BANK),0) + " Botol");
 
         //Floating Action Button
         FloatingActionButton transacFAB = (FloatingActionButton)  view.findViewById(R.id.add_transac_fab);

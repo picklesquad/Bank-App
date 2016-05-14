@@ -129,6 +129,8 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
                         tvStatus.setText("Menunggu Konfirmasi");
                     }else if(status == 1){
                         tvStatus.setText("Menunggu Pembayaran");
+                    }else if(status == -1){
+                        tvStatus.setText("Withdraw ditolak");
                     }else{
                         tvStatus.setText("Withdraw Selesai");
                     }
@@ -146,6 +148,8 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
                 } catch (JSONException e) {
                     Crashlytics.logException(e);
                     e.printStackTrace();
+                } catch (Exception e){
+                    Crashlytics.logException(e);
                 }
 
             }
@@ -160,7 +164,6 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
 
     private void volleyRequestButton(final String id, final String url){
         String buildUrl = String.format(URL+url);
-        Log.e("params",buildUrl);
         StringRequest request =  new StringRequest(Request.Method.PUT, buildUrl, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -184,13 +187,15 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                } catch (Exception e){
+                    Crashlytics.logException(e);
                 }
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Crashlytics.logException(error);
             }
         }){
             @Override

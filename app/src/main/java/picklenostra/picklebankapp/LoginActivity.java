@@ -2,6 +2,7 @@ package picklenostra.picklebankapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -20,10 +21,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.crashlytics.android.Crashlytics;
+import com.google.android.gms.gcm.GoogleCloudMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,9 +50,11 @@ public class LoginActivity extends ActionBarActivity {
     private final String KEY_SAMPAH_KERTAS_BANK = "sampahKertasBank";
     private final String KEY_SAMPAH_BOTOL_BANK = "sampahBotolBank";
     private final String KEY_SAMPAH_BESI_BANK = "sampahBesiBank";
-
-    private String phoneNumber,password;
+    private String phoneNumber,password, regid;
+    private final String PROJECT_NUMBER = "810813850020";
     UserSessionManager session;
+    private GoogleCloudMessaging gcm;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,11 +104,13 @@ public class LoginActivity extends ActionBarActivity {
         StringRequest login =  new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.e("jsonLogin", response);
                 try {
+                    pbProgressBar.setVisibility(View.GONE);
                     JSONObject responseObject = new JSONObject(response);
-                    if(responseObject.getString("message").equals("Gagal")){
+
+                    if(responseObject.getString("message").equals("Login gagal")){
                         Toast.makeText(getApplicationContext(), "No HP atau Password salah!", Toast.LENGTH_LONG).show();
+                        session.logoutUser();
                         finish();
                     }else{
                         JSONObject bank = responseObject.getJSONObject("data");
@@ -132,17 +139,19 @@ public class LoginActivity extends ActionBarActivity {
                         editor.putInt(KEY_SAMPAH_BESI_BANK, sampahBesi);
                         editor.commit();
 
+                        getRegId();
                         //Buat intent untuk masuk ke Profile
                         Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        Log.e("nama",nama);
                         startActivity(intent);
                         finish();
                     }
                 } catch (JSONException e) {
                     Crashlytics.logException(e);
                     e.printStackTrace();
+                }  catch (Exception e){
+                    Crashlytics.logException(e);
                 }
             }
         }, new Response.ErrorListener(){
@@ -164,4 +173,30 @@ public class LoginActivity extends ActionBarActivity {
         VolleyController.getInstance().addToRequestQueue(login);
     }
 
+    public void getRegId(){
+        new AsyncTask<Void, Void, String>() {
+            @Override
+            protected String doInBackground(Void... params) {
+                String msg = "";
+                if (gcm == null) {
+                    gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
+                }
+                try{
+                    regid = gcm.register(PROJECT_NUMBER);
+                }catch (IOException e){
+                    msg = "Error " + e.getMessage();
+                    Log.e("msg", msg);
+                }
+                msg = "Device registered, registration ID=" + regid;
+                Log.i("GCM",  msg);
+
+                return msg;
+            }
+
+            @Override
+            protected void onPostExecute(String msg) {
+                Log.e("msg", msg + "\n");
+            }
+        }.execute(null, null, null);
+    }
 }
