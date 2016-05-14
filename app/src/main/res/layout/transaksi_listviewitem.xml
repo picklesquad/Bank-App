@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_margin="16dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+        <TextView
+            android:id="@+id/transaksi_tanggal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:text="Senin, 12-02-2015"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/text"/>
+        <TextView
+            android:id="@+id/transaksi_waktu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/transaksi_tanggal"
+            android:text="03:18"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/text"/>
+        <TextView
+            android:id="@+id/transaksi_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="06x2K1hdqh91"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/text"/>
+        <TextView
+            android:id="@+id/transaksi_namaNasabah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/transaksi_id"
+            android:text="Edwin Aditya Rahman"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/text"/>
+        <TextView
+            android:id="@+id/transaksi_nominalTransaksi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/transaksi_namaNasabah"
+            android:text="Rp 400.000,-"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/text"/>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
