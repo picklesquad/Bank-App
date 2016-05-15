@@ -19,7 +19,7 @@ import picklenostra.picklebankapp.R;
  */
 public class ItemTransaksiAdapter extends BaseAdapter{
     Activity activity;
-    private ArrayList<ItemTransaksiModel> lisItemTransaksiModel;
+    ArrayList<ItemTransaksiModel> lisItemTransaksiModel;
 
     public ItemTransaksiAdapter(Activity activity, ArrayList<ItemTransaksiModel> lisItemTransaksiModel) {
         this.activity = activity;
@@ -48,7 +48,7 @@ public class ItemTransaksiAdapter extends BaseAdapter{
         if (view == null){
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            inflater.inflate(R.layout.transaksi_listviewitem, null);
+            view = inflater.inflate(R.layout.transaksi_listviewitem, null);
             viewHolder.transaksiId = (TextView)view.findViewById(R.id.transaksi_id);
             viewHolder.transaksiNamaNasabah = (TextView)view.findViewById(R.id.transaksi_namaNasabah);
             viewHolder.transaksiNominal = (TextView)view.findViewById(R.id.transaksi_nominalTransaksi);
@@ -61,7 +61,7 @@ public class ItemTransaksiAdapter extends BaseAdapter{
         }
 
         ItemTransaksiModel itemTransaksiModel = (ItemTransaksiModel)getItem(position);
-        viewHolder.transaksiId.setText(itemTransaksiModel.getId());
+        viewHolder.transaksiId.setText(itemTransaksiModel.getId()+"");
         viewHolder.transaksiNamaNasabah.setText(itemTransaksiModel.getNamaNasabah());
         viewHolder.transaksiNominal.setText("Rp " + itemTransaksiModel.getNominalTransaksi() + ",-");
 

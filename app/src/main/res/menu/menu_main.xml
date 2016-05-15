@@ -7,15 +7,24 @@
         android:title="Edit Profile"
         android:textColor="@color/text"
         android:orderInCategory="100"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/action_settings"
+        android:title="Settings"
+        android:textColor="@color/text"
+        android:orderInCategory="101"
+        app:showAsAction="never"
+        />
     <item android:id="@+id/action_history"
         android:title="History"
         android:textColor="@color/text"
-        android:orderInCategory="101"
-        app:showAsAction="never" />
+        android:orderInCategory="102"
+        app:showAsAction="never"
+        />
     <item android:id="@+id/action_logout"
         android:title="@string/action_logout"
-        android:orderInCategory="102"
+        android:orderInCategory="103"
         android:textColor="@color/text"
         app:showAsAction="never" />
 </menu>

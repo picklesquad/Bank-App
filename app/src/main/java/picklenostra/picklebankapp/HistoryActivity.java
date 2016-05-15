@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import picklenostra.picklebankapp.Adapter.HistoryPagerAdapter;
 import picklenostra.picklebankapp.Adapter.PagerAdapter;
 
 public class HistoryActivity extends AppCompatActivity {
@@ -27,7 +28,7 @@ public class HistoryActivity extends AppCompatActivity {
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.history_viewpager);
-        final PagerAdapter adapter = new PagerAdapter
+        final HistoryPagerAdapter adapter = new HistoryPagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));

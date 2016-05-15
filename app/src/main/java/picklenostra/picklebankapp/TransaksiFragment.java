@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -19,8 +20,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import picklenostra.picklebankapp.Adapter.ItemTransaksiAdapter;
+import picklenostra.picklebankapp.Helper.VolleyController;
 import picklenostra.picklebankapp.Model.ItemTransaksiModel;
 import picklenostra.picklebankapp.Model.ItemWithdrawalModel;
 
@@ -80,7 +84,15 @@ public class TransaksiFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
 
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headers = new HashMap<String, String>();
+                headers.put("idBank", "1");
+                return headers;
+            }
+        };
+        VolleyController.getInstance().addToRequestQueue(request);
     }
 
 }

@@ -19,7 +19,7 @@ import picklenostra.picklebankapp.R;
  */
 public class ItemWithdrawalAdapter extends BaseAdapter {
     Activity activity;
-    private ArrayList<ItemWithdrawalModel> lisItemWithdrawalModel;
+    ArrayList<ItemWithdrawalModel> lisItemWithdrawalModel;
 
     public ItemWithdrawalAdapter(Activity activity, ArrayList<ItemWithdrawalModel> lisItemWithdrawalModel) {
         this.activity = activity;
@@ -48,7 +48,7 @@ public class ItemWithdrawalAdapter extends BaseAdapter {
         if (view == null){
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            inflater.inflate(R.layout.withdrawal_listviewitem, null);
+            view = inflater.inflate(R.layout.withdrawal_listviewitem, null);
             viewHolder.withdrawalId = (TextView)view.findViewById(R.id.withdrawal_id);
             viewHolder.withdrawalNamaNasabah = (TextView)view.findViewById(R.id.withdrawal_namaNasabah);
             viewHolder.withdrawalNominal = (TextView)view.findViewById(R.id.withdrawal_nominalWithdrawal);
@@ -61,7 +61,7 @@ public class ItemWithdrawalAdapter extends BaseAdapter {
         }
 
         ItemWithdrawalModel itemWithdrawalModel = (ItemWithdrawalModel)getItem(position);
-        viewHolder.withdrawalId.setText(itemWithdrawalModel.getId());
+        viewHolder.withdrawalId.setText(itemWithdrawalModel.getId()+"");
         viewHolder.withdrawalNamaNasabah.setText(itemWithdrawalModel.getNamaNasabah());
         viewHolder.withdrawalNominal.setText("Rp " + itemWithdrawalModel.getNominalWithdrawal() + ",-");
 
