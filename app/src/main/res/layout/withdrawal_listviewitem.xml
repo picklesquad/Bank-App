@@ -47,7 +47,7 @@
             android:textStyle="bold"
             android:textColor="@color/text"/>
         <TextView
-            android:id="@+id/withdrawal_nominalwithdrawal"
+            android:id="@+id/withdrawal_nominalWithdrawal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/withdrawal_namaNasabah"
