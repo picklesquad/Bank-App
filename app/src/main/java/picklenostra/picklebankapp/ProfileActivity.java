@@ -1,5 +1,6 @@
 package picklenostra.picklebankapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -69,7 +70,8 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_history) {
+            startActivity(new Intent(ProfileActivity.this, HistoryActivity.class));
             return true;
         }
         if(id == R.id.action_logout){

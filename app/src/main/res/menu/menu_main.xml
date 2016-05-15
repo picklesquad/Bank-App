@@ -7,12 +7,11 @@
         android:title="Edit Profile"
         android:textColor="@color/text"
         android:orderInCategory="100"
-        app:showAsAction="never"
-        />
-    <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
-        android:orderInCategory="101"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_history"
+        android:title="History"
         android:textColor="@color/text"
+        android:orderInCategory="101"
         app:showAsAction="never" />
     <item android:id="@+id/action_logout"
         android:title="@string/action_logout"
