@@ -57,7 +57,7 @@ public class NotifikasiFragment extends Fragment {
 
         volleyRequest(idBank);
 
-        Log.e("LEN",listNotifikasi.size()+"");
+//        Log.e("LEN",listNotifikasi.size()+"");
 
         notifikasiAdapter = new NotifikasiAdapter(getActivity(),listNotifikasi);
         listView.setAdapter(notifikasiAdapter);
@@ -82,7 +82,7 @@ public class NotifikasiFragment extends Fragment {
                 try {
                     JSONObject responseAPI = new JSONObject(response);
                     JSONArray arrayNotifikasi = responseAPI.getJSONArray("data");
-                    Log.e("Response",arrayNotifikasi.toString());
+//                    Log.e("Response",arrayNotifikasi.toString());
                     for (int i = 0; i < arrayNotifikasi.length(); i++){
                         NotifikasiModel notifikasiModel = new NotifikasiModel();
                         JSONObject objectNotifikasi = arrayNotifikasi.getJSONObject(i);
@@ -92,7 +92,7 @@ public class NotifikasiFragment extends Fragment {
                         int status = objectNotifikasi.getInt("status");
                         long dateTemp = objectNotifikasi.getLong("waktu");
 
-                        Log.e("Response2",objectNotifikasi.toString());
+//                        Log.e("Response2",objectNotifikasi.toString());
 
                         notifikasiModel.setNotificationId(notificationId);
                         notifikasiModel.setNama(nama);
@@ -104,6 +104,8 @@ public class NotifikasiFragment extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Crashlytics.logException(e);
+                }  catch (Exception e){
                     Crashlytics.logException(e);
                 }
 

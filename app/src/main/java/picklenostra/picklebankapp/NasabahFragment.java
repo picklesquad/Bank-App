@@ -113,9 +113,10 @@ public class NasabahFragment extends Fragment{
                         listNasabah.add(nasabahModel);
                         adapter.notifyDataSetChanged();
                     }
-                    Log.d("Array empty", listNasabah.toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Crashlytics.logException(e);
+                } catch (Exception e){
                     Crashlytics.logException(e);
                 }
             }
