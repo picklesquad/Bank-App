@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 public class HomeFragment extends Fragment {
     private SharedPreferences shared;
     private TextView tvCustomer, tvGarbage;
+    private CardView cvGarbage;
     private int totalCustomer, totalGarbage;
 
     @Override
@@ -30,6 +32,8 @@ public class HomeFragment extends Fragment {
 
         tvCustomer = (TextView) view.findViewById(R.id.customer_stats_number);
         tvGarbage = (TextView) view.findViewById(R.id.level_name);
+        cvGarbage = (CardView) view.findViewById(R.id.garbage_stats);
+
 
         shared = this.getActivity().getSharedPreferences(getString(R.string.KEY_SHARED_PREF), Context.MODE_PRIVATE);
         totalCustomer = shared.getInt(getString(R.string.KEY_TOTAL_NASABAH_BANK), 0);
@@ -38,6 +42,22 @@ public class HomeFragment extends Fragment {
 
         tvCustomer.setText(totalCustomer + " Nasabah");
         tvGarbage.setText(totalGarbage + " kg dan " + shared.getInt(getString(R.string.KEY_SAMPAH_BOTOL_BANK),0) + " Buah");
+
+        SharedPreferences.Editor editor = shared.edit();
+        editor.putInt("sampahPlastik", shared.getInt(getString(R.string.KEY_SAMPAH_PLASTIK_BANK),0));
+        editor.putInt("sampahBesi",  shared.getInt(getString(R.string.KEY_SAMPAH_BESI_BANK),0));
+        editor.putInt("sampahKertas", shared.getInt(getString(R.string.KEY_SAMPAH_KERTAS_BANK),0));
+        editor.putInt("sampahBotol", shared.getInt(getString(R.string.KEY_SAMPAH_BOTOL_BANK),0));
+        editor.commit();
+
+
+        cvGarbage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), DetailSampahActivity.class));
+            }
+        });
+
 
         //Floating Action Button
         FloatingActionButton transacFAB = (FloatingActionButton)  view.findViewById(R.id.add_transac_fab);
@@ -49,6 +69,7 @@ public class HomeFragment extends Fragment {
                 startActivityForResult(intent, 0);
             }
         });
+
 
         return view;
     }
