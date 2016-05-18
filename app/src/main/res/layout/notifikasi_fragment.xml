@@ -4,9 +4,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/light_grey_3">
-    <ListView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ListView
         android:id="@+id/lv_notifikasi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:cacheColorHint="@android:color/transparent"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,7 @@ public class NotifikasiFragment extends Fragment {
     private NotifikasiAdapter notifikasiAdapter;
     private String idBank;
     SharedPreferences shared;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +61,16 @@ public class NotifikasiFragment extends Fragment {
 
         Log.e("LEN",listNotifikasi.size()+"");
 
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //Refreshing data on server
+                volleyRequest(idBank);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
         notifikasiAdapter = new NotifikasiAdapter(getActivity(),listNotifikasi);
         listView.setAdapter(notifikasiAdapter);
 
@@ -71,6 +83,8 @@ public class NotifikasiFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+
         
         return view;
     }

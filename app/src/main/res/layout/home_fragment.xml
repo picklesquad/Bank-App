@@ -9,7 +9,7 @@
         <ImageView
             android:id="@+id/placeImage"
             android:layout_width="match_parent"
-            android:layout_height="256dp"
+            android:layout_height="200dp"
             android:src="@drawable/city2"
             android:scaleType="centerCrop"
             android:transitionName="tImage" />
@@ -22,7 +22,7 @@
         android:id="@+id/customer_stats">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="72dp"
+            android:layout_height="wrap_content"
             android:padding="16dp">
             <ImageView
                 android:layout_width="40dp"
@@ -60,7 +60,7 @@
         android:id="@+id/garbage_stats">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="72dp"
+            android:layout_height="wrap_content"
             android:padding="16dp">
             <ImageView
                 android:layout_width="40dp"

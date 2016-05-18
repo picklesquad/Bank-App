@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
@@ -21,6 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.crashlytics.android.Crashlytics;
+
+import android.support.v4.widget.SwipeRefreshLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,6 +49,7 @@ public class NasabahFragment extends Fragment{
     private ArrayList<NasabahModel> listNasabah;
     private NasabahAdapter adapter;
     SharedPreferences shared;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,6 +64,17 @@ public class NasabahFragment extends Fragment{
         volleyRequest(idBank);
         adapter = new NasabahAdapter(getActivity(), listNasabah);
         listView.setAdapter(adapter);
+
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //Refreshing data on server
+                volleyRequest(idBank);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+    
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -88,6 +103,7 @@ public class NasabahFragment extends Fragment{
         });
 
         return view;
+
     }
 
     private void volleyRequest(final String idBank){
@@ -135,6 +151,8 @@ public class NasabahFragment extends Fragment{
         };
         VolleyController.getInstance().addToRequestQueue(request);
     }
+
+
 
 }
 
