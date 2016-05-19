@@ -21,7 +21,7 @@ import picklenostra.picklebankapp.R;
  */
 public class GcmMessageHandler extends IntentService {
 
-    private String title,text;
+    private String title,text, id;
     public static final int MESSAGE_NOTIFICATION_ID = 435345;
 
     private Handler handler;
@@ -46,6 +46,7 @@ public class GcmMessageHandler extends IntentService {
 
         title = extras.getString("title");
         text = extras.getString("text");
+        id = extras.getString("id");
 
         createNotification(title,text);
         Log.i("GCM", "Received : (" +messageType+")  "+extras.getString("title"));
@@ -72,10 +73,10 @@ public class GcmMessageHandler extends IntentService {
         Intent myIntent = null;
         try {
             myIntent = new Intent(this,Class.forName("picklenostra.picklebankapp.NotifikasiDetailActivity"));
-            myIntent.putExtra("id","1");
+            myIntent.putExtra("id",id);
             PendingIntent contentIntent = PendingIntent.getActivity(this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             mBuilder.setContentIntent(contentIntent);
-            mBuilder.build().flags |= Notification.FLAG_AUTO_CANCEL;
+            mBuilder.setAutoCancel(true);
             mNotificationManager.notify(MESSAGE_NOTIFICATION_ID, mBuilder.build());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
