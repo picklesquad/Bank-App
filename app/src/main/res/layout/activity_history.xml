@@ -13,7 +13,8 @@
         android:background="@color/primary"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextAppearance="@string/histori_header"/>
     <android.support.design.widget.TabLayout
         android:id="@+id/history_tablayout"
         android:layout_width="match_parent"
