@@ -45,7 +45,7 @@ public class TransactionFormActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private EditText etPlastikInput, etPhoneNumbInput, etKertasInput, etLogamInput, etBotolInput, etHargaInput;
-    private final String URL = "http://104.155.206.184:8080/pickle-0.1/bank/transaction/addNew";
+    private final String URL = "http://104.155.206.184:8080/api/bank/transaction/addNew";
     private String idBank;
     private ProgressBar loading;
     SharedPreferences shared;

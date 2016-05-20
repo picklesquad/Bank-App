@@ -1,5 +1,6 @@
 package picklenostra.picklebankapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -29,6 +30,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import picklenostra.picklebankapp.Helper.UserSessionManager;
 import picklenostra.picklebankapp.Helper.VolleyController;
@@ -40,7 +42,8 @@ public class LoginActivity extends ActionBarActivity {
     private ProgressBar pbProgressBar;
     private Button btnLogin;
     //private final String url = "http://private-ba5008-picklesquad.apiary-mock.com/login";
-    private final String url = "http://104.155.206.184:8080/pickle-0.1/bank/login";
+    private final String url = "http://104.155.206.184:8080/api/bank/login";
+    private final String urlGcm = "http://104.155.206.184:8080/api/bank/gcmRegister";
 
     private final String KEY_ID_BANK = "idBank";
     private final String KEY_NAMA_BANK = "namaBank";
@@ -54,7 +57,7 @@ public class LoginActivity extends ActionBarActivity {
     private final String PROJECT_NUMBER = "810813850020";
     UserSessionManager session;
     private GoogleCloudMessaging gcm;
-
+    private SharedPreferences shared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,23 +77,33 @@ public class LoginActivity extends ActionBarActivity {
             public void onClick(View v) {
                 phoneNumber = etPhoneNumber.getText().toString();
                 password = etPassword.getText().toString();
-                if(validate(phoneNumber,password)){
+
                     btnLogin.setVisibility(View.GONE);
                     pbProgressBar.setVisibility(View.VISIBLE);
                     volleyRequest(phoneNumber,password);
-                }
+
             }
         });
     }
 
+
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
     private boolean validate(String phoneNumber, String password){
         boolean isValid = true;
-//        if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-//            etEmail.setError("Enter a valid email address");
-//            isValid = false;
-//        }
+        if(phoneNumber.isEmpty() || (phoneNumber.length() >= 10 & phoneNumber.length() <= 12)){
+            etPhoneNumber.setError("No HP tidak valid");
+            isValid = false;
+        }
         if(password.isEmpty() || password.length() < 8){
-            etPassword.setError("Password must be 8 characters or more");
+            etPassword.setError("Password harus lebih dari 8 karakter");
             isValid = false;
         }
         else{
@@ -139,7 +152,8 @@ public class LoginActivity extends ActionBarActivity {
                         editor.putInt(KEY_SAMPAH_BESI_BANK, sampahBesi);
                         editor.commit();
 
-                        getRegId();
+
+                        getRegId(id);
                         //Buat intent untuk masuk ke Profile
                         Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -173,7 +187,7 @@ public class LoginActivity extends ActionBarActivity {
         VolleyController.getInstance().addToRequestQueue(login);
     }
 
-    public void getRegId(){
+    public void getRegId(final String idBank){
         new AsyncTask<Void, Void, String>() {
             @Override
             protected String doInBackground(Void... params) {
@@ -190,6 +204,7 @@ public class LoginActivity extends ActionBarActivity {
                 msg = "Device registered, registration ID=" + regid;
                 Log.i("GCM",  msg);
 
+                volleySaveGcmId(regid, idBank);
                 return msg;
             }
 
@@ -198,5 +213,50 @@ public class LoginActivity extends ActionBarActivity {
                 Log.e("msg", msg + "\n");
             }
         }.execute(null, null, null);
+    }
+
+    private void volleySaveGcmId(final String gcmid, final String idBank){
+        StringRequest request =  new StringRequest(Request.Method.PUT, urlGcm, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject responseObject = new JSONObject(response);
+                    if(responseObject.get("data") == null){
+                        Log.e("data", "Null return");
+                    }
+                    else {
+                        String message = responseObject.getString("data");
+                        Log.i("data",message);
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (Exception e){
+                    Crashlytics.logException(e);
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Crashlytics.logException(error);
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", gcmid);
+                return params;
+            }
+
+            @Override
+            public Map<String, String> getHeaders(){
+                Map<String,String> headers = new HashMap<String ,String>();
+                headers.put("id", idBank);
+                return headers;
+            }
+        };
+        VolleyController.getInstance().addToRequestQueue(request);
     }
 }

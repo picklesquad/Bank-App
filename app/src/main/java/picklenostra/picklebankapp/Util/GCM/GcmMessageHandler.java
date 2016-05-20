@@ -17,7 +17,7 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import picklenostra.picklebankapp.R;
 
 /**
- * Created by ASUS on 5/14/2016.
+ * Created by andrikurniawan.id@gmail.com on 5/14/2016.
  */
 public class GcmMessageHandler extends IntentService {
 
