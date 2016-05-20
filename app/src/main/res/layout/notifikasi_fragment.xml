@@ -8,6 +8,12 @@
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/notifikasi_list_loading"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:indeterminate="true" />
         <ListView
         android:id="@+id/lv_notifikasi"
         android:layout_width="match_parent"
