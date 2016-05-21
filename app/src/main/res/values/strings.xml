@@ -49,4 +49,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="withdraw_pending">Menunggu Konfirmasi</string>
+    <string name="withdraw_accept">Menunggu Pembayaran</string>
+    <string name="withdraw_reject">Withdraw Ditolak</string>
+    <string name="withdraw_complete">Withdraw Selesai</string>
 </resources>

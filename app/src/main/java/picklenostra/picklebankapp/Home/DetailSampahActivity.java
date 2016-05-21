@@ -1,4 +1,4 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.Home;
 
 /**
  * Created by marteinstein on 15/05/2016.
@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import picklenostra.picklebankapp.R;
 
 
 public class DetailSampahActivity extends AppCompatActivity {

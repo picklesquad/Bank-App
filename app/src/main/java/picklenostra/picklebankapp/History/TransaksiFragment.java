@@ -1,4 +1,4 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.History;
 
 
 import android.os.Bundle;
@@ -27,13 +27,13 @@ import picklenostra.picklebankapp.Adapter.ItemTransaksiAdapter;
 import picklenostra.picklebankapp.Helper.VolleyController;
 import picklenostra.picklebankapp.Model.ItemTransaksiModel;
 import picklenostra.picklebankapp.Model.ItemWithdrawalModel;
+import picklenostra.picklebankapp.R;
+import picklenostra.picklebankapp.Util.RestUri;
 
 
 public class TransaksiFragment extends Fragment {
 
-    private ListView listView;
     private ArrayList<ItemTransaksiModel> listItemTransaksiModel;
-    private String URL = "http://104.155.206.184:8080/pickle-0.1/bank/transaction";
     private ItemTransaksiAdapter adapter;
 
     @Override
@@ -41,7 +41,7 @@ public class TransaksiFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.transaksi_fragment, container, false);
 
-        listView = (ListView)view.findViewById(R.id.transaksi_listview);
+        ListView listView = (ListView) view.findViewById(R.id.transaksi_listview);
         listItemTransaksiModel = new ArrayList<>();
 
         volleyRequest();
@@ -52,7 +52,7 @@ public class TransaksiFragment extends Fragment {
     }
 
     private void volleyRequest(){
-        StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.GET, RestUri.transaction.TRANSACTION, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

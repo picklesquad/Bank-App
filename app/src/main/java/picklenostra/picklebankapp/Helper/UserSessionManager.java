@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 
 import java.util.HashMap;
 
-import picklenostra.picklebankapp.LoginActivity;
+import picklenostra.picklebankapp.Home.LoginActivity;
 
 /**
  * Created by Edwin on 3/10/2016.

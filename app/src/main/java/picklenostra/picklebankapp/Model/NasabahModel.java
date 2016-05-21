@@ -14,24 +14,6 @@ public class NasabahModel implements Serializable {
     private String photoUrl;
     private String memberSince;
 
-    public String getMemberSince() {
-        return memberSince;
-    }
-
-    public void setMemberSince(String memberSince) {
-        this.memberSince = memberSince;
-    }
-
-    private int jumlahSampah, jumlahSaldo;
-
-    public String getPhotoUrl() {
-        return photoUrl;
-    }
-
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
-
     public String getId() {
         return id;
     }
@@ -86,5 +68,23 @@ public class NasabahModel implements Serializable {
 
     public void setJumlahSaldo(int jumlahSaldo) {
         this.jumlahSaldo = jumlahSaldo;
+    }
+
+    public String getMemberSince() {
+        return memberSince;
+    }
+
+    public void setMemberSince(String memberSince) {
+        this.memberSince = memberSince;
+    }
+
+    private int jumlahSampah, jumlahSaldo;
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 }

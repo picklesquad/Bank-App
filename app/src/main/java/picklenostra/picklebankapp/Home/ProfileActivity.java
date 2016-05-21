@@ -1,4 +1,4 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.Home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.view.MenuItem;
 
 import picklenostra.picklebankapp.Adapter.PagerAdapter;
 import picklenostra.picklebankapp.Helper.UserSessionManager;
+import picklenostra.picklebankapp.History.HistoryActivity;
+import picklenostra.picklebankapp.R;
 
 
 public class ProfileActivity extends AppCompatActivity {

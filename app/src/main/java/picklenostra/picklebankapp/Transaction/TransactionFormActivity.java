@@ -1,16 +1,12 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.Transaction;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +21,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.crashlytics.android.Crashlytics;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONException;
@@ -33,23 +31,20 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import picklenostra.picklebankapp.Adapter.PagerAdapter;
-import picklenostra.picklebankapp.Helper.UserSessionManager;
 import picklenostra.picklebankapp.Helper.VolleyController;
-import picklenostra.picklebankapp.Model.NotifikasiModel;
+import picklenostra.picklebankapp.Home.ProfileActivity;
+import picklenostra.picklebankapp.R;
+import picklenostra.picklebankapp.Util.RestUri;
 
 /**
  * Created by Daniya on 4/20/16.
  */
 public class TransactionFormActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
     private EditText etPlastikInput, etPhoneNumbInput, etKertasInput, etLogamInput, etBotolInput, etHargaInput;
-    private final String URL = "http://104.155.206.184:8080/api/bank/transaction/addNew";
     private String idBank;
     private ProgressBar loading;
     SharedPreferences shared;
-
     private String phoneNumber, harga, plastik, kertas, botol, logam;
     private Button submitButton;
     /**
@@ -57,6 +52,11 @@ public class TransactionFormActivity extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +64,11 @@ public class TransactionFormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_transaction_form);
 
         // Attaching the layout to the toolbar object
-        toolbar = (Toolbar) findViewById(R.id.transac_form_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.transac_form_toolbar);
         toolbar.setTitle("Tambah Transaksi");
 
         shared = this.getSharedPreferences(getString(R.string.KEY_SHARED_PREF), Context.MODE_PRIVATE);
-        idBank = shared.getString(getString(R.string.KEY_ID_BANK),"1");
+        idBank = shared.getString(getString(R.string.KEY_ID_BANK), "1");
 
         // Setting toolbar as the ActionBar with setSupportActionBar() call
         setSupportActionBar(toolbar);
@@ -100,10 +100,13 @@ public class TransactionFormActivity extends AppCompatActivity {
                 kertas = etKertasInput.getText().toString();
                 logam = etLogamInput.getText().toString();
                 botol = etBotolInput.getText().toString();
-                volleyRequest(phoneNumber, harga, plastik, kertas, logam, botol,idBank);
+                volleyRequest(phoneNumber, harga, plastik, kertas, logam, botol, idBank);
             }
         });
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client2 = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void volleyRequest(final String phoneNumber,
@@ -113,7 +116,7 @@ public class TransactionFormActivity extends AppCompatActivity {
                                final String logam,
                                final String botol,
                                final String idBank) {
-        StringRequest transaksi = new StringRequest(Request.Method.POST, URL,
+        StringRequest transaksi = new StringRequest(Request.Method.POST, RestUri.transaction.TRANSACTION_NEW,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -128,7 +131,7 @@ public class TransactionFormActivity extends AppCompatActivity {
                             if (status == 201) {
 
                                 //Buat intent untuk masuk ke Profile
-                                Toast.makeText(getApplicationContext(), "Transaksi berhasil", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Transaksi berhasil", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(TransactionFormActivity.this, ProfileActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -141,7 +144,7 @@ public class TransactionFormActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             Crashlytics.logException(e);
                             e.printStackTrace();
-                        }  catch (Exception e){
+                        } catch (Exception e) {
                             Crashlytics.logException(e);
                         }
 
@@ -164,6 +167,7 @@ public class TransactionFormActivity extends AppCompatActivity {
                 params.put("totalHarga", harga);
                 return params;
             }
+
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<String, String>();
@@ -200,10 +204,42 @@ public class TransactionFormActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client2.connect();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "TransactionForm Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://picklenostra.picklebankapp/http/host/path")
+        );
+        AppIndex.AppIndexApi.start(client2, viewAction);
     }
 
     @Override
     public void onStop() {
         super.onStop();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        Action viewAction = Action.newAction(
+                Action.TYPE_VIEW, // TODO: choose an action type.
+                "TransactionForm Page", // TODO: Define a title for the content shown.
+                // TODO: If you have web page content that matches this app activity's content,
+                // make sure this auto-generated web page URL is correct.
+                // Otherwise, set the URL to null.
+                Uri.parse("http://host/path"),
+                // TODO: Make sure this auto-generated app URL is correct.
+                Uri.parse("android-app://picklenostra.picklebankapp/http/host/path")
+        );
+        AppIndex.AppIndexApi.end(client2, viewAction);
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client2.disconnect();
     }
 }

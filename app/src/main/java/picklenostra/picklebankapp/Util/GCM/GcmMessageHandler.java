@@ -64,6 +64,11 @@ public class GcmMessageHandler extends IntentService {
     }
 
     public void createNotification(String title, String body){
+
+        if(title == null || text == null){
+            return;
+        }
+
         Context context = getBaseContext();
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.brandinglogo).setContentTitle(title)
@@ -72,11 +77,13 @@ public class GcmMessageHandler extends IntentService {
                 .getSystemService(Context.NOTIFICATION_SERVICE);
         Intent myIntent = null;
         try {
-            myIntent = new Intent(this,Class.forName("picklenostra.picklebankapp.NotifikasiDetailActivity"));
+            myIntent = new Intent(this,Class.forName("picklenostra.picklebankapp.Notifikasi.NotifikasiDetailActivity"));
             myIntent.putExtra("id",id);
             PendingIntent contentIntent = PendingIntent.getActivity(this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             mBuilder.setContentIntent(contentIntent);
             mBuilder.setAutoCancel(true);
+            mBuilder.setVibrate(new long[]{500, 500, 500, 500, 500});
+            mBuilder.setPriority(Notification.PRIORITY_HIGH);
             mNotificationManager.notify(MESSAGE_NOTIFICATION_ID, mBuilder.build());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

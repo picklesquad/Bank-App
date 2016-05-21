@@ -2,6 +2,7 @@ package picklenostra.picklebankapp.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class NasabahAdapter extends BaseAdapter implements Filterable {
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return Long.parseLong(listNasabah.get(position).getId());
     }
 
     @Override
@@ -68,7 +69,7 @@ public class NasabahAdapter extends BaseAdapter implements Filterable {
             holder = (ViewHolder)view.getTag();
         }
 
-        NasabahModel nasabah = (NasabahModel)getItem(position);
+        NasabahModel nasabah = (NasabahModel) getItem(position);
         holder.nasabahName.setText(nasabah.getNama());
         holder.nasabahMemberSince.setText("Berlangganan Sejak: " + nasabah.getMemberSince());
         if(nasabah.getPhotoUrl() == null || nasabah.getPhotoUrl().equals("")) {

@@ -1,4 +1,4 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.History;
 
 
 import android.os.Bundle;
@@ -30,15 +30,14 @@ import picklenostra.picklebankapp.Helper.VolleyController;
 import picklenostra.picklebankapp.Model.ItemWithdrawalModel;
 import picklenostra.picklebankapp.Model.ItemWithdrawalModel;
 import picklenostra.picklebankapp.R;
+import picklenostra.picklebankapp.Util.RestUri;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class WithdrawalFragment extends Fragment {
 
-    private ListView listView;
     private ArrayList<ItemWithdrawalModel> listItemWithdrawalModel;
-    private String URL = "http://104.155.206.184:8080/pickle-0.1/bank/withdraw";
     private ItemWithdrawalAdapter adapter;
 
 
@@ -46,7 +45,7 @@ public class WithdrawalFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.withdrawal_fragment, container, false);
-        listView = (ListView)view.findViewById(R.id.withdrawal_listview);
+        ListView listView = (ListView) view.findViewById(R.id.withdrawal_listview);
         listItemWithdrawalModel = new ArrayList<>();
 
         volleyRequest();
@@ -58,7 +57,7 @@ public class WithdrawalFragment extends Fragment {
 
     private void volleyRequest(){
 
-        StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.GET, RestUri.withdraw.WITHDRAW, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

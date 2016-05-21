@@ -1,44 +1,25 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.Nasabah;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.crashlytics.android.Crashlytics;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
-import picklenostra.picklebankapp.Adapter.PagerAdapter;
-import picklenostra.picklebankapp.Helper.UserSessionManager;
 import picklenostra.picklebankapp.Helper.VolleyController;
-import picklenostra.picklebankapp.Model.NotifikasiModel;
+import picklenostra.picklebankapp.R;
+import picklenostra.picklebankapp.Util.RestUri;
 import picklenostra.picklebankapp.Util.RupiahFormatter;
 
 /**
@@ -50,8 +31,6 @@ public class NasabahDetailActivity extends AppCompatActivity{
     private String iduser;
     private ProgressBar loading;
     private ScrollView sv_nasabah;
-    private final String URL = "http://104.155.206.184:8080/pickle-0.1/bank/nasabah/%1$s";
-    //SharedPreferences shared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -90,7 +69,7 @@ public class NasabahDetailActivity extends AppCompatActivity{
     }
 
     private void volleyRequest(final String iduser){
-        String params = String.format(URL,iduser+"");
+        String params = String.format(RestUri.nasabah.NASABAH_DETAIL,iduser+"");
         StringRequest request =  new StringRequest(Request.Method.GET, params, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

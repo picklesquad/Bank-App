@@ -1,4 +1,4 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.Nasabah;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,8 +23,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.crashlytics.android.Crashlytics;
 
-import android.support.v4.widget.SwipeRefreshLayout;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +34,8 @@ import java.util.Map;
 import picklenostra.picklebankapp.Adapter.NasabahAdapter;
 import picklenostra.picklebankapp.Helper.VolleyController;
 import picklenostra.picklebankapp.Model.NasabahModel;
+import picklenostra.picklebankapp.R;
+import picklenostra.picklebankapp.Util.RestUri;
 
 /**
  * Created by Daniya on 3/20/16.
@@ -45,7 +45,6 @@ public class NasabahFragment extends Fragment{
     private ListView listView;
     private EditText searchInput;
     private String idBank;
-    private String URL = "http://104.155.206.184:8080/pickle-0.1/bank/nasabah/getAll";
     private ArrayList<NasabahModel> listNasabah;
     private NasabahAdapter adapter;
     SharedPreferences shared;
@@ -60,7 +59,7 @@ public class NasabahFragment extends Fragment{
         searchInput = (EditText)view.findViewById(R.id.search_nasabah);
         listNasabah = new ArrayList<>();
         shared = getActivity().getSharedPreferences(getString(R.string.KEY_SHARED_PREF), Context.MODE_PRIVATE);
-        idBank = shared.getString(getString(R.string.KEY_ID_BANK),"1");
+        idBank = shared.getString(getString(R.string.KEY_ID_BANK),"");
         volleyRequest(idBank);
         adapter = new NasabahAdapter(getActivity(), listNasabah);
         listView.setAdapter(adapter);
@@ -79,7 +78,8 @@ public class NasabahFragment extends Fragment{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String iduser = "" + listNasabah.get(position).getId();
+                String iduser = "" + adapter.getItemId(position);
+                Log.e("iduser", iduser);
                 Intent intent = new Intent(NasabahFragment.this.getActivity(),NasabahDetailActivity.class);
                 intent.putExtra("iduser",iduser);
                 startActivity(intent);
@@ -107,7 +107,8 @@ public class NasabahFragment extends Fragment{
     }
 
     private void volleyRequest(final String idBank){
-        final StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+        final StringRequest request = new StringRequest(Request.Method.GET, RestUri.nasabah.NASABAH_ALL
+                , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

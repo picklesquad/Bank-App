@@ -1,4 +1,4 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.Notifikasi;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +29,9 @@ import java.util.Map;
 
 import picklenostra.picklebankapp.Adapter.NotifikasiAdapter;
 import picklenostra.picklebankapp.Helper.VolleyController;
-import picklenostra.picklebankapp.Model.NasabahModel;
 import picklenostra.picklebankapp.Model.NotifikasiModel;
+import picklenostra.picklebankapp.R;
+import picklenostra.picklebankapp.Util.RestUri;
 import picklenostra.picklebankapp.Util.RupiahFormatter;
 
 /**
@@ -41,7 +41,6 @@ public class NotifikasiFragment extends Fragment {
 
     private ListView listView;
     private ArrayList<NotifikasiModel> listNotifikasi;
-    private final String URL = "http://104.155.206.184:8080/pickle-0.1/bank/notification";
     private NotifikasiAdapter notifikasiAdapter;
     private String idBank;
     SharedPreferences shared;
@@ -84,13 +83,11 @@ public class NotifikasiFragment extends Fragment {
             }
         });
 
-
-        
         return view;
     }
 
     private void volleyRequest(final String idBank){
-        StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.GET, RestUri.notifikasi.NOTIFICATION, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

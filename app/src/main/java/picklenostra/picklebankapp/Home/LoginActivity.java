@@ -1,13 +1,11 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.Home;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +17,6 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.gcm.GoogleCloudMessaging;
@@ -30,10 +27,12 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import picklenostra.picklebankapp.Helper.UserSessionManager;
 import picklenostra.picklebankapp.Helper.VolleyController;
+import picklenostra.picklebankapp.R;
+import picklenostra.picklebankapp.Util.RestUri;
+import picklenostra.picklebankapp.Util.Util;
 
 public class LoginActivity extends ActionBarActivity {
 
@@ -41,10 +40,6 @@ public class LoginActivity extends ActionBarActivity {
     private EditText etPhoneNumber, etPassword;
     private ProgressBar pbProgressBar;
     private Button btnLogin;
-    //private final String url = "http://private-ba5008-picklesquad.apiary-mock.com/login";
-    private final String url = "http://104.155.206.184:8080/api/bank/login";
-    private final String urlGcm = "http://104.155.206.184:8080/api/bank/gcmRegister";
-
     private final String KEY_ID_BANK = "idBank";
     private final String KEY_NAMA_BANK = "namaBank";
     private final String KEY_RATING_BANK = "ratingBank";
@@ -54,7 +49,6 @@ public class LoginActivity extends ActionBarActivity {
     private final String KEY_SAMPAH_BOTOL_BANK = "sampahBotolBank";
     private final String KEY_SAMPAH_BESI_BANK = "sampahBesiBank";
     private String phoneNumber,password, regid;
-    private final String PROJECT_NUMBER = "810813850020";
     UserSessionManager session;
     private GoogleCloudMessaging gcm;
     private SharedPreferences shared;
@@ -114,7 +108,7 @@ public class LoginActivity extends ActionBarActivity {
     }
 
     private void volleyRequest(final String phoneNumber, final String password){
-        StringRequest login =  new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest login =  new StringRequest(Request.Method.POST, RestUri.login.LOGIN, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -190,13 +184,13 @@ public class LoginActivity extends ActionBarActivity {
     public void getRegId(final String idBank){
         new AsyncTask<Void, Void, String>() {
             @Override
-            protected String doInBackground(Void... params) {
+            protected String doInBackground(Void... params ) {
                 String msg = "";
                 if (gcm == null) {
                     gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
                 }
                 try{
-                    regid = gcm.register(PROJECT_NUMBER);
+                    regid = gcm.register(Util.PROJECT_NUMBER);
                 }catch (IOException e){
                     msg = "Error " + e.getMessage();
                     Log.e("msg", msg);
@@ -216,7 +210,7 @@ public class LoginActivity extends ActionBarActivity {
     }
 
     private void volleySaveGcmId(final String gcmid, final String idBank){
-        StringRequest request =  new StringRequest(Request.Method.PUT, urlGcm, new Response.Listener<String>() {
+        StringRequest request =  new StringRequest(Request.Method.PUT, RestUri.login.GCM_UPDATE, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {

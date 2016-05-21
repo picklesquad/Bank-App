@@ -7,6 +7,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 
 import picklenostra.picklebankapp.Helper.UserSessionManager;
+import picklenostra.picklebankapp.Home.LoginActivity;
+import picklenostra.picklebankapp.Home.ProfileActivity;
 
 public class Splash extends AppCompatActivity {
 
