@@ -43,10 +43,10 @@ public class DetailSampahActivity extends AppCompatActivity {
 
     public void display() {
         SharedPreferences shared = getSharedPreferences(getResources().getString(R.string.KEY_SHARED_PREF), MODE_PRIVATE);
-        sampahPlastik.setText(shared.getInt("sampahPlastik", 0)+" kg");
-        sampahBesi.setText(shared.getInt("sampahBesi", 0)+" kg");
-        sampahKertas.setText(shared.getInt("sampahKertas", 0)+" kg");
-        sampahBotol.setText( shared.getInt("sampahBotol", 0)+ " buah");
+        sampahPlastik.setText(shared.getInt(getString(R.string.KEY_SAMPAH_PLASTIK_BANK), 0)+" kg");
+        sampahBesi.setText(shared.getInt(getString(R.string.KEY_SAMPAH_BESI_BANK), 0)+" kg");
+        sampahKertas.setText(shared.getInt(getString(R.string.KEY_SAMPAH_KERTAS_BANK), 0)+" kg");
+        sampahBotol.setText( shared.getInt(getString(R.string.KEY_SAMPAH_BOTOL_BANK), 0)+ " buah");
     }
 
 }

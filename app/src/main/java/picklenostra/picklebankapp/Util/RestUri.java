@@ -12,6 +12,10 @@ public class RestUri {
         public static final String GCM_UPDATE = BASE_URI_API + "gcmRegister";
     }
 
+    public static class profile{
+        public static final String PROFILE = BASE_URI_API + "profile";
+    }
+
     public static class nasabah{
         private static final String NASABAH = BASE_URI_API + "nasabah/";
 
