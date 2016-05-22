@@ -64,12 +64,14 @@ public class TransaksiFragment extends Fragment {
                         String namaNasabah = transaction.getString("nama");
                         long waktu = transaction.getLong("waktu");
                         int harga = transaction.getInt("harga");
+                        int status = transaction.getInt("status");
 
                         ItemTransaksiModel itemTransaksilModel = new ItemTransaksiModel();
                         itemTransaksilModel.setId(idTransaction);
                         itemTransaksilModel.setNamaNasabah(namaNasabah);
                         itemTransaksilModel.setWaktu(waktu);
                         itemTransaksilModel.setNominalTransaksi(harga);
+                        itemTransaksilModel.setStatus(status);
                         listItemTransaksiModel.add(itemTransaksilModel);
                         adapter.notifyDataSetChanged();
                     }

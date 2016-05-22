@@ -22,51 +22,86 @@
                 android:layout_margin="@dimen/activity_horizontal_margin_small"
                 android:layout_weight="1"/>
             <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_toRightOf="@id/transaksi_id"
-            >
-            <TextView
-                android:id="@+id/transaksi_tanggal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Senin, 12-02-2015"
-                android:textSize="@dimen/abc_text_size_body_1_material"
-                android:textStyle="bold"
-                android:textColor="@color/text"
-                android:layout_margin="@dimen/activity_horizontal_margin_small"/>
-            <TextView
-                android:id="@+id/transaksi_waktu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/transaksi_tanggal"
-                android:text="03:18"
-                android:textSize="@dimen/abc_text_size_body_1_material"
-                android:textStyle="bold"
-                android:textColor="@color/text"
-                android:layout_margin="@dimen/activity_horizontal_margin_small"/>
-        </RelativeLayout>
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_toRightOf="@id/transaksi_id">
+                <TextView
+                    android:id="@+id/transaksi_tanggal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Senin, 12-02-2015"
+                    android:textSize="@dimen/abc_text_size_body_1_material"
+                    android:textStyle="bold"
+                    android:textColor="@color/text"
+                    android:layout_margin="@dimen/activity_horizontal_margin_small"/>
+            </RelativeLayout>
         </LinearLayout>
-        <TextView
-            android:id="@+id/transaksi_namaNasabah"
-            android:layout_width="wrap_content"
+
+        <LinearLayout
             android:layout_height="wrap_content"
-            android:layout_below="@id/detail_transaksi"
-            android:text="Edwin Aditya Rahman"
-            android:textSize="@dimen/abc_text_size_body_1_material"
-            android:textColor="@color/text"
-            android:layout_margin="@dimen/activity_horizontal_margin_small"/>
-        <TextView
-            android:id="@+id/transaksi_nominalTransaksi"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/detail_nasabah_name"
+            android:layout_below="@+id/detail_transaksi">
+            <TextView
+                android:id="@+id/transaksi_namaNasabah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edwin Aditya Rahman"
+                android:textSize="@dimen/abc_text_size_body_1_material"
+                android:textStyle="bold"
+                android:textColor="@color/text"
+                android:layout_margin="@dimen/activity_horizontal_margin_small"
+                android:layout_weight="1"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_toRightOf="@id/transaksi_id">
+                <TextView
+                    android:id="@+id/transaksi_waktu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="05.00"
+                    android:textSize="@dimen/abc_text_size_body_1_material"
+                    android:textColor="@color/text"
+                    android:layout_margin="@dimen/activity_horizontal_margin_small"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_height="wrap_content"
-            android:layout_below="@id/transaksi_namaNasabah"
-            android:text="Rp 400.000,-"
-            android:textSize="@dimen/abc_text_size_body_1_material"
-            android:textColor="@color/text"
-            android:layout_margin="@dimen/activity_horizontal_margin_small"/>
+            android:layout_width="match_parent"
+            android:id="@+id/detail_transaksi_price"
+            android:layout_below="@+id/detail_nasabah_name">
+            <TextView
+                android:id="@+id/transaksi_nominalTransaksi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp 400.000,-"
+                android:textSize="@dimen/abc_text_size_body_1_material"
+                android:textColor="@color/text"
+                android:layout_margin="@dimen/activity_horizontal_margin_small"
+                android:layout_weight="1"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_toRightOf="@id/transaksi_nominalTransaksi">
+                <TextView
+                    android:id="@+id/transaksi_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DITOLAK"
+                    android:textSize="@dimen/abc_text_size_body_1_material"
+                    android:textColor="@color/text"
+                    android:layout_margin="@dimen/activity_horizontal_margin_small"/>
+            </RelativeLayout>
+        </LinearLayout>
+
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>
