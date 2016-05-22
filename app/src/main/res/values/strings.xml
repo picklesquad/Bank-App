@@ -35,13 +35,14 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_profile">ProfileActivity</string>
 
     <!--Strings related to Profile and its Fragments-->
     <string name="nasabah_default_name">Your Name</string>
     <string name="nasabah_default_join_date">Join Date</string>
     <string name="empty_string"> </string>
 
+    <string name="phone_number_login">Nomor Telepon Selular</string>
+    <string name="password_login">Password</string>
 
     <string name="transaction_header">Tambah Transaksi</string>
     <string name="notifikasi_detail_header">Status Withdrawal</string>

@@ -3,7 +3,7 @@ package picklenostra.picklebankapp.Transaction;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -142,7 +142,7 @@ public class TransactionFormActivity extends AppCompatActivity {
         }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("phoneNumber", phoneNumber);
                 params.put("kertas", kertas);
                 params.put("plastik", plastik);
@@ -154,7 +154,7 @@ public class TransactionFormActivity extends AppCompatActivity {
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<String, String>();
+                Map<String, String> headers = new HashMap<>();
                 headers.put("idBank", idBank);
                 return headers;
             }
