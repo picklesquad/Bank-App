@@ -93,7 +93,7 @@ public class NotifikasiFragment extends Fragment {
                 try {
                     JSONObject responseAPI = new JSONObject(response);
                     JSONArray arrayNotifikasi = responseAPI.getJSONArray("data");
-//                    Log.e("Response",arrayNotifikasi.toString());
+                    listNotifikasi.clear();
                     for (int i = 0; i < arrayNotifikasi.length(); i++){
                         NotifikasiModel notifikasiModel = new NotifikasiModel();
                         JSONObject objectNotifikasi = arrayNotifikasi.getJSONObject(i);

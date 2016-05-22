@@ -1,6 +1,8 @@
 package picklenostra.picklebankapp.Notifikasi;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
@@ -24,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import picklenostra.picklebankapp.Helper.VolleyController;
+import picklenostra.picklebankapp.Home.ProfileActivity;
 import picklenostra.picklebankapp.R;
 import picklenostra.picklebankapp.Util.RestUri;
 import picklenostra.picklebankapp.Util.RupiahFormatter;
@@ -97,7 +100,16 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
                 volleyRequestButton(id,url);
             }
         });
+    }
 
+    @Override
+    public void onBackPressed(){
+        if(getIntent().getStringExtra("type") != null){
+            finish();
+            startActivity(new Intent(this, ProfileActivity.class));
+        }else{
+            finish();
+        }
 
     }
 

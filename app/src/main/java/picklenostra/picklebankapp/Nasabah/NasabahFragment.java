@@ -115,6 +115,7 @@ public class NasabahFragment extends Fragment{
                     JSONObject responseAPI = new JSONObject(response);
                     JSONArray arrayNasabah = responseAPI.getJSONArray("data");
 
+                    listNasabah.clear();
                     for(int i = 0; i < arrayNasabah.length(); i++){
                         NasabahModel nasabahModel = new NasabahModel();
                         JSONObject objectNasabah = arrayNasabah.getJSONObject(i);

@@ -79,6 +79,7 @@ public class GcmMessageHandler extends IntentService {
         try {
             myIntent = new Intent(this,Class.forName("picklenostra.picklebankapp.Notifikasi.NotifikasiDetailActivity"));
             myIntent.putExtra("id",id);
+            myIntent.putExtra("type","GCM");
             PendingIntent contentIntent = PendingIntent.getActivity(this, 0, myIntent, PendingIntent.FLAG_UPDATE_CURRENT);
             mBuilder.setContentIntent(contentIntent);
             mBuilder.setAutoCancel(true);
