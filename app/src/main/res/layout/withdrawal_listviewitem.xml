@@ -6,55 +6,100 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp">
-        <TextView
-            android:id="@+id/withdrawal_tanggal"
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:text="Senin, 12-02-2015"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:textColor="@color/text"/>
-        <TextView
-            android:id="@+id/withdrawal_waktu"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/detail_transaksi">
+            <TextView
+                android:id="@+id/withdrawal_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="06x2K1hdqh91"
+                android:textSize="@dimen/abc_text_size_body_1_material"
+                android:textStyle="bold"
+                android:textColor="@color/text"
+                android:layout_margin="@dimen/activity_horizontal_margin_small"
+                android:layout_weight="1"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_toRightOf="@id/transaksi_id">
+                <TextView
+                    android:id="@+id/withdrawal_tanggal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Senin, 12-02-2015"
+                    android:textSize="@dimen/abc_text_size_body_1_material"
+                    android:textStyle="bold"
+                    android:textColor="@color/text"
+                    android:layout_margin="@dimen/activity_horizontal_margin_extra_small"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/withdrawal_tanggal"
-            android:text="03:18"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:textColor="@color/text"/>
-        <TextView
-            android:id="@+id/withdrawal_id"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/detail_nasabah_name"
+            android:layout_below="@+id/detail_transaksi"
+            android:layout_margin="@dimen/activity_horizontal_margin_extra_small">
+            <TextView
+                android:id="@+id/withdrawal_namaNasabah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edwin Aditya Rahman"
+                android:textSize="@dimen/abc_text_size_body_1_material"
+                android:textStyle="bold"
+                android:textColor="@color/text"
+                android:layout_weight="1"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_toRightOf="@id/transaksi_id">
+                <TextView
+                    android:id="@+id/withdrawal_waktu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="05.00"
+                    android:textSize="@dimen/abc_text_size_body_1_material"
+                    android:textColor="@color/text"/>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_height="wrap_content"
-            android:text="06x2K1hdqh91"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:textColor="@color/text"/>
-        <TextView
-            android:id="@+id/withdrawal_namaNasabah"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/withdrawal_id"
-            android:text="Edwin Aditya Rahman"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:textColor="@color/text"/>
-        <TextView
-            android:id="@+id/withdrawal_nominalWithdrawal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/withdrawal_namaNasabah"
-            android:text="Rp 400.000,-"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:textColor="@color/text"/>
+            android:layout_width="match_parent"
+            android:id="@+id/detail_transaksi_price"
+            android:layout_below="@+id/detail_nasabah_name"
+            android:layout_margin="@dimen/activity_horizontal_margin_extra_small">
+            <TextView
+                android:id="@+id/withdrawal_nominalWithdrawal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp 400.000,-"
+                android:textSize="@dimen/abc_text_size_body_1_material"
+                android:textColor="@color/text"
+                android:layout_weight="1"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_toRightOf="@id/transaksi_nominalTransaksi">
+                <TextView
+                    android:id="@+id/withdrawal_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DITOLAK"
+                    android:textSize="@dimen/abc_text_size_body_1_material"
+                    android:textColor="@color/text" />
+            </RelativeLayout>
+        </LinearLayout>
+
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

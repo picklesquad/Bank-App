@@ -1,6 +1,8 @@
 package picklenostra.picklebankapp.History;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -35,6 +37,7 @@ public class TransaksiFragment extends Fragment {
 
     private ArrayList<ItemTransaksiModel> listItemTransaksiModel;
     private ItemTransaksiAdapter adapter;
+    private SharedPreferences shared;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,14 +47,18 @@ public class TransaksiFragment extends Fragment {
         ListView listView = (ListView) view.findViewById(R.id.transaksi_listview);
         listItemTransaksiModel = new ArrayList<>();
 
-        volleyRequest();
+        shared = this.getActivity().getSharedPreferences(getString(R.string.KEY_SHARED_PREF), Context.MODE_PRIVATE);
+        String idBank = shared.getString(getString(R.string.KEY_ID_BANK),"");
+        String apiToken = shared.getString(getString(R.string.KEY_API_TOKEN),"");
+
+        volleyRequest(idBank, apiToken);
 
         adapter = new ItemTransaksiAdapter(this.getActivity(), listItemTransaksiModel);
         listView.setAdapter(adapter);
         return view;
     }
 
-    private void volleyRequest(){
+    private void volleyRequest(final String idBank, final String apiToken){
         StringRequest request = new StringRequest(Request.Method.GET, RestUri.transaction.TRANSACTION, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -89,8 +96,9 @@ public class TransaksiFragment extends Fragment {
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<String, String>();
-                headers.put("idBank", "1");
+                Map<String, String> headers = new HashMap<>();
+                headers.put("idBank", idBank);
+                headers.put("apiToken", apiToken);
                 return headers;
             }
         };

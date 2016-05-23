@@ -71,8 +71,11 @@ public class HomeFragment extends Fragment {
 
         shared = this.getActivity().getSharedPreferences(getString(R.string.KEY_SHARED_PREF), Context.MODE_PRIVATE);
         idBank = shared.getString(getString(R.string.KEY_ID_BANK),"");
+        String apiToken = shared.getString(getString(R.string.KEY_API_TOKEN),"");
 
-        volleyRequest(idBank);
+        Log.e("token", apiToken);
+
+        volleyRequest(idBank, apiToken);
 
         totalCustomer = shared.getInt(getString(R.string.KEY_TOTAL_NASABAH_BANK), 0);
         Log.e("nasabah", "" + totalCustomer);
@@ -105,7 +108,7 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    private void volleyRequest(final String idBank){
+    private void volleyRequest(final String idBank, final String apiToken){
         StringRequest login =  new StringRequest(Request.Method.GET, RestUri.profile.PROFILE, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -114,7 +117,7 @@ public class HomeFragment extends Fragment {
                     home_loader.setVisibility(View.GONE);
                     ll_home.setVisibility(View.VISIBLE);
                     add_transac_fab.setVisibility(View.VISIBLE);
-                    Log.e("test","masuk");
+                    Log.e("Response Object", responseObject.toString());
                     JSONObject bank = responseObject.getJSONObject("data");
                     int totalNasabah = bank.getInt("totalNasabah");
                     int sampahPlastik = bank.getInt("sampahPlastik");
@@ -151,6 +154,7 @@ public class HomeFragment extends Fragment {
             public Map<String, String> getHeaders(){
                 Map<String, String> headers = new HashMap<>();
                 headers.put("id", idBank);
+                headers.put("apiToken",apiToken);
                 return headers;
             }
         };

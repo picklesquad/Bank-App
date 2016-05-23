@@ -40,6 +40,7 @@ public class LoginActivity extends ActionBarActivity {
     private EditText etPhoneNumber, etPassword;
     private ProgressBar pbProgressBar;
     private Button btnLogin;
+    private final String KEY_API_TOKEN = "apiToken";
     private final String KEY_ID_BANK = "idBank";
     private final String KEY_NAMA_BANK = "namaBank";
     private final String KEY_RATING_BANK = "ratingBank";
@@ -122,6 +123,7 @@ public class LoginActivity extends ActionBarActivity {
                     }else{
                         JSONObject bank = responseObject.getJSONObject("data");
                         String id = bank.getString("id");
+                        String apiToken = bank.getString("apiToken");
                         String nama = bank.getString("nama");
                         int rating = bank.getInt("rating");
                         int totalNasabah = bank.getInt("totalNasabah");
@@ -137,6 +139,7 @@ public class LoginActivity extends ActionBarActivity {
                         SharedPreferences shared = getSharedPreferences(getResources().getString(R.string.KEY_SHARED_PREF), MODE_PRIVATE);
                         SharedPreferences.Editor editor = shared.edit();
                         editor.putString(KEY_ID_BANK, id);
+                        editor.putString(KEY_API_TOKEN, apiToken);
                         editor.putString(KEY_NAMA_BANK, nama);
                         editor.putInt(KEY_RATING_BANK, rating);
                         editor.putInt(KEY_TOTAL_NASABAH_BANK, totalNasabah);
@@ -147,8 +150,9 @@ public class LoginActivity extends ActionBarActivity {
                         editor.commit();
 
 
-                        getRegId(id);
+                        getRegId(id,apiToken);
                         //Buat intent untuk masuk ke Profile
+                        Log.e("token", shared.getString("apiToken",""));
                         Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -181,7 +185,7 @@ public class LoginActivity extends ActionBarActivity {
         VolleyController.getInstance().addToRequestQueue(login);
     }
 
-    public void getRegId(final String idBank){
+    public void getRegId(final String idBank, final String apiToken){
         new AsyncTask<Void, Void, String>() {
             @Override
             protected String doInBackground(Void... params ) {
@@ -198,7 +202,7 @@ public class LoginActivity extends ActionBarActivity {
                 msg = "Device registered, registration ID=" + regid;
                 Log.i("GCM",  msg);
 
-                volleySaveGcmId(regid, idBank);
+                volleySaveGcmId(regid, idBank, apiToken);
                 return msg;
             }
 
@@ -209,7 +213,7 @@ public class LoginActivity extends ActionBarActivity {
         }.execute(null, null, null);
     }
 
-    private void volleySaveGcmId(final String gcmid, final String idBank){
+    private void volleySaveGcmId(final String gcmid, final String idBank, final String apiToken){
         StringRequest request =  new StringRequest(Request.Method.PUT, RestUri.login.GCM_UPDATE, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -248,6 +252,7 @@ public class LoginActivity extends ActionBarActivity {
             public Map<String, String> getHeaders(){
                 Map<String,String> headers = new HashMap<String ,String>();
                 headers.put("id", idBank);
+                headers.put("apiToken",apiToken);
                 return headers;
             }
         };

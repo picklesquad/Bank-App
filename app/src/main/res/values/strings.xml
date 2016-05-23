@@ -13,6 +13,7 @@
     <string name="KEY_SAMPAH_KERTAS_BANK">sampahKertasBank</string>
     <string name="KEY_SAMPAH_BOTOL_BANK">sampahBotolBank</string>
     <string name="KEY_SAMPAH_BESI_BANK">sampahBesiBank</string>
+    <string name="KEY_API_TOKEN">apiToken</string>
 
 
     <!-- Strings related to Menu in Top Right-->

@@ -55,8 +55,9 @@ public class NotifikasiFragment extends Fragment {
 
         shared = getActivity().getSharedPreferences(getString(R.string.KEY_SHARED_PREF), Context.MODE_PRIVATE);
         idBank = shared.getString(getString(R.string.KEY_ID_BANK),"1");
+        final String apiToken = shared.getString(getString(R.string.KEY_API_TOKEN),"");
 
-        volleyRequest(idBank);
+        volleyRequest(idBank, apiToken);
 
 //        Log.e("LEN",listNotifikasi.size()+"");
 
@@ -65,7 +66,7 @@ public class NotifikasiFragment extends Fragment {
             @Override
             public void onRefresh() {
                 //Refreshing data on server
-                volleyRequest(idBank);
+                volleyRequest(idBank, apiToken);
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -86,7 +87,7 @@ public class NotifikasiFragment extends Fragment {
         return view;
     }
 
-    private void volleyRequest(final String idBank){
+    private void volleyRequest(final String idBank, final String apiToken){
         StringRequest request = new StringRequest(Request.Method.GET, RestUri.notifikasi.NOTIFICATION, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -131,6 +132,7 @@ public class NotifikasiFragment extends Fragment {
             public Map<String,String> getHeaders() {
                 Map<String, String> headers = new HashMap<String,String>();
                 headers.put("idBank",idBank);
+                headers.put("apiToken", apiToken);
                 return headers;
             }
         };
