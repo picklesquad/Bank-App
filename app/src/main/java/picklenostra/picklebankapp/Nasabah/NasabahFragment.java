@@ -60,7 +60,9 @@ public class NasabahFragment extends Fragment{
         listNasabah = new ArrayList<>();
         shared = getActivity().getSharedPreferences(getString(R.string.KEY_SHARED_PREF), Context.MODE_PRIVATE);
         idBank = shared.getString(getString(R.string.KEY_ID_BANK),"");
-        volleyRequest(idBank);
+        final String apiToken = shared.getString(getString(R.string.KEY_API_TOKEN),"");
+        Log.e("token", apiToken);
+        volleyRequest(idBank,apiToken);
         adapter = new NasabahAdapter(getActivity(), listNasabah);
         listView.setAdapter(adapter);
 
@@ -69,7 +71,7 @@ public class NasabahFragment extends Fragment{
             @Override
             public void onRefresh() {
                 //Refreshing data on server
-                volleyRequest(idBank);
+                volleyRequest(idBank,apiToken);
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -106,7 +108,7 @@ public class NasabahFragment extends Fragment{
 
     }
 
-    private void volleyRequest(final String idBank){
+    private void volleyRequest(final String idBank, final String apiToken){
         final StringRequest request = new StringRequest(Request.Method.GET, RestUri.nasabah.NASABAH_ALL
                 , new Response.Listener<String>() {
             @Override
@@ -148,6 +150,7 @@ public class NasabahFragment extends Fragment{
             public Map<String,String> getHeaders(){
                 Map<String,String> headers = new HashMap<String, String>();
                 headers.put("idBank", idBank);
+                headers.put("apiToken",apiToken);
                 return headers;
             }
 

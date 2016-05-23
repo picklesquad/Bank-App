@@ -54,6 +54,7 @@ public class ItemWithdrawalAdapter extends BaseAdapter {
             viewHolder.withdrawalNominal = (TextView)view.findViewById(R.id.withdrawal_nominalWithdrawal);
             viewHolder.withdrawalTanggal = (TextView)view.findViewById(R.id.withdrawal_tanggal);
             viewHolder.withdrawalWaktu = (TextView)view.findViewById(R.id.withdrawal_waktu);
+            viewHolder.withdrawalStatus = (TextView) view.findViewById(R.id.withdrawal_status);
             view.setTag(viewHolder);
         }
         else{
@@ -82,10 +83,20 @@ public class ItemWithdrawalAdapter extends BaseAdapter {
 
         viewHolder.withdrawalTanggal.setText(date+"/"+month+"/"+cal.get(Calendar.YEAR));
         viewHolder.withdrawalWaktu.setText(hour+":"+minute);
+
+        String status;
+        if(itemWithdrawalModel.getStatus() == 0){
+            status = "MENUNGGU";
+        }else if(itemWithdrawalModel.getStatus() == 1){
+            status = "DISETUJUI";
+        }else if(itemWithdrawalModel.getStatus() == 2){
+            status = "SELESAI";
+        }else status = "DITOLAK";
+        viewHolder.withdrawalStatus.setText(status);
         return view;
     }
 
     static class ViewHolder{
-        TextView withdrawalId, withdrawalNamaNasabah, withdrawalNominal, withdrawalTanggal, withdrawalWaktu;
+        TextView withdrawalId, withdrawalNamaNasabah, withdrawalNominal, withdrawalTanggal, withdrawalWaktu, withdrawalStatus;
     }
 }

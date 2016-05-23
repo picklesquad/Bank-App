@@ -56,6 +56,7 @@ public class TransactionFormActivity extends AppCompatActivity {
 
         shared = this.getSharedPreferences(getString(R.string.KEY_SHARED_PREF), Context.MODE_PRIVATE);
         idBank = shared.getString(getString(R.string.KEY_ID_BANK), "1");
+        final String apiToken = shared.getString(getString(R.string.KEY_API_TOKEN),"");
 
         // Setting toolbar as the ActionBar with setSupportActionBar() call
         setSupportActionBar(toolbar);
@@ -87,7 +88,7 @@ public class TransactionFormActivity extends AppCompatActivity {
                 kertas = etKertasInput.getText().toString();
                 logam = etLogamInput.getText().toString();
                 botol = etBotolInput.getText().toString();
-                volleyRequest(phoneNumber, harga, plastik, kertas, logam, botol, idBank);
+                volleyRequest(phoneNumber, harga, plastik, kertas, logam, botol, idBank, apiToken);
             }
         });
 
@@ -99,7 +100,8 @@ public class TransactionFormActivity extends AppCompatActivity {
                                final String kertas,
                                final String logam,
                                final String botol,
-                               final String idBank) {
+                               final String idBank,
+                               final String apiToken) {
         StringRequest transaksi = new StringRequest(Request.Method.POST, RestUri.transaction.TRANSACTION_NEW,
                 new Response.Listener<String>() {
                     @Override
@@ -156,6 +158,7 @@ public class TransactionFormActivity extends AppCompatActivity {
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
                 headers.put("idBank", idBank);
+                headers.put("apiToken", apiToken);
                 return headers;
             }
         };

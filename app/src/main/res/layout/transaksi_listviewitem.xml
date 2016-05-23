@@ -35,7 +35,8 @@
                     android:textSize="@dimen/abc_text_size_body_1_material"
                     android:textStyle="bold"
                     android:textColor="@color/text"
-                    android:layout_margin="@dimen/activity_horizontal_margin_small"/>
+                    android:layout_marginRight="@dimen/activity_horizontal_margin_small"
+                    android:layout_marginTop="@dimen/activity_vertical_margin_small"/>
             </RelativeLayout>
         </LinearLayout>
 
@@ -43,7 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:id="@+id/detail_nasabah_name"
-            android:layout_below="@+id/detail_transaksi">
+            android:layout_below="@+id/detail_transaksi"
+            android:layout_margin="@dimen/activity_horizontal_margin_extra_small">
             <TextView
                 android:id="@+id/transaksi_namaNasabah"
                 android:layout_width="wrap_content"
@@ -52,7 +54,8 @@
                 android:textSize="@dimen/abc_text_size_body_1_material"
                 android:textStyle="bold"
                 android:textColor="@color/text"
-                android:layout_margin="@dimen/activity_horizontal_margin_small"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin_small"
+                android:layout_marginBottom="@dimen/activity_horizontal_margin_small"
                 android:layout_weight="1"/>
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -67,7 +70,7 @@
                     android:text="05.00"
                     android:textSize="@dimen/abc_text_size_body_1_material"
                     android:textColor="@color/text"
-                    android:layout_margin="@dimen/activity_horizontal_margin_small"/>
+                    android:layout_marginRight="@dimen/activity_horizontal_margin_small"/>
             </RelativeLayout>
         </LinearLayout>
 
@@ -75,15 +78,17 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:id="@+id/detail_transaksi_price"
-            android:layout_below="@+id/detail_nasabah_name">
+            android:layout_below="@+id/detail_nasabah_name"
+            android:layout_margin="@dimen/activity_horizontal_margin_extra_small">
             <TextView
                 android:id="@+id/transaksi_nominalTransaksi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Rp 400.000,-"
                 android:textSize="@dimen/abc_text_size_body_1_material"
+                android:layout_marginLeft="@dimen/activity_vertical_margin_small"
+                android:layout_marginBottom="@dimen/activity_vertical_margin_small"
                 android:textColor="@color/text"
-                android:layout_margin="@dimen/activity_horizontal_margin_small"
                 android:layout_weight="1"/>
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -98,7 +103,7 @@
                     android:text="DITOLAK"
                     android:textSize="@dimen/abc_text_size_body_1_material"
                     android:textColor="@color/text"
-                    android:layout_margin="@dimen/activity_horizontal_margin_small"/>
+                    android:layout_marginRight="@dimen/activity_horizontal_margin_small"/>
             </RelativeLayout>
         </LinearLayout>
 

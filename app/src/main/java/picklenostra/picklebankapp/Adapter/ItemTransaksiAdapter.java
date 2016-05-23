@@ -89,7 +89,7 @@ public class ItemTransaksiAdapter extends BaseAdapter{
         else if(itemTransaksiModel.getStatus() == 2)
             status = "DITOLAK";
         else
-            status = "PENDING";
+            status = "MENUNGGU";
         viewHolder.transaksiStatus.setText(status);
 
         return view;
