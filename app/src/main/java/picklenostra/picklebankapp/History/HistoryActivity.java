@@ -1,4 +1,4 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.History;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import picklenostra.picklebankapp.Adapter.HistoryPagerAdapter;
 import picklenostra.picklebankapp.Adapter.PagerAdapter;
+import picklenostra.picklebankapp.R;
 
 public class HistoryActivity extends AppCompatActivity {
 

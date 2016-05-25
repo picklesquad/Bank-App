@@ -1,11 +1,11 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.Notifikasi;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -21,12 +21,14 @@ import com.crashlytics.android.Crashlytics;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import picklenostra.picklebankapp.Helper.VolleyController;
+import picklenostra.picklebankapp.Home.ProfileActivity;
+import picklenostra.picklebankapp.R;
+import picklenostra.picklebankapp.Util.RestUri;
 import picklenostra.picklebankapp.Util.RupiahFormatter;
 
 
@@ -35,21 +37,18 @@ import picklenostra.picklebankapp.Util.RupiahFormatter;
  */
 public class NotifikasiDetailActivity extends AppCompatActivity{
 
-    private Toolbar toolbar;
     private TextView tvId, tvNama, tvStatus, tvBalance, tvDate, tvTime;
     private Button accept, reject, confirm;
     private RelativeLayout notifikasi;
     private ProgressBar loading = null;
-    private int loadingStatus = 0;
     private String id;
-    private final String URL = "http://104.155.206.184:8080/pickle-0.1/bank/withdraw/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifikasi_detail);
 
-        toolbar = (Toolbar) findViewById(R.id.notifikasi_detail_toolbar); // Attaching the layout to the toolbar object
+        Toolbar toolbar = (Toolbar) findViewById(R.id.notifikasi_detail_toolbar);
         toolbar.setTitle("Detil Withdraw");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -67,7 +66,6 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
         loading = (ProgressBar) findViewById (R.id.notifikasi_loader);
         notifikasi = (RelativeLayout) findViewById(R.id.detail);
 
-
         id = getIntent().getStringExtra("id");
 
         volleyRequest(id);
@@ -82,7 +80,7 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String url = "updateStatus/accept";
+                final String url = RestUri.withdraw.WITHDRAW_ACCEPT;
                 volleyRequestButton(id,url);
             }
         });
@@ -90,7 +88,7 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
         reject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String url = "updateStatus/reject";
+                final String url = RestUri.withdraw.WITHDRAW_REJECT;
                 volleyRequestButton(id,url);
             }
         });
@@ -98,16 +96,25 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String url = "updateStatus/complete";
+                final String url = RestUri.withdraw.WITHDRAW_COMPLETE;
                 volleyRequestButton(id,url);
             }
         });
+    }
 
+    @Override
+    public void onBackPressed(){
+        if(getIntent().getStringExtra("type") != null){
+            finish();
+            startActivity(new Intent(this, ProfileActivity.class));
+        }else{
+            finish();
+        }
 
     }
 
     private void volleyRequest(final String id){
-        String params = String.format(URL+"%1$s",id+"");
+        String params = String.format(RestUri.withdraw.WITHDRAW_DETAIL,id+"");
         StringRequest request =  new StringRequest(Request.Method.GET, params, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -126,11 +133,13 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
                     tvId.setText(id);
                     tvBalance.setText(jumlah);
                     if(status == 0){
-                        tvStatus.setText("Menunggu Konfirmasi");
+                        tvStatus.setText(getString(R.string.withdraw_pending));
                     }else if(status == 1){
-                        tvStatus.setText("Menunggu Pembayaran");
+                        tvStatus.setText(getString(R.string.withdraw_accept));
+                    }else if(status == -1){
+                        tvStatus.setText(getString(R.string.withdraw_reject));
                     }else{
-                        tvStatus.setText("Withdraw Selesai");
+                        tvStatus.setText(getString(R.string.withdraw_complete));
                     }
                     tvDate.setText(DateFormat.format("dd/MM/yyyy",date) + "");
                     tvTime.setText(DateFormat.format("HH:mm",date)+ "");
@@ -146,6 +155,8 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
                 } catch (JSONException e) {
                     Crashlytics.logException(e);
                     e.printStackTrace();
+                } catch (Exception e){
+                    Crashlytics.logException(e);
                 }
 
             }
@@ -159,9 +170,7 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
     }
 
     private void volleyRequestButton(final String id, final String url){
-        String buildUrl = String.format(URL+url);
-        Log.e("params",buildUrl);
-        StringRequest request =  new StringRequest(Request.Method.PUT, buildUrl, new Response.Listener<String>() {
+        StringRequest request =  new StringRequest(Request.Method.PUT, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -184,18 +193,20 @@ public class NotifikasiDetailActivity extends AppCompatActivity{
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                } catch (Exception e){
+                    Crashlytics.logException(e);
                 }
 
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Crashlytics.logException(error);
             }
         }){
             @Override
             public Map<String, String> getHeaders(){
-                Map<String,String> headers = new HashMap<String ,String>();
+                Map<String,String> headers = new HashMap<>();
                 headers.put("id", id);
                 return headers;
             }

@@ -1,6 +1,8 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.History;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -27,32 +29,37 @@ import picklenostra.picklebankapp.Adapter.ItemTransaksiAdapter;
 import picklenostra.picklebankapp.Helper.VolleyController;
 import picklenostra.picklebankapp.Model.ItemTransaksiModel;
 import picklenostra.picklebankapp.Model.ItemWithdrawalModel;
+import picklenostra.picklebankapp.R;
+import picklenostra.picklebankapp.Util.RestUri;
 
 
 public class TransaksiFragment extends Fragment {
 
-    private ListView listView;
     private ArrayList<ItemTransaksiModel> listItemTransaksiModel;
-    private String URL = "http://104.155.206.184:8080/pickle-0.1/bank/transaction";
     private ItemTransaksiAdapter adapter;
+    private SharedPreferences shared;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.transaksi_fragment, container, false);
 
-        listView = (ListView)view.findViewById(R.id.transaksi_listview);
+        ListView listView = (ListView) view.findViewById(R.id.transaksi_listview);
         listItemTransaksiModel = new ArrayList<>();
 
-        volleyRequest();
+        shared = this.getActivity().getSharedPreferences(getString(R.string.KEY_SHARED_PREF), Context.MODE_PRIVATE);
+        String idBank = shared.getString(getString(R.string.KEY_ID_BANK),"");
+        String apiToken = shared.getString(getString(R.string.KEY_API_TOKEN),"");
+
+        volleyRequest(idBank, apiToken);
 
         adapter = new ItemTransaksiAdapter(this.getActivity(), listItemTransaksiModel);
         listView.setAdapter(adapter);
         return view;
     }
 
-    private void volleyRequest(){
-        StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+    private void volleyRequest(final String idBank, final String apiToken){
+        StringRequest request = new StringRequest(Request.Method.GET, RestUri.transaction.TRANSACTION, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -64,12 +71,14 @@ public class TransaksiFragment extends Fragment {
                         String namaNasabah = transaction.getString("nama");
                         long waktu = transaction.getLong("waktu");
                         int harga = transaction.getInt("harga");
+                        int status = transaction.getInt("status");
 
                         ItemTransaksiModel itemTransaksilModel = new ItemTransaksiModel();
                         itemTransaksilModel.setId(idTransaction);
                         itemTransaksilModel.setNamaNasabah(namaNasabah);
                         itemTransaksilModel.setWaktu(waktu);
                         itemTransaksilModel.setNominalTransaksi(harga);
+                        itemTransaksilModel.setStatus(status);
                         listItemTransaksiModel.add(itemTransaksilModel);
                         adapter.notifyDataSetChanged();
                     }
@@ -87,8 +96,9 @@ public class TransaksiFragment extends Fragment {
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headers = new HashMap<String, String>();
-                headers.put("idBank", "1");
+                Map<String, String> headers = new HashMap<>();
+                headers.put("idBank", idBank);
+                headers.put("apiToken", apiToken);
                 return headers;
             }
         };

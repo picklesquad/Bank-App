@@ -10,7 +10,7 @@ public class ItemWithdrawalModel implements Serializable {
     private int nominalWithdrawal;
     private long waktu;
     private String namaNasabah;
-
+    private int status;
 
     public int getId() {
         return id;
@@ -42,5 +42,13 @@ public class ItemWithdrawalModel implements Serializable {
 
     public void setNamaNasabah(String namaNasabah) {
         this.namaNasabah = namaNasabah;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

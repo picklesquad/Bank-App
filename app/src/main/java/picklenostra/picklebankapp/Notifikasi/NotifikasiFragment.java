@@ -1,11 +1,11 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.Notifikasi;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,8 +29,9 @@ import java.util.Map;
 
 import picklenostra.picklebankapp.Adapter.NotifikasiAdapter;
 import picklenostra.picklebankapp.Helper.VolleyController;
-import picklenostra.picklebankapp.Model.NasabahModel;
 import picklenostra.picklebankapp.Model.NotifikasiModel;
+import picklenostra.picklebankapp.R;
+import picklenostra.picklebankapp.Util.RestUri;
 import picklenostra.picklebankapp.Util.RupiahFormatter;
 
 /**
@@ -40,10 +41,10 @@ public class NotifikasiFragment extends Fragment {
 
     private ListView listView;
     private ArrayList<NotifikasiModel> listNotifikasi;
-    private final String URL = "http://104.155.206.184:8080/pickle-0.1/bank/notification";
     private NotifikasiAdapter notifikasiAdapter;
     private String idBank;
     SharedPreferences shared;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,10 +55,21 @@ public class NotifikasiFragment extends Fragment {
 
         shared = getActivity().getSharedPreferences(getString(R.string.KEY_SHARED_PREF), Context.MODE_PRIVATE);
         idBank = shared.getString(getString(R.string.KEY_ID_BANK),"1");
+        final String apiToken = shared.getString(getString(R.string.KEY_API_TOKEN),"");
 
-        volleyRequest(idBank);
+        volleyRequest(idBank, apiToken);
 
-        Log.e("LEN",listNotifikasi.size()+"");
+//        Log.e("LEN",listNotifikasi.size()+"");
+
+        swipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //Refreshing data on server
+                volleyRequest(idBank, apiToken);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         notifikasiAdapter = new NotifikasiAdapter(getActivity(),listNotifikasi);
         listView.setAdapter(notifikasiAdapter);
@@ -71,18 +83,18 @@ public class NotifikasiFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        
+
         return view;
     }
 
-    private void volleyRequest(final String idBank){
-        StringRequest request = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
+    private void volleyRequest(final String idBank, final String apiToken){
+        StringRequest request = new StringRequest(Request.Method.GET, RestUri.notifikasi.NOTIFICATION, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject responseAPI = new JSONObject(response);
                     JSONArray arrayNotifikasi = responseAPI.getJSONArray("data");
-                    Log.e("Response",arrayNotifikasi.toString());
+                    listNotifikasi.clear();
                     for (int i = 0; i < arrayNotifikasi.length(); i++){
                         NotifikasiModel notifikasiModel = new NotifikasiModel();
                         JSONObject objectNotifikasi = arrayNotifikasi.getJSONObject(i);
@@ -92,7 +104,7 @@ public class NotifikasiFragment extends Fragment {
                         int status = objectNotifikasi.getInt("status");
                         long dateTemp = objectNotifikasi.getLong("waktu");
 
-                        Log.e("Response2",objectNotifikasi.toString());
+//                        Log.e("Response2",objectNotifikasi.toString());
 
                         notifikasiModel.setNotificationId(notificationId);
                         notifikasiModel.setNama(nama);
@@ -104,6 +116,8 @@ public class NotifikasiFragment extends Fragment {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Crashlytics.logException(e);
+                }  catch (Exception e){
                     Crashlytics.logException(e);
                 }
 
@@ -118,6 +132,7 @@ public class NotifikasiFragment extends Fragment {
             public Map<String,String> getHeaders() {
                 Map<String, String> headers = new HashMap<String,String>();
                 headers.put("idBank",idBank);
+                headers.put("apiToken", apiToken);
                 return headers;
             }
         };

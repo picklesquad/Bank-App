@@ -10,6 +10,7 @@ public class ItemTransaksiModel implements Serializable {
     private int nominalTransaksi;
     private long waktu;
     private String namaNasabah;
+    private int status;
 
 
     public int getId() {
@@ -42,5 +43,13 @@ public class ItemTransaksiModel implements Serializable {
 
     public void setNamaNasabah(String namaNasabah) {
         this.namaNasabah = namaNasabah;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

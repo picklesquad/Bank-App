@@ -55,23 +55,29 @@ public class NotifikasiAdapter extends BaseAdapter{
             viewHolder.nameNotifikasi = (TextView)view.findViewById(R.id.tv_user_notifikasi);
             viewHolder.dateNotifikasi = (TextView)view.findViewById(R.id.tv_date_notifikasi);
             viewHolder.priceNotifikasi = (TextView)view.findViewById(R.id.tv_price_notifikasi);
+            viewHolder.statusNotifikasi = (TextView)view.findViewById(R.id.tv_status_notifikasi);
             view.setTag(viewHolder);
         }
         else{
             viewHolder = (ViewHolder)view.getTag();
         }
 
+        String status;
         NotifikasiModel notifikasiModel = (NotifikasiModel)getItem(position);
+        if(notifikasiModel.getStatus() == 0){
+            status = "PENDING";
+        } else status = "DITERIMA";
         viewHolder.idNotifikasi.setText(notifikasiModel.getNotificationId());
         viewHolder.nameNotifikasi.setText(notifikasiModel.getNama());
         viewHolder.dateNotifikasi.setText(notifikasiModel.getDate());
         viewHolder.priceNotifikasi.setText(notifikasiModel.getHarga()+"");
+        viewHolder.statusNotifikasi.setText(status);
 
         return view;
     }
 
 
     static class ViewHolder{
-        TextView idNotifikasi, nameNotifikasi, dateNotifikasi, priceNotifikasi;
+        TextView idNotifikasi, nameNotifikasi, dateNotifikasi, priceNotifikasi, statusNotifikasi;
     }
 }

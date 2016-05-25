@@ -54,6 +54,7 @@ public class ItemTransaksiAdapter extends BaseAdapter{
             viewHolder.transaksiNominal = (TextView)view.findViewById(R.id.transaksi_nominalTransaksi);
             viewHolder.transaksiTanggal = (TextView)view.findViewById(R.id.transaksi_tanggal);
             viewHolder.transaksiWaktu = (TextView)view.findViewById(R.id.transaksi_waktu);
+            viewHolder.transaksiStatus = (TextView)view.findViewById(R.id.transaksi_status);
             view.setTag(viewHolder);
         }
         else{
@@ -82,10 +83,19 @@ public class ItemTransaksiAdapter extends BaseAdapter{
 
         viewHolder.transaksiTanggal.setText(date+"/"+month+"/"+cal.get(Calendar.YEAR));
         viewHolder.transaksiWaktu.setText(hour+":"+minute);
+        String status;
+        if(itemTransaksiModel.getStatus() == 1)
+            status = "SELESAI";
+        else if(itemTransaksiModel.getStatus() == 2)
+            status = "DITOLAK";
+        else
+            status = "MENUNGGU";
+        viewHolder.transaksiStatus.setText(status);
+
         return view;
     }
 
     static class ViewHolder{
-        TextView transaksiId, transaksiNamaNasabah, transaksiNominal, transaksiTanggal, transaksiWaktu;
+        TextView transaksiId, transaksiNamaNasabah, transaksiNominal, transaksiTanggal, transaksiWaktu, transaksiStatus;
     }
 }

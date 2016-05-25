@@ -1,6 +1,6 @@
 <resources>
     <string name="test">Halo Pickle Developer! Kamu berhasil</string>
-    <string name="app_name">Pickle</string>
+    <string name="app_name">Pickle Bank App</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- DEFINE ALL CONSTANTS HERE -->
@@ -13,6 +13,7 @@
     <string name="KEY_SAMPAH_KERTAS_BANK">sampahKertasBank</string>
     <string name="KEY_SAMPAH_BOTOL_BANK">sampahBotolBank</string>
     <string name="KEY_SAMPAH_BESI_BANK">sampahBesiBank</string>
+    <string name="KEY_API_TOKEN">apiToken</string>
 
 
     <!-- Strings related to Menu in Top Right-->
@@ -35,18 +36,24 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
-    <string name="title_activity_profile">ProfileActivity</string>
 
     <!--Strings related to Profile and its Fragments-->
     <string name="nasabah_default_name">Your Name</string>
     <string name="nasabah_default_join_date">Join Date</string>
     <string name="empty_string"> </string>
 
+    <string name="phone_number_login">Nomor Telepon Selular</string>
+    <string name="password_login">Password</string>
 
     <string name="transaction_header">Tambah Transaksi</string>
     <string name="notifikasi_detail_header">Status Withdrawal</string>
-    <string name="title_activity_history">HistoryActivity</string>
+    <string name="histori_header">Histori</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="withdraw_pending">Menunggu Konfirmasi</string>
+    <string name="withdraw_accept">Menunggu Pembayaran</string>
+    <string name="withdraw_reject">Withdraw Ditolak</string>
+    <string name="withdraw_complete">Withdraw Selesai</string>
 </resources>

@@ -1,107 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <FrameLayout
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/home"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/placeImage"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="256dp"
-            android:src="@drawable/city2"
-            android:scaleType="centerCrop"
-            android:transitionName="tImage" />
-    </FrameLayout>
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        card_view:cardBackgroundColor="@color/blue"
-        android:id="@+id/customer_stats">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="72dp"
-            android:padding="16dp">
+            android:layout_height="wrap_content">
+
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@mipmap/ic_customer"
-                android:id="@+id/customer_icon"
-                android:adjustViewBounds="true"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/customer"
-                android:layout_toRightOf="@+id/customer_icon"
-                android:layout_alignParentTop="true"
-                android:textSize="16sp"
-                android:text="Anda memiliki"
-                android:textColor="@color/white"
-                android:layout_marginLeft="16dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/customer_stats_number"
-                android:layout_toRightOf="@+id/customer_icon"
-                android:layout_below="@+id/customer"
-                android:text="201 Nasabah"
-                android:textColor="@color/white"
-                android:layout_marginLeft="16dp"/>
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/customer_stats"
-        card_view:cardBackgroundColor="@color/accent"
-        android:id="@+id/garbage_stats">
-        <RelativeLayout
+                android:id="@+id/placeImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/city2"
+                android:transitionName="tImage" />
+        </FrameLayout>
+
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/customer_stats"
             android:layout_width="match_parent"
-            android:layout_height="72dp"
-            android:padding="16dp">
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@mipmap/ic_weight_white"
-                android:id="@+id/garbage_icon"
-                android:adjustViewBounds="true"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/garbage"
-                android:layout_toRightOf="@+id/garbage_icon"
-                android:layout_alignParentTop="true"
-                android:textSize="16sp"
-                android:text="Anda memiliki"
-                android:textColor="@color/white"
-                android:layout_marginLeft="16dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/level_name"
-                android:layout_toRightOf="@+id/garbage_icon"
-                android:layout_below="@+id/garbage"
-                android:text="201 Nasabah"
-                android:textColor="@color/white"
-                android:layout_marginLeft="16dp"/>
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
-    <android.support.design.widget.CoordinatorLayout
-        android:id="@+id/main_content"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/add_transac_fab"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
-            android:layout_margin="16dp"
-            android:src="@mipmap/ic_plus"
-            app:layout_anchorGravity="bottom|right|end"/>
-    </android.support.design.widget.CoordinatorLayout>
-</LinearLayout>
+            card_view:cardBackgroundColor="@color/blue">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/customer_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/ic_customer" />
+
+                <TextView
+                    android:id="@+id/customer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/customer_icon"
+                    android:text="Anda memiliki"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/customer_stats_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/customer"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/customer_icon"
+                    android:text="201 Nasabah"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/garbage_stats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/customer_stats"
+            card_view:cardBackgroundColor="@color/accent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <ImageView
+                    android:id="@+id/garbage_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/ic_weight_white" />
+
+
+
+                <TextView
+                    android:id="@+id/garbage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/garbage_icon"
+                    android:text="Anda memiliki"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/level_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/garbage"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/garbage_icon"
+                    android:text="201 Nasabah"
+                    android:textColor="@color/white" />
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_transac_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        android:src="@mipmap/ic_plus"
+        app:layout_anchorGravity="bottom|right|end"
+        android:visibility="gone"/>
+
+    <LinearLayout
+    android:id="@+id/loader_notifikasi"
+    android:orientation="horizontal"
+    android:layout_gravity="center"
+    android:layout_centerHorizontal="true"
+    android:layout_width="48dp"
+    android:layout_height="match_parent">
+        <ProgressBar
+            android:id="@+id/home_loader"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:indeterminate="true"
+            style="@android:style/Widget.ProgressBar.Large" />
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

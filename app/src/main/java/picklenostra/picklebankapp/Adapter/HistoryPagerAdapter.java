@@ -5,8 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.widget.BaseAdapter;
 
-import picklenostra.picklebankapp.TransaksiFragment;
-import picklenostra.picklebankapp.WithdrawalFragment;
+import picklenostra.picklebankapp.History.*;
 
 /**
  * Created by Edwin on 5/14/2016.

@@ -1,4 +1,4 @@
-package picklenostra.picklebankapp;
+package picklenostra.picklebankapp.Home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.view.MenuItem;
 
 import picklenostra.picklebankapp.Adapter.PagerAdapter;
 import picklenostra.picklebankapp.Helper.UserSessionManager;
+import picklenostra.picklebankapp.History.HistoryActivity;
+import picklenostra.picklebankapp.R;
 
 
 public class ProfileActivity extends AppCompatActivity {
@@ -39,6 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter
                 (getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setOffscreenPageLimit(0);
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -82,5 +85,10 @@ public class ProfileActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed(){
+        finish();
     }
 }

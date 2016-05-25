@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:layout_marginTop="16dp"
     android:orientation="vertical">
-
     <FrameLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -18,12 +17,23 @@
             android:inputType="textVisiblePassword"
             android:background="@android:color/white"/>
     </FrameLayout>
-    <ListView
-        android:id="@+id/lv_nasabah"
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/nasabah_list_loading"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:indeterminate="true" />
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:cacheColorHint="@android:color/transparent"
-        android:divider="@color/textHint"
-        android:dividerHeight="1dp">
-    </ListView>
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/lv_nasabah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@color/textHint"
+            android:dividerHeight="1dp">
+        </ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>
