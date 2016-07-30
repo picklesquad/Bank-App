@@ -1,5 +1,7 @@
 package picklenostra.picklebankapp.Nasabah;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -17,6 +19,9 @@ import com.crashlytics.android.Crashlytics;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import picklenostra.picklebankapp.Helper.VolleyController;
 import picklenostra.picklebankapp.R;
 import picklenostra.picklebankapp.Util.RestUri;
@@ -31,6 +36,7 @@ public class NasabahDetailActivity extends AppCompatActivity{
     private String iduser;
     private ProgressBar loading;
     private ScrollView sv_nasabah;
+    private SharedPreferences shared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -58,7 +64,10 @@ public class NasabahDetailActivity extends AppCompatActivity{
 
         iduser = getIntent().getStringExtra("iduser");
 
-        volleyRequest(iduser);
+        shared = getSharedPreferences(getString(R.string.KEY_SHARED_PREF), Context.MODE_PRIVATE);
+        String idBank = shared.getString(getString(R.string.KEY_ID_BANK),"");
+
+        volleyRequest(iduser, idBank);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +77,7 @@ public class NasabahDetailActivity extends AppCompatActivity{
         });
     }
 
-    private void volleyRequest(final String iduser){
+    private void volleyRequest(final String iduser, final String idBank){
         String params = String.format(RestUri.nasabah.NASABAH_DETAIL,iduser+"");
         StringRequest request =  new StringRequest(Request.Method.GET, params, new Response.Listener<String>() {
             @Override
@@ -113,7 +122,14 @@ public class NasabahDetailActivity extends AppCompatActivity{
             public void onErrorResponse(VolleyError error) {
                 Crashlytics.logException(error);
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders(){
+                Map<String, String> headers = new HashMap<>();
+                headers.put("idBank", idBank);
+                return headers;
+            }
+        };
         VolleyController.getInstance().addToRequestQueue(request);
     }
 

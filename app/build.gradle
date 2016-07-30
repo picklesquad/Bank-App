@@ -25,12 +25,18 @@ android {
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
-        versionName "0.1"
+        versionName "1.0"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        applicationVariants.all { variant ->
+            variant.outputs.each { output ->
+                output.outputFile = file("$project.buildDir/apk/pickle-bank.apk")
+            }
         }
     }
 }
